@@ -6,18 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://longfeihouhouhou.github.io">
-  <title>Archives: 2018/3 | LoongFly的博客</title>
+  <title>使用hexo+git搭建个人blog（上） | LoongFly的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前端攻城狮，此为博客一枚">
-<meta name="keywords" content="前端,js,jQuery,javascript,html5,开发者,程序猿,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验,Vue,React,node.js">
-<meta property="og:type" content="website">
-<meta property="og:title" content="LoongFly的博客">
-<meta property="og:url" content="http://longfeihouhouhou.github.io/archives/2018/03/index.html">
+  <meta name="description" content="使用hexo+git搭建个人blog的步骤(一) 搭建篇参考教程: hexo从零开始到搭建完整  ###1 安装 git bash node.js ###2 安装 hexo    npm i -g hexo   hexo init###3 创建 git 仓库,以用户名 + github.io 为名    ###4 配置 GitHub 账户   git config –global user.nam">
+<meta name="keywords" content="hexo,blog">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用hexo+git搭建个人blog（上）">
+<meta property="og:url" content="http://longfeihouhouhou.github.io/使用hexo-git搭建个人blog（上）.md/index.html">
 <meta property="og:site_name" content="LoongFly的博客">
-<meta property="og:description" content="前端攻城狮，此为博客一枚">
+<meta property="og:description" content="使用hexo+git搭建个人blog的步骤(一) 搭建篇参考教程: hexo从零开始到搭建完整  ###1 安装 git bash node.js ###2 安装 hexo    npm i -g hexo   hexo init###3 创建 git 仓库,以用户名 + github.io 为名    ###4 配置 GitHub 账户   git config –global user.nam">
+<meta property="og:image" content="https://i.loli.net/2017/07/24/597578ab8cf77.png">
+<meta property="og:updated_time" content="2018-03-09T14:50:24.257Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LoongFly的博客">
-<meta name="twitter:description" content="前端攻城狮，此为博客一枚">
+<meta name="twitter:title" content="使用hexo+git搭建个人blog（上）">
+<meta name="twitter:description" content="使用hexo+git搭建个人blog的步骤(一) 搭建篇参考教程: hexo从零开始到搭建完整  ###1 安装 git bash node.js ###2 安装 hexo    npm i -g hexo   hexo init###3 创建 git 仓库,以用户名 + github.io 为名    ###4 配置 GitHub 账户   git config –global user.nam">
+<meta name="twitter:image" content="https://i.loli.net/2017/07/24/597578ab8cf77.png">
   
     <link rel="alternative" href="/atom.xml" title="LoongFly的博客" type="application/atom+xml">
   
@@ -155,353 +158,233 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-使用hexo-git搭建个人blog（上）" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      使用hexo+git搭建个人blog（上）
+    </h1>
+  
+
+        
+        <a href="/使用hexo-git搭建个人blog（上）.md/" class="archive-article-date">
+  	<time datetime="2017-03-13T17:25:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-14</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="使用hexo-git搭建个人blog的步骤-一-搭建篇"><a href="#使用hexo-git搭建个人blog的步骤-一-搭建篇" class="headerlink" title="使用hexo+git搭建个人blog的步骤(一) 搭建篇"></a>使用hexo+git搭建个人blog的步骤(一) 搭建篇</h1><h3 id="参考教程"><a href="#参考教程" class="headerlink" title="参考教程:"></a>参考教程:</h3><ul>
+<li><p><a href="http://www.cnblogs.com/visugar/p/6821777.html" target="_blank" rel="noopener">hexo从零开始到搭建完整</a> </p>
+<p>###1 安装 <code>git bash</code> <code>node.js</code></p>
+<p>###2 安装 <code>hexo</code></p>
+<p>   npm i -g hexo<br>   hexo init<br>###3 创建 git 仓库,以用户名 + github.io 为名<br>   <img src="https://i.loli.net/2017/07/24/597578ab8cf77.png" alt="2.png"></p>
+<p>###4 配置 GitHub 账户<br>   git config –global user.name ‘username<br>   git config –global user.email <a href="mailto:&#39;example@xx.com" target="_blank" rel="noopener">&#39;example@xx.com</a><br>###5 在 Git Bash 中创建 <code>ssh</code> </p>
+<pre><code>ssh-keygen -t rsa -C &apos;youremail@examole.com
+cd ~/.ssh
+cat id_rsa.pub
+</code></pre><p>###6 在 GitHub 中添加 ssh </p>
+<blockquote>
+<p>主页 =&gt; Settings =&gt; SSH and GPG keys =&gt; New SSH Key 添加从 gitbash 中获取到的SSH即可 titile随意</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li><p>验证是否成功</p>
+<pre><code>`git bash  
+ ssh -T git@github.com`
+</code></pre><p>###1.7 本地运行</p>
+</li>
+<li><p>修改 _config.yml 文件,添加以下字段</p>
+<pre><code>`deploy:
+            type: git 
+            repo: http: //github.com/your username/your username.gitub.io.git
+            branch: master`
+</code></pre></li>
+<li><p>回到 git bash 中, 执行以下命令</p>
+<pre><code>hexo clean
+hexo generate
+hexo server 
+</code></pre></li>
+<li><em>注: hexo 3.0 把服务器独立成个别模块, 需要单独安装 <code>npm i hexo- server</code></em></li>
+<li><p>打开浏览器输入: <code>localhost:4000</code> 可以看到已经在本地看到 blog 了    </p>
+<h3 id="1-8-上传到-GitHub"><a href="#1-8-上传到-GitHub" class="headerlink" title="1.8 上传到 GitHub"></a>1.8 上传到 GitHub</h3></li>
+<li><p>安装 <code>npm install hexo-depolyer-git --save</code> (这样能让写好的文章部署到 GitHub 服务器让别人可以浏览到)  </p>
+</li>
+<li><p>执行命令( 每次都按照以下步骤部署)</p>
+<pre><code>hexo clean
+hexo generate
+hexo deploy
+</code></pre></li>
+<li><p>接下来 浏览器输入 <code>http:\\yourusername.github.io</code> 就可以看到个人博客了!</p>
+</li>
+</ul>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://ww1.sinaimg.cn/large/c3fd4c29ly1fp5gbsv27tj20la0ogwg3.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://ww1.sinaimg.cn/large/c3fd4c29ly1fp5gc2g8gyj20oa0o940n.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/html5的web语义化.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:39:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/html5的web语义化.md/">html5的web语义化</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">html</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/总结JS中MAth方法.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:38:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/总结JS中MAth方法.md/">总结JS中MAth方法</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Math</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">blog</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://longfeihouhouhou.github.io/使用hexo-git搭建个人blog（上）.md/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/总结JS数组的30种方法.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:37:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/使用hexo-git搭建个人blog（下）.md/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          使用hexo+git搭建个人blog（下）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/什么是hybrid-App开发模式？.md/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">什么是hybrid-App开发模式？</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/总结JS数组的30种方法.md/">总结JS数组的30种方法</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Array</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/七种布局技巧.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:35:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/七种布局技巧.md/">七种布局技巧</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Css</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">布局</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/怪异模式.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:33:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/怪异模式.md/">怪异模式</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Css</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/flex布局和弹性盒子.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:32:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/flex布局和弹性盒子.md/">flex布局和弹性盒子</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CSS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">flex</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/Css特性.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:31:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/Css特性.md/">Css特性</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Css</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">布局</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/简单总结js的设计模式.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:28:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/简单总结js的设计模式.md/">简单总结js的设计模式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2018/03/page/2/">2</a><a class="page-number" href="/archives/2018/03/page/3/">3</a><a class="extend next" rel="next" href="/archives/2018/03/page/2/">Next &raquo;</a>
-    </nav>
   
 
 
@@ -525,8 +408,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

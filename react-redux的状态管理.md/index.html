@@ -6,18 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://longfeihouhouhou.github.io">
-  <title>Archives: 2018/3 | LoongFly的博客</title>
+  <title>react-redux的状态管理 | LoongFly的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前端攻城狮，此为博客一枚">
-<meta name="keywords" content="前端,js,jQuery,javascript,html5,开发者,程序猿,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验,Vue,React,node.js">
-<meta property="og:type" content="website">
-<meta property="og:title" content="LoongFly的博客">
-<meta property="og:url" content="http://longfeihouhouhou.github.io/archives/2018/03/index.html">
+  <meta name="description" content="##Redux [toc] ###1.Redux应用场景因为单页面应用内容越来越复杂，所以管理不断变化的state非常困难，在React中，数据在组件中是单向流动的，兄弟组件之间的通信就会比较麻烦 ###2. Redux设计思想  Redux是将整个应用状态存储到一个地方，称为store,里面保存一颗状态树(state  tree)。（因为状态一般都用对象，而对象都是树形结构）组件可以派发(dis">
+<meta name="keywords" content="react,react-redux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react-redux的状态管理">
+<meta property="og:url" content="http://longfeihouhouhou.github.io/react-redux的状态管理.md/index.html">
 <meta property="og:site_name" content="LoongFly的博客">
-<meta property="og:description" content="前端攻城狮，此为博客一枚">
+<meta property="og:description" content="##Redux [toc] ###1.Redux应用场景因为单页面应用内容越来越复杂，所以管理不断变化的state非常困难，在React中，数据在组件中是单向流动的，兄弟组件之间的通信就会比较麻烦 ###2. Redux设计思想  Redux是将整个应用状态存储到一个地方，称为store,里面保存一颗状态树(state  tree)。（因为状态一般都用对象，而对象都是树形结构）组件可以派发(dis">
+<meta property="og:image" content="http://longfeihouhouhou.github.io/react-redux的状态管理.md/redux-wrong.png">
+<meta property="og:image" content="http://longfeihouhouhou.github.io/react-redux的状态管理.md/redux-flow.png">
+<meta property="og:updated_time" content="2018-03-09T15:10:20.676Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LoongFly的博客">
-<meta name="twitter:description" content="前端攻城狮，此为博客一枚">
+<meta name="twitter:title" content="react-redux的状态管理">
+<meta name="twitter:description" content="##Redux [toc] ###1.Redux应用场景因为单页面应用内容越来越复杂，所以管理不断变化的state非常困难，在React中，数据在组件中是单向流动的，兄弟组件之间的通信就会比较麻烦 ###2. Redux设计思想  Redux是将整个应用状态存储到一个地方，称为store,里面保存一颗状态树(state  tree)。（因为状态一般都用对象，而对象都是树形结构）组件可以派发(dis">
+<meta name="twitter:image" content="http://longfeihouhouhou.github.io/react-redux的状态管理.md/redux-wrong.png">
   
     <link rel="alternative" href="/atom.xml" title="LoongFly的博客" type="application/atom+xml">
   
@@ -155,353 +159,245 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-react-redux的状态管理" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      react-redux的状态管理
+    </h1>
+  
+
+        
+        <a href="/react-redux的状态管理.md/" class="archive-article-date">
+  	<time datetime="2018-03-09T15:08:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##Redux</p>
+<p>[toc]</p>
+<p>###1.Redux应用场景<br>因为单页面应用内容越来越复杂，所以管理不断变化的state非常困难，在React中，数据在组件中是单向流动的，兄弟组件之间的通信就会比较麻烦<img src="./redux-wrong.png" alt="Alt text"></p>
+<p>###2. Redux设计思想</p>
+<ul>
+<li>Redux是将整个应用状态存储到一个地方，称为store,里面保存一颗状态树(<code>state  tree</code>)。（因为状态一般都用对象，而对象都是树形结构）组件可以派发(dispatch) 行为 action 给store，而不是直接通知其他组件。组件内部通过订阅store中的状态state 来刷新自己的视图。<br><img src="./redux-flow.png" alt="Alt text"><br>###3. Redux三大原则</li>
+</ul>
+<ol>
+<li>整个应用的state被储存在一颗object tree中，并且存在一个唯一一个store中</li>
+<li>state是只读的，唯一改变state的方法就是触发action ，action是一个用于描述已发生事件的普通对象</li>
+<li>使用纯函数来执行修改，为了描述action 如果改变state tree 你需要编写reducers</li>
+</ol>
+<ul>
+<li>单一数据源的设计让React的组件之间的通信更加方便，同时便于状态的统一管理<br>###4.Redux解析概念</li>
+</ul>
+<hr>
+<ul>
+<li><p>4.1 Store</p>
+<ul>
+<li>store 就是保存数据的地方，可以把它看成一个容器，整个应用只能有一个store</li>
+<li><p>Redux 提供createStore 方法，用来生成store </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;createStore&#125; <span class="keyword">from</span> <span class="string">'redux'</span></span><br><span class="line"><span class="keyword">const</span> store = createStore(fn)</span><br></pre></td></tr></table></figure>
+<p>  上面代码中createStore函数接受另一个函数作为参数，返回新生成的store对象。</p>
+</li>
+</ul>
+</li>
+<li><p>4.2 State<br>  Store对象包含所有数据，如果想要得到某个时点的数据，就要对Store生成快照。这种时间点的数据集合，就叫做State。当前时刻的State，可以通过store.getState( )拿到。</p>
+  <figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import &#123;createStore&#125; <span class="keyword">from</span> 'redux'</span><br><span class="line">const store=createStore(fn)</span><br><span class="line">const <span class="keyword">state</span>=store.getState()</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>4.3 Action<br>  state的变化会导致view的变化，但是用户接触不到State，只能解触到view，所以state的变化必须是view导致的。action就是view发出的通知，表示state应该快要发生变化了，action是一个对象。其中的type属性是必须的，表示action的名称。其他属性可以自由设置，社区有一个规范可以参考</p>
+  <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> action=&#123;</span><br><span class="line">	<span class="keyword">type</span>:<span class="string">'ADD_TODO'</span>,</span><br><span class="line">	playload:<span class="string">'学习Redux'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  上面代码中，action的名称是ADD_TODO，它携带的信息是字符串’学习Redux’ 这样可以理解，action描述当前发生的事情，可以改变State的唯一办法，就是使用ation ，它可以运送数据到Store</p>
+</li>
+</ul>
+</li>
+<li>4.4 Action Creator<br>view要发送多少种信息，就会有多少种action，如果都手写太麻烦，可以定义一个函数来生成action，这个函数就叫action creator<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> ADD_TODO = <span class="string">'添加TODO'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addTodo</span><span class="params">(text)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span>&#123;</span><br><span class="line">	type:ADD_TODO,</span><br><span class="line">	text</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> action=addTodo(<span class="string">'学习Redux'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>上面代码中，addTodo函数就是一个Action Creator</p>
+<ul>
+<li><p>4.5 store.dispatch()<br>  store.dispatch() 是view发出action的唯一方法。</p>
+  <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;createStore&#125; <span class="keyword">from</span> <span class="string">'redux'</span></span><br><span class="line"><span class="keyword">const</span> store=createStore(fn)</span><br><span class="line">store.dispatch(&#123;</span><br><span class="line">	<span class="keyword">type</span>:<span class="string">'ADD_TODO'</span>,</span><br><span class="line">	payload:<span class="string">'学习Redux'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>  上面代码中store.dispath 接受一个action对象作为参数，将它发送出去，结合Action Creator，这段代码可以改写如下。</p>
+  <figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">store</span><span class="selector-class">.dispatch</span>(addTodo(<span class="string">'学习Redux'</span>))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>4.6 Reducer<br>Store收到Action以后，必须给一个新的State，这样View才会发生变化。这种State的计算过程就叫做Reducer。Reducer是一个纯函数，它接受Action和当前state作为参数，返回一个新的State。</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> reducer =<span class="function"><span class="keyword">function</span><span class="params">(state,action)</span></span>&#123;</span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">	<span class="keyword">return</span> new_state;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="如何使用redux"><a href="#如何使用redux" class="headerlink" title="如何使用redux"></a>如何使用redux</h2><ol>
+<li>后台写一个后台接口  /lessons</li>
+<li>前台(api)里写一个获取接口数据的方法</li>
+<li>在action-types里添加新的actionType类型</li>
+<li>在reducer里修改初始状态，并添加一个case</li>
+<li>在<code>actions</code>里添加一个方法调用此方法</li>
+<li>在组件中调用action中的方法</li>
+</ol>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://ww1.sinaimg.cn/large/c3fd4c29ly1fp5gbsv27tj20la0ogwg3.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://ww1.sinaimg.cn/large/c3fd4c29ly1fp5gc2g8gyj20oa0o940n.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/html5的web语义化.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:39:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/html5的web语义化.md/">html5的web语义化</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">html</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/总结JS中MAth方法.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:38:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/总结JS中MAth方法.md/">总结JS中MAth方法</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Math</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">react-redux</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://longfeihouhouhou.github.io/react-redux的状态管理.md/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/总结JS数组的30种方法.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:37:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/react入门.md/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          react入门
+        
+      </div>
+    </a>
+  
+  
+    <a href="/Vue组件化开发.md/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Vue组件化开发</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/总结JS数组的30种方法.md/">总结JS数组的30种方法</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Array</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/七种布局技巧.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:35:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/七种布局技巧.md/">七种布局技巧</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Css</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">布局</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/怪异模式.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:33:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/怪异模式.md/">怪异模式</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Css</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/flex布局和弹性盒子.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:32:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/flex布局和弹性盒子.md/">flex布局和弹性盒子</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CSS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">flex</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/Css特性.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:31:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/Css特性.md/">Css特性</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Css</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">布局</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/简单总结js的设计模式.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:28:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/简单总结js的设计模式.md/">简单总结js的设计模式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2018/03/page/2/">2</a><a class="page-number" href="/archives/2018/03/page/3/">3</a><a class="extend next" rel="next" href="/archives/2018/03/page/2/">Next &raquo;</a>
-    </nav>
   
 
 
@@ -525,8 +421,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

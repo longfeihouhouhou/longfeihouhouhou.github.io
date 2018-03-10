@@ -6,13 +6,13 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://longfeihouhouhou.github.io">
-  <title>Archives: 2018/3 | LoongFly的博客</title>
+  <title>LoongFly的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="前端攻城狮，此为博客一枚">
 <meta name="keywords" content="前端,js,jQuery,javascript,html5,开发者,程序猿,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验,Vue,React,node.js">
 <meta property="og:type" content="website">
 <meta property="og:title" content="LoongFly的博客">
-<meta property="og:url" content="http://longfeihouhouhou.github.io/archives/2018/03/index.html">
+<meta property="og:url" content="http://longfeihouhouhou.github.io/page/2/index.html">
 <meta property="og:site_name" content="LoongFly的博客">
 <meta property="og:description" content="前端攻城狮，此为博客一枚">
 <meta name="twitter:card" content="summary">
@@ -157,320 +157,47 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Js中的事件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 itemprop="name">
+      <a class="article-title" href="/Js中的事件.md/">Js中的事件</a>
+    </h1>
+  
+
+        
+        <a href="/Js中的事件.md/" class="archive-article-date">
+  	<time datetime="2018-03-09T15:15:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
+</a>
+        
+      </header>
     
-    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#JS中的事件</p>
+<p>##事件冒泡</p>
+<blockquote>
+<p>事件的触发顺序自内向外，这就是事件冒泡。例如点击事件，点击子元素，由于事件冒泡会触发父元素的点击事件，一直到body<br>在监听函数中第三个参数是布尔值，true为捕获，false为冒泡，默认是false，由下向上触发事件<br>IE浏览器只支持事件冒泡，它也不支持addEventListener函数，而是提供另一个函数attachEvent<br> <img src="http://ww1.sinaimg.cn/large/c3fd4c29ly1fm28nx50jcj20ja0eft9e.jpg" alt=""><br>解决冒泡的方法：</p>
+</blockquote>
+<ol>
+<li><p>阻止冒泡传播，加入event.stopPropagation，终止事件的广播分发，这样事件就会停留在本节点，不会在向上传播</p>
+</li>
+<li><p>判断事件触发的节点和当前处理事件节点的引用是否相等</p>
+ <figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">event</span>.target==<span class="keyword">event</span>.currentTarget</span><br></pre></td></tr></table></figure>
+<p> 弊端是需要每一个节点都要处理，代码量冗余，解决办法是使用事件委托</p>
+<figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">	  <span class="built_in">window</span>.onload=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">document</span>.getElementById(<span class="string">'body'</span>).addEventListener(<span class="string">'click'</span>,fn);</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> target=e.target</span><br><span class="line">	swich (target.id)&#123;</span><br><span class="line">		<span class="keyword">case</span>: <span class="string">'parent'</span>:</span><br><span class="line">			alert (<span class="string">'您好，我是'</span>+target.id);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span>: <span class="string">'child'</span>:</span><br><span class="line">			alert (<span class="string">'您好，我是'</span>+target.id);</span><br><span class="line">			<span class="keyword">break</span>;	</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/html5的web语义化.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:39:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/html5的web语义化.md/">html5的web语义化</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">html</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/总结JS中MAth方法.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:38:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/总结JS中MAth方法.md/">总结JS中MAth方法</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Math</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/总结JS数组的30种方法.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:37:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/总结JS数组的30种方法.md/">总结JS数组的30种方法</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Array</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/七种布局技巧.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:35:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/七种布局技巧.md/">七种布局技巧</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Css</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">布局</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/怪异模式.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:33:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/怪异模式.md/">怪异模式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Css</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/flex布局和弹性盒子.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:32:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/flex布局和弹性盒子.md/">flex布局和弹性盒子</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CSS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">flex</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/Css特性.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:31:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/Css特性.md/">Css特性</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Css</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">布局</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/简单总结js的设计模式.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:28:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/简单总结js的设计模式.md/">简单总结js的设计模式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -486,21 +213,1048 @@
 		</ul>
 	</div>
 
-          
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/Js中的事件.md/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
+    <article id="post-浏览器都有那些分类？" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
-    </div></section>
+    <h1 itemprop="name">
+      <a class="article-title" href="/浏览器都有那些分类？.md/">浏览器都有那些分类？</a>
+    </h1>
   
 
+        
+        <a href="/浏览器都有那些分类？.md/" class="archive-article-date">
+  	<time datetime="2018-03-09T15:13:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##浏览器的分类</p>
+<p>@(计算机基础)</p>
+<p>根据内核属性将浏览器分为四类：</p>
+<ul>
+<li>1 . <strong>IE6/7/8/9/10/11  Trident  (IE内核)</strong><br>常见的浏览器：<br>2345浏览器、腾讯TT、淘宝浏览器、阿云浏览器（早期版本）、瑞星安全浏览器、蚂蚁浏览器、飞腾浏览器、速达浏览器、佐罗浏览器、海豚浏览器等等</li>
+<li>2 .  <strong>firefox    (Gecko/Firefox)</strong><br>特点：代码完全公开，任何人都可以为其编写代码。不过以gecko为内核的浏览器Firefox最多，所以也称firefox内核<br>常见的浏览器：<br>Mozilla Firefox、Mozilla SeaMonkey、waterfox（Firefox的64位开源版）、Iceweasel、Epiphany（早期版本）、Flock（早期版本）等等 </li>
+<li>3 . <strong>WebKit   (webkit内核是chrome和safair的内核原型)</strong><br>  webkit是苹果公司研发，两大主力浏览器chrome和safair都是基于webkit，严格来说chrome的内核是基于webkit的分支而发展成的chromuim<br>  常见浏览器：<br>  Chrome(v8引擎)360 浏览器、搜狗浏览器 、傲游浏览器3、 Apple Safari (Win/Mac/iPhone/iPad)、Symbian手机浏览器、Android 默认浏览器</li>
+<li>4 . <strong>opera (presto内核)</strong><br>  公认网页浏览速度最快的浏览器内核，代价是牺牲了网页的兼容性，执行同等的js所需时间仅为trident和gecko的 1/3 ，由于是商业引擎，使用的浏览器较少<br>  常见浏览器：下NDSBrowser、Wii Internet Channle、Nokia 770网络浏览器等</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">浏览器</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/浏览器都有那些分类？.md/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-图解HTTP" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/图解HTTP.md/">图解HTTP</a>
+    </h1>
+  
+
+        
+        <a href="/图解HTTP.md/" class="archive-article-date">
+  	<time datetime="2018-03-09T15:12:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#图解HTTP</p>
+<p>###HTTP 超文本传输协议<br>HTTP： HyperText Transfer Protocol </p>
+<hr>
+<p>一个请求从客户端到服务端的流程<br><img src="http://ww1.sinaimg.cn/large/c3fd4c29ly1flxr2yyvi2j20h90fkjww.jpg" alt=""><br>客户端从应用层（HTTP协议）发送一个HTTP请求。<br>接着，为了传输方便，会在传输层（TCP协议）把从应用层收到的HTTP请求报文进行分割，并在各个报文打上端口号和序号转发给网络层。<br>在网络层（IP协议），增加作为通信目的地MAC地址后转发给链路层。这样给发往网络的通信请求就齐全了。</p>
+<blockquote>
+<p>发送端在层与层的传递时，每经过一层都会打上该层所属的首部信息，相反，服务端在接受信息时每经过一层都会去掉该层所属的首部信息。<br>TCP/IP 协议族中IP占了一半，IP就是网络协议，IP协议的作用就是将数据包传送给对方，而为了确保准确传送，IP地址和MAC地址就是重要条件</p>
+</blockquote>
+<hr>
+<p>###TCP的三次握手<br>TCP位于传输层，提供可靠的字节流服务，字节流是指为了方便传输，将大块数据分割以报文段为单位的数据包进行管理，可靠的传输服务是指TCP协议为了更容易传送大数据才把数据分割，而且TCP协议能够确认数据最终是否到达对方<br>，为了确保数据送达，TCP协议采用三次握手策略：<br>发送端首先发送一个带SYN标志的数据包给对方，接收端收到后回复带SYN/ACK标志的数据包以示消息传达确认消息，最后发送端再传回一个带ACK标志的数据包代表握手结束</p>
+<p>###DNS（Domian Name System）<br>域名服务系统和HTTP协议一样位于应用层的协议，它提供域名到IP地址之间的解析服务。用户通常使用主机名或域名来访问对方的计算机，而不是直接通过IP地址访问，因为与IP地址的一组纯数字相比，用字母配合数字更符合人类的记忆习惯。<br>DNS协议提供通过域名查找IP地址，或逆向从IP地址反查找域名的服务。</p>
+<hr>
+<p>###各种协议与HTTP协议的关系<br><img src="http://ww1.sinaimg.cn/large/c3fd4c29ly1fly05ta14mj20cl0i2dld.jpg" alt=""></p>
+<p>###URI与URL<br>即 统一资源标识符和统一资源定位符，URI用字符串表示某一互联网资源，而URL表示资源在互联网所处的位置。</p>
+<p>##HTTP协议</p>
+<ul>
+<li>用于客户端和服务端的通信</li>
+<li>通过请求和响应的交换达成通信<blockquote>
+<p>请求报文是由请求方法、请求URI、协议版本、可选的请求首部字段和内容实体构成的</p>
+</blockquote>
+</li>
+</ul>
+<p>请求报文的构成<br> <img src="http://ww1.sinaimg.cn/large/c3fd4c29ly1fly0z5ra0hj20cs06gabc.jpg" alt=""></p>
+<hr>
+<p> 响应报文的构成<br> <img src="http://ww1.sinaimg.cn/large/c3fd4c29ly1fly129hjsjj20b305njsd.jpg" alt=""><br> HTTP协议本身不具备保存之前发送过的请求或响应的功能，使用HTTP协议本身并不保留之前一切的请求或响应报文的信息。HTTP虽然是无状态协议，但是为了实现期望的保存状态功能，于是引入了Cookie技术，有了Cookie再用HTTP协议通信，就可以管理状态了。<br> 使用URI来定位访问的资源</p>
+<p>###HTTP方法<br>使用HTTP方法来告诉服务器意图<br>GET：获取资源<br>POST：传输实体主体<br>GET和POST使用很相似，但POST的主要目的并不是获取相应的主体内容<br>PUT：用来传输文件，因为HTTP/1.1的PUT方法自身不带验证机制，一般web网站不使用它<br>HEAD：和GET一样，但是不返回报文主体，值返回响应首部<br>DELETE ： 删除文件，同PUT相反，机制类似所以一般网站不会开放DELETE方法。<br>….<br><img src="http://ww1.sinaimg.cn/large/c3fd4c29ly1fly48gcrr0j20dz08zgmx.jpg" alt=""></p>
+<hr>
+<p>###TCP的持久链接<br>当一个网站需要大量请求时，会建立多次TCP，每次请求都会造成TCP的链接和断开，造成通信量的开销HTTP1.1提出HTTP keep-alive的方法，只要任意一端没有提出明显的断开，就是一直持久链接，在HTTP1.1中多有的链接都是持久链接</p>
+<p>###Cookie的状态管理<br>HTTP是无状态协议，它不对之前发生过的请求和响应进行状态管理，无状态的优点是：由于不必保存状态，自然可以减少服务器的CPU以及内存的消耗，从侧面说正是HTTP协议本身简单才会被应用各种场景。<br>Cookie技术通过在请求和响应报文中写入cookie信息来控制客户端的状态。<br>cookie会根据从服务器端发送的响应报文内的一个叫做Set-Cookie的首部字段信息，通知客户端保存Cookie，当下次客户端再往该服务器发送请求时，客户端会自动在报文中加入cookie值后发送出去。<br>服务器端发现客户端发送过来的cookie后，会去检查究竟是从哪一个客户端发来的链接请求，然后对比服务器上的记录，最后得到之前的状态信息。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">计算机基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/图解HTTP.md/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-react入门" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/react入门.md/">react入门</a>
+    </h1>
+  
+
+        
+        <a href="/react入门.md/" class="archive-article-date">
+  	<time datetime="2018-03-09T15:11:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#初识react</p>
+<p>[toc]</p>
+<p>##react安装<br><figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">npm </span><span class="string">install </span><span class="built_in">create-reacte-app</span> -g</span><br><span class="line"><span class="built_in">create-reacte-app</span> <span class="string">my </span><span class="string">app</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">cd </span><span class="string">my-app</span></span><br><span class="line"><span class="string">npm </span><span class="string">start</span></span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>##JSX简介<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> element = <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, world!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>;</span><br></pre></td></tr></table></figure></p>
+<p>这种标签语法不是html也不是字符串，而是JSX，一种javascipt语法扩展，在React中推荐使用jsx来描述用户界面<br><strong>使用</strong></p>
+<ul>
+<li>可以任意的在jsx中使用js表达式, 但是要包含在大括号中。</li>
+<li>在书写jsx时候 一般带上换行和缩进，增强代码可读性, 推荐在jsx代码外扩上一个小括号，放置分号自动插入的bug</li>
+<li>jsx本身也是一种表达式，也就是说可以在if 或者for语句使用jsx，将他赋值给变量，当作参数传入，作为返回值。</li>
+<li>属性:<br>  使用引号来定义以字符串为值的属性，使用大括号来定义以js表达式为值的属性<br><strong>JSX代表Object</strong><br>Babel转译器会把jsx转换成一个名为React.createElement()的方法调用。这个方法会返回一个对象，这样的对象被称为 React元素，react通过读取这些对象来构建DOM并保持数据一致<br>##元素渲染<br>元素是构成React应用的最小单位<br>React DOM 首先会比较元素内容先后的不同，而在渲染过程中只会更新改变了的部分<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">渲染方法</span><br><span class="line"><span class="keyword">const</span> element = <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, world<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>;</span><br><span class="line">ReactDOM.render(</span><br><span class="line">  element,</span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">'root'</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>##React组件<br><strong>组件定义的方式</strong><br>第一种：js普通函数<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Welcome</span>(<span class="params">props</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, &#123;props.name&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>第二种： es6类<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Welcome</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> &lt;h1&gt;<span class="type">Hello</span>, &#123;<span class="keyword">this</span>.props.name&#125;&lt;/h1&gt;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>当React遇到的元素是用户自定义的组件，它会将JSX属性作为单个对象传递给该组件，这个对象称之为”props”</p>
+<blockquote>
+<p> 警告:<br> 组件名称必须大写字母开头 </p>
+</blockquote>
+<p>React非常灵活，但是有一个严格的规则：<br><strong>所有的React组件必须像纯函数那样使用他们的props</strong></p>
+<blockquote>
+<p>纯函数： 函数执行不会改变自己的输入值，当传入值相同时总能返回相同的结果</p>
+</blockquote>
+<p>##state状态<br><strong>将函数转换为类</strong></p>
+<ol>
+<li>创建一个名称扩展为React.Component的ES6类</li>
+<li>创建一个叫做render( )的空方法</li>
+<li>将函数体移动到render( )方法中</li>
+<li>在render( )方法中，使用this.props替换props</li>
+<li>删除剩余空函数声明</li>
+</ol>
+<p>使用类才能允许我们使用其他特性，例如局部状态，生命周期钩子<br><strong>给一个类添加局部状态</strong></p>
+<ol>
+<li>在render方法中使用this.state.date替代this.props.date</li>
+<li>添加一个类构造函数来初始化this.state</li>
+<li>从 <code>&lt;Clock/&gt;</code>元素移除date属性</li>
+</ol>
+<p>结果如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Clock</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props);</span><br><span class="line">    <span class="keyword">this</span>.state = &#123;<span class="attr">date</span>: <span class="keyword">new</span> <span class="built_in">Date</span>()&#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;h1&gt;Hello, world!<span class="xml"><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line">        &lt;h2&gt;It is &#123;<span class="keyword">this</span>.state.date.toLocaleTimeString()&#125;.&lt;<span class="regexp">/h2&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ReactDOM.render(</span><br><span class="line">  &lt;Clock /&gt;,</span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">'root'</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
+<p>接下来，使用Clock设置计时器，每秒刷新一次，这样就会用到生命周期</p>
+<p>##生命周期<br>每当Clock组件第一次加载到DOM中的时候，我们都想生成定时器，这在React中被称为挂载。</p>
+<p>同样，每当Clock生成的这个DOM被移除的时候，我们也会想要清除定时器，这在React中被称为卸载。</p>
+<p>我们可以在组件类上声明特殊的方法，当组件挂载或卸载时，来运行一些代码：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">componentDidMount</span><span class="params">()</span></span>&#123;<span class="comment">//建立定时器</span></span><br><span class="line"> &#125;</span><br><span class="line"><span class="function"><span class="title">componentWillUnmount</span><span class="params">()</span></span> &#123;<span class="comment">//卸载定时器</span></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<p>这些方法被称作生命周期钩子。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Clock</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props);</span><br><span class="line">    <span class="keyword">this</span>.state = &#123;<span class="attr">date</span>: <span class="keyword">new</span> <span class="built_in">Date</span>()&#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  componentDidMount() &#123;</span><br><span class="line">    <span class="keyword">this</span>.timerID = setInterval(</span><br><span class="line">      () =&gt; <span class="keyword">this</span>.tick(),</span><br><span class="line">      <span class="number">1000</span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  componentWillUnmount() &#123;</span><br><span class="line">    clearInterval(<span class="keyword">this</span>.timerID);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  tick() &#123;</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">      date: <span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;h1&gt;Hello, world!<span class="xml"><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line">        &lt;h2&gt;It is &#123;<span class="keyword">this</span>.state.date.toLocaleTimeString()&#125;.&lt;<span class="regexp">/h2&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ReactDOM.render(</span><br><span class="line">  &lt;Clock /&gt;,</span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">'root'</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
+<p>让我们回顾下发生了什么，一级调用方法的顺序</p>
+<ol>
+<li>当<code>&lt;clock/&gt;</code>被传递给ReactDOM.render( )时, React调用Clock组件的构造函数。由于Clock需要显示当前时间，所以使用包含当前时间的对象来初始化this.state。我们稍后会更新此状态</li>
+<li>然后 React 调用Clock组件的render( )方法. 这是React 了解屏幕上应该显示什么内容的原因，然后React更新Dom 以匹配Clock的渲染输出。</li>
+<li>让clock的输出插入到DOM中时，React调用componentDidMount( )生命周期钩子.在其中，clock组件要求浏览器设置一个定时器，每秒执行一次</li>
+<li>浏览器每秒调用tick( )方法，在其中Clock 组件通过使用包含当前的对象，调用setState( )来调度UI更新。 通过调用setState( )，React知道状态已经改变 ，并再次调用render( )方法来确定屏幕上应当显示什么，这一次render( )方法中的this,state.date将不同, 所以渲染输出将包含更新的事件，并响应的更新DOM.</li>
+<li>一旦Clock组件被从Dom中移除，React会调用componentWillUnmount( )这个钩子函数，定时器也就会被清除</li>
+</ol>
+<p>##正确的使用状态<br>关于<code>setState()</code>的三件事情：<br><strong>1 不要直接更新状态</strong><br><figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// Wrong</span><br><span class="line">this.<span class="keyword">state</span>.comment = 'Hello';</span><br></pre></td></tr></table></figure></p>
+<p>应该使用setState( )<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Correct</span></span><br><span class="line"><span class="keyword">this</span>.setState(&#123;<span class="string">comment:</span> <span class="string">'Hello'</span>&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>构造函数是位移能够初始化<code>this.state</code>的地方。<br><strong>状态更新可能是异步的</strong><br>React可以将多个setState( )调用 合并成一个调用来提高性能。<br>因为this.props和this.state可能是异步更新的，不应该靠他们的值来计算下一个状态。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/react入门.md/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-react-redux的状态管理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/react-redux的状态管理.md/">react-redux的状态管理</a>
+    </h1>
+  
+
+        
+        <a href="/react-redux的状态管理.md/" class="archive-article-date">
+  	<time datetime="2018-03-09T15:08:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##Redux</p>
+<p>[toc]</p>
+<p>###1.Redux应用场景<br>因为单页面应用内容越来越复杂，所以管理不断变化的state非常困难，在React中，数据在组件中是单向流动的，兄弟组件之间的通信就会比较麻烦<img src="./redux-wrong.png" alt="Alt text"></p>
+<p>###2. Redux设计思想</p>
+<ul>
+<li>Redux是将整个应用状态存储到一个地方，称为store,里面保存一颗状态树(<code>state  tree</code>)。（因为状态一般都用对象，而对象都是树形结构）组件可以派发(dispatch) 行为 action 给store，而不是直接通知其他组件。组件内部通过订阅store中的状态state 来刷新自己的视图。<br><img src="./redux-flow.png" alt="Alt text"><br>###3. Redux三大原则</li>
+</ul>
+<ol>
+<li>整个应用的state被储存在一颗object tree中，并且存在一个唯一一个store中</li>
+<li>state是只读的，唯一改变state的方法就是触发action ，action是一个用于描述已发生事件的普通对象</li>
+<li>使用纯函数来执行修改，为了描述action 如果改变state tree 你需要编写reducers</li>
+</ol>
+<ul>
+<li>单一数据源的设计让React的组件之间的通信更加方便，同时便于状态的统一管理<br>###4.Redux解析概念</li>
+</ul>
+<hr>
+<ul>
+<li><p>4.1 Store</p>
+<ul>
+<li>store 就是保存数据的地方，可以把它看成一个容器，整个应用只能有一个store</li>
+<li><p>Redux 提供createStore 方法，用来生成store </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;createStore&#125; <span class="keyword">from</span> <span class="string">'redux'</span></span><br><span class="line"><span class="keyword">const</span> store = createStore(fn)</span><br></pre></td></tr></table></figure>
+<p>  上面代码中createStore函数接受另一个函数作为参数，返回新生成的store对象。</p>
+</li>
+</ul>
+</li>
+<li><p>4.2 State<br>  Store对象包含所有数据，如果想要得到某个时点的数据，就要对Store生成快照。这种时间点的数据集合，就叫做State。当前时刻的State，可以通过store.getState( )拿到。</p>
+  <figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import &#123;createStore&#125; <span class="keyword">from</span> 'redux'</span><br><span class="line">const store=createStore(fn)</span><br><span class="line">const <span class="keyword">state</span>=store.getState()</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>4.3 Action<br>  state的变化会导致view的变化，但是用户接触不到State，只能解触到view，所以state的变化必须是view导致的。action就是view发出的通知，表示state应该快要发生变化了，action是一个对象。其中的type属性是必须的，表示action的名称。其他属性可以自由设置，社区有一个规范可以参考</p>
+  <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> action=&#123;</span><br><span class="line">	<span class="keyword">type</span>:<span class="string">'ADD_TODO'</span>,</span><br><span class="line">	playload:<span class="string">'学习Redux'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  上面代码中，action的名称是ADD_TODO，它携带的信息是字符串’学习Redux’ 这样可以理解，action描述当前发生的事情，可以改变State的唯一办法，就是使用ation ，它可以运送数据到Store</p>
+</li>
+</ul>
+</li>
+<li>4.4 Action Creator<br>view要发送多少种信息，就会有多少种action，如果都手写太麻烦，可以定义一个函数来生成action，这个函数就叫action creator<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> ADD_TODO = <span class="string">'添加TODO'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addTodo</span><span class="params">(text)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span>&#123;</span><br><span class="line">	type:ADD_TODO,</span><br><span class="line">	text</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> action=addTodo(<span class="string">'学习Redux'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>上面代码中，addTodo函数就是一个Action Creator</p>
+<ul>
+<li><p>4.5 store.dispatch()<br>  store.dispatch() 是view发出action的唯一方法。</p>
+  <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;createStore&#125; <span class="keyword">from</span> <span class="string">'redux'</span></span><br><span class="line"><span class="keyword">const</span> store=createStore(fn)</span><br><span class="line">store.dispatch(&#123;</span><br><span class="line">	<span class="keyword">type</span>:<span class="string">'ADD_TODO'</span>,</span><br><span class="line">	payload:<span class="string">'学习Redux'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>  上面代码中store.dispath 接受一个action对象作为参数，将它发送出去，结合Action Creator，这段代码可以改写如下。</p>
+  <figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">store</span><span class="selector-class">.dispatch</span>(addTodo(<span class="string">'学习Redux'</span>))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>4.6 Reducer<br>Store收到Action以后，必须给一个新的State，这样View才会发生变化。这种State的计算过程就叫做Reducer。Reducer是一个纯函数，它接受Action和当前state作为参数，返回一个新的State。</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> reducer =<span class="function"><span class="keyword">function</span><span class="params">(state,action)</span></span>&#123;</span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">	<span class="keyword">return</span> new_state;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="如何使用redux"><a href="#如何使用redux" class="headerlink" title="如何使用redux"></a>如何使用redux</h2><ol>
+<li>后台写一个后台接口  /lessons</li>
+<li>前台(api)里写一个获取接口数据的方法</li>
+<li>在action-types里添加新的actionType类型</li>
+<li>在reducer里修改初始状态，并添加一个case</li>
+<li>在<code>actions</code>里添加一个方法调用此方法</li>
+<li>在组件中调用action中的方法</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">react-redux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/react-redux的状态管理.md/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Vue组件化开发" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Vue组件化开发.md/">Vue组件化开发</a>
+    </h1>
+  
+
+        
+        <a href="/Vue组件化开发.md/" class="archive-article-date">
+  	<time datetime="2018-03-09T14:56:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##Vue组件化开发</p>
+<ul>
+<li>单页应用（一个页面）<br>##组件</li>
+<li>把一个复杂的页面拆分成若干个组件，最后拼成一个完整的页面。组件就是自定义标签，封装可重用代码<h2 id="组件的分类"><a href="#组件的分类" class="headerlink" title="组件的分类"></a>组件的分类</h2></li>
+<li>页面级组件（home组件 list组件）</li>
+<li>基础组件（页面级包含基础级，也可以叫可复用组件）<h2 id="组件化开发的好处"><a href="#组件化开发的好处" class="headerlink" title="组件化开发的好处"></a>组件化开发的好处</h2></li>
+<li>提高开发效率</li>
+<li>方便重复使用</li>
+<li>便于协同开发</li>
+<li>更容易被管理和维护<h2 id="组件的使用"><a href="#组件的使用" class="headerlink" title="组件的使用"></a>组件的使用</h2></li>
+<li>全局组件（不需要在组件中再次声明）<ul>
+<li>写插件时可能会需要用到全局组件</li>
+</ul>
+</li>
+<li>局部组件（在某个组件中声明的）<ul>
+<li>自己写的组件一般是局部组件<br>##组件的特点<br>1、组件的名字不能使用已经存在的东西<br>2、一个组件就是一个对象<br>3、名字规范，js中不区分标签大小写<br>4、组件模版中只能有一个根节点，所有组件都是基于根实          例的<br>5、 组件中的data 必须是一个函数，<br>6、组件中的data 只能自己组件使用<br>7、组件相互独立，两个人之间没有任何关系<h2 id="全局组件"><a href="#全局组件" class="headerlink" title="全局组件"></a>全局组件</h2><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">component</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> my=&#123;</span><br><span class="line">	template:<span class="string">'&lt;div&gt;&#123;&#123;msg&#125;&#125;&lt;/div&gt;'</span>,</span><br><span class="line">	data()&#123;</span><br><span class="line">		return &#123;msg:<span class="string">'hello'</span>&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">Vue.component(<span class="string">'my-component'</span>,my)</span><br></pre></td></tr></table></figure>
+<p>##局部组件<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="keyword">vm</span>=<span class="keyword">new</span> Vue(&#123;</span><br><span class="line">	<span class="keyword">e</span><span class="variable">l:</span><span class="string">'#app'</span>,</span><br><span class="line">	component<span class="variable">s:</span>&#123;</span><br><span class="line">		child:&#123;</span><br><span class="line">			template:<span class="string">'&lt;div&gt;子组件&lt;/div&gt;'</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>定义在内部，而不是挂载在全局<h2 id="组件间的数据传递prop"><a href="#组件间的数据传递prop" class="headerlink" title="组件间的数据传递prop"></a>组件间的数据传递prop</h2></li>
+<li>组件实例的作用域是孤立的，互相不能访问</li>
+<li>给谁传递属性，就写在谁身上，通过冒号传递，可以传递数字，变量，布尔类型</li>
+<li>子组件需要显示声明在props 上</li>
+<li>属性的名字要使用驼峰命名法，因为要加载到html上</li>
+<li>使用四种验证方式，验证数据的传入方式</li>
+<li>这意味着不能（也不应该）在子组件模版内直接引用父组件的数据。父组件的数据<br>##单向数据流<h3 id="事件Event是子传父"><a href="#事件Event是子传父" class="headerlink" title="事件Event是子传父"></a>事件Event是子传父</h3></li>
+<li>在子组件上绑定自定义函数，对应的事件函数是父类的</li>
+<li>子组件触发自己的自定义事件，让父类执行</li>
+</ul>
+<p>2、父组件发生变化，刷新子组件</p>
+<hr>
+<p>##重点</p>
+<ul>
+<li>全局组件和局部组件的使用</li>
+<li>局部组件的模版</li>
+<li>组件中的数据必须是函数诶型</li>
+<li>属性的嵌套</li>
+<li>属性的传递</li>
+<li>属性的验证</li>
+<li>父组件获取子组件数据和方法</li>
+</ul>
+<p>##路由</p>
+<ul>
+<li>不同的url返回不同的结果</li>
+<li>vue的路由（spa）中只有一个首页，切换url地址，显示不同的组件</li>
+<li>切换路径，但是页面不切换<ul>
+<li>hash #</li>
+<li>pushState  没井号 (在开发的时候会产生404)，如果线上时会使用这种方式，可以依赖服务端解决404问题</li>
+</ul>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/Vue组件化开发.md/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-初识express" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/初识express.md/">初识express</a>
+    </h1>
+  
+
+        
+        <a href="/初识express.md/" class="archive-article-date">
+  	<time datetime="2018-03-09T14:54:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[toc]</p>
+<ul>
+<li><p>express是一个简洁快速node.js开发框架<br>##使用express</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span> express</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取、引用 通过变量app我们就可以调用express的各种方法</p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">var</span> <span class="built_in">express</span> = require('<span class="built_in">express</span>');</span><br><span class="line"><span class="built_in">var</span> app = <span class="built_in">express</span>();</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>###练习</p>
+<ul>
+<li>当客户端以get方式访问</li>
+<li>如果有一天，你忘记了请求和响应的格式。 打开gitbash<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入　</span><br><span class="line">curl <span class="params">--verbose</span> http:<span class="string">//localhost</span><span class="function">:8080</span>/user</span><br><span class="line">curl <span class="params">--verbose</span> <span class="params">--data</span> <span class="string">"name=zfpx"</span> -X POST http:<span class="string">//localhost</span><span class="function">:8080</span>/user</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>##send 方法</p>
+<ul>
+<li>send 方法可以接受任何类型的参数：字符串 buffer 对象  数组 数字 ，主要是数据类型转换 ，把其他类型都转成end能处理的类型，也就是字符串或者buffer</li>
+<li>发送文件的sendFile 但是需要绝对路径，或者指定root根目录</li>
+<li></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">nodeJs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/初识express.md/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-GIT进阶操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/GIT进阶操作.md/">GIT进阶操作</a>
+    </h1>
+  
+
+        
+        <a href="/GIT进阶操作.md/" class="archive-article-date">
+  	<time datetime="2018-03-09T14:34:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>通常我们在做团队项目时会使用GIT来进行团队分工和配合，那么正确使用GIT的流程是什么样子的呢，分支又是如何利用的呢？</p>
+<ul>
+<li>最开始我们在<code>git hub</code>上创建一个仓库，然后在项目的setting选项中选择<code>Collaborators</code>，通过用户名来邀请合作者，邀请发出后，被邀请额合作者会在绑定邮箱中收到邀请函。接受邀请后就可以一同开发这个在GIT上的项目了</li>
+<li>我们会首先使用<code>git clone https://github.com/xxxxx/xxxxxx.git</code>指令在<code>git bash</code>命令行中来将仓库下载下来，当你推送修改的时候要使用<code>git push origin master</code>指令推送。不过在<code>git push</code>之前 必须要执行 <code>git add .</code>和<code>git commit -m&#39;本次提交名字&#39;</code>  两个步骤操作，这个是必须的，要弄白为什么，就得理解<code>git hub</code>的三个分区。</li>
+<li><code>git hub</code>有三个分区，分别是 <code>工作区</code> <code>暂存区</code> <code>历史区</code> <ul>
+<li>工作区指的是当前当前代码编辑进行区域，暂存区是执行<code>git add</code>指令后文件暂存的区域，而历史区则是你的版本历史区域，也就是说你可以有多个历史区文件，但是暂存区只有一个（只有一个分支情况下），那么暂存区和历史区有什么必要性呢？</li>
+<li>先说历史区，他能收集你多个时间段的代码，多个时间段的版本也就是<code>git commit</code>，多次提交的版本，例如 1.0版 1.1版 2.1版，当你代码出错找不到解决办法的时候，可以使用版本回退，来回到你想回到的版本，而<code>git commit -m</code>后面的字段就是版本的名称，所以写好版本名是非常有必要的</li>
+<li>再说暂存区，说到暂存区就不得不提及<code>git</code>  分支的好处了，当同时有多人开发同一个项目时，难免会出现冲突，所谓冲突就是多个人对同一个文件进行了不同的修改，例如<code>README</code>文件的第一行，如果张三和李四都对这个文件的第一行进行了修改，并且是有差异的修改，那么<code>git hub</code> 会对这两个两个修改表示出无法处理，它不知道第一行到底是接受张三的还是李四的。</li>
+</ul>
+</li>
+<li><p>所以一般我们在提交代码之前先要使用<code>git pull origin master</code>将<code>git hub</code>仓库中最新的代码在本地更新一下，但是这就是导致了工作区（也就是当前编辑区）下的代码会受到干扰，因为拉下的文件也可能与工作区下的代码冲突，所以这个时候，如果我们将当前的修改放到一个区域，拉下来的代码放到另一个区域，再将这两个区域进行合并就方便多了，而暂存区就是用来存放代码的，我们可以通过<code>git add .</code>指令将工作区代码存放到暂存区，然后通过<code>git pull origin master</code>指令将<code>GIT</code>仓库中最新的版本更新到工作区，但是这样虽然达到了工作区内容是<code>GIT</code>仓库最新版，暂存区内容是我编辑的最新版的目的，但是如何进行智能的合并呢？这就涉及到了分支问题。</p>
+<blockquote>
+<p>默认情况下，只有一个主分支:  <code>master</code> ，我们可以通过<code>git checkout -b &#39;xxxx&#39;</code>来创建一个名为<code>xxxx</code> 的分支，然后通过 <code>git checkout xxxx</code>来进行分支切换, 通过<code>git branch</code>指令查看所有分支 ，通过<code>git merge xxxx</code>合并分支，通过<code>git branch -D xxxx</code>删除分支，值得注意的是你可以合并、删除任何分支，但是不能在当前分支下进行删除当前分支的操作。</p>
+</blockquote>
+</li>
+<li><p>如果我们在<code>git pull</code>之前 创建一个分支例如<code>git checkout -b &#39;loong&#39;</code>，通过<code>git add .</code>将我的修改添加到<code>loong</code>分支的暂存区上，再切换回主分支<code>git checkout master</code> 然后在进行<code>pull pull</code>操作，  将<code>GIT</code>仓库最新版本更新到本地主分支上面，这就相当于主分支<code>master</code>下的文件和<code>git hub</code>上是一致的，而<code>loong</code>分支上是我的修改。这样就实现了我既有了网上最新的版本，分支上也有了我当前修改的版本。这个时候我们就可以将两个分支进行合并，从而获得完全体的最新版本。</p>
+<blockquote>
+<p>假如我们不使用分支，直接将工作区内容添加到暂存区，然后跟新本地<code>master</code>，这样虽然达到了工作区是网上最新的版本，暂存区是我的修改，但是无法达到代码合并的目的。</p>
+</blockquote>
+<ul>
+<li>在主分支上通过 <code>git merge loong</code>指令将分支合并到主分支，然后通过<code>git add .</code>，<code>git commit -m&#39;提交版本名&#39;</code>, <code>git push origin mstare</code>指令将合并完成后的代码推送到<code>git hub</code>仓库<blockquote>
+<p>如果这个时候分支名从<code>master</code>变成<code>Merging|Master</code>那就说明你的修改和<code>GIT</code>仓库上最新的版本有了冲突，你可以到编辑器内进行冲突处理，然后再<code>git push</code>这种冲突是具体到某一个文件的某一行的差异，是比较好处理的。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/GIT进阶操作.md/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/hello-world.md/">Hello World</a>
+    </h1>
+  
+
+        
+        <a href="/hello-world.md/" class="archive-article-date">
+  	<time datetime="2018-03-09T07:41:50.420Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/hello-world.md/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-GIT的使用指南" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/GIT的使用指南.md/">GIT的使用指南</a>
+    </h1>
+  
+
+        
+        <a href="/GIT的使用指南.md/" class="archive-article-date">
+  	<time datetime="2017-05-09T14:34:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="GIT-使用指南"><a href="#GIT-使用指南" class="headerlink" title="GIT 使用指南"></a>GIT 使用指南</h1><p>[toc]</p>
+<h2 id="git-特性"><a href="#git-特性" class="headerlink" title="git 特性"></a>git 特性</h2><p>-&gt; 管理代码版本的工具（分布式git） </p>
+<ul>
+<li>能记住是谁提交的东西</li>
+<li>保存每个阶段的内容（备份功能）</li>
+<li>可以实现时空裂缝功能</li>
+<li>GitHub 开源  多端共享 团队协作</li>
+<li>自动合并代码，比较不同<br>-&gt; 区别集中式 svn<h2 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h2></li>
+<li>下载git</li>
+<li>通过鼠标右键 git bush  here 使用git 命令行</li>
+<li>查看 git 版本<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="comment">--version</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="使用git"><a href="#使用git" class="headerlink" title="使用git"></a>使用git</h2><ul>
+<li>界面化操作GUI ( source tree)</li>
+<li>命令行操作c l i<h2 id="配置git"><a href="#配置git" class="headerlink" title="配置git"></a>配置git</h2><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git<span class="built_in"> config </span>--global user.name zhufengzhufeng</span><br><span class="line">git congif --global user.email 695409705@qq.com</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>-&gt;告诉git 是谁提交的代码</p>
+<h2 id="初始化git-不能嵌套使用git"><a href="#初始化git-不能嵌套使用git" class="headerlink" title="初始化git(不能嵌套使用git)"></a>初始化git(不能嵌套使用git)</h2><ul>
+<li>以某个文件夹作为git管理的目录<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git init</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>-&gt; 会产生一个.git文件夹</p>
+<h2 id="提交到git前-查看暂存区是否存在"><a href="#提交到git前-查看暂存区是否存在" class="headerlink" title="提交到git前 查看暂存区是否存在"></a>提交到git前 查看暂存区是否存在</h2><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git status</span></span><br></pre></td></tr></table></figure>
+<p>-&gt; 如果是红色便是未添加到暂存区</p>
+<ul>
+<li>添加到暂存区<ul>
+<li>git add 文件名</li>
+<li>或者 git add .   提交所有<h3 id="提交到历史区"><a href="#提交到历史区" class="headerlink" title="提交到历史区"></a>提交到历史区</h3><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git</span> commit -m <span class="string">"initial"</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>单纯的git commit 会进入编辑器 可以直接通过-m +”本次提交日志”来便捷提交 </p>
+</blockquote>
+<h3 id="查看提交历史"><a href="#查看提交历史" class="headerlink" title="查看提交历史"></a>查看提交历史</h3>  <figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git  <span class="built_in">log</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>查看所提交过的文件及历史</p>
+</blockquote>
+<h2 id="比较三个阶段文件区别"><a href="#比较三个阶段文件区别" class="headerlink" title="比较三个阶段文件区别"></a>比较三个阶段文件区别</h2><ul>
+<li><p>工作区和暂存区</p>
+<pre><code><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git diff</span></span><br></pre></td></tr></table></figure>
+</code></pre></li>
+<li><p>比较暂存区和历史区</p>
+<pre><code><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff <span class="comment">--cached</span></span><br></pre></td></tr></table></figure>
+</code></pre></li>
+<li><p>比较工作区和历史区</p>
+<pre><code><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git diff mater</span></span><br></pre></td></tr></table></figure>
+</code></pre></li>
+</ul>
+<blockquote>
+<p>如果一样则不显示</p>
+<ul>
+<li>时空裂缝<ul>
+<li>工作区回到暂存区内容<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git checkout 文件名</span><br><span class="line"> ``` </span><br><span class="line"> - 将暂存区内容返回到上一次</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<pre><code>git reset HEAD 文件名
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">- </span>查看历史版本</span><br></pre></td></tr></table></figure>
+
+git reflog 版本号
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">- </span>回到历史版本</span><br></pre></td></tr></table></figure>
+
+git reset --hard 版本号
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 分支</span></span></span><br><span class="line">- 查看分支</span><br></pre></td></tr></table></figure>
+</code></pre><p>git branch<br><figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="deletion">-创建分支</span></span><br></pre></td></tr></table></figure></p>
+<p>git checkout -b 分支名<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">- </span>切换分支</span><br></pre></td></tr></table></figure></p>
+<p>git checkout 分支名<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">- </span>创建并切换分支名</span><br></pre></td></tr></table></figure></p>
+<p>git checkout -b dev<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">- </span>删除分支</span><br></pre></td></tr></table></figure></p>
+<p>git branch -D 分支名  但是不能删除当前分支<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-&gt;每个分支是没有关`enter <span class="keyword">code</span> here`系的</span><br><span class="line">- 分支合并</span><br></pre></td></tr></table></figure></p>
+<p>git merge dev<br><code>`</code></p>
+<h2 id="linux-命令"><a href="#linux-命令" class="headerlink" title="linux 命令"></a>linux 命令</h2><ul>
+<li>pwd  打印当前路径</li>
+<li>rm -rf  .git  (删除文件夹)</li>
+<li>mkdir 创建目录</li>
+<li>ls （list show 查看目录）</li>
+<li>cd -git-pro/ (进入文件夹)</li>
+<li>创建一个文本并在命令行编辑<ul>
+<li>touch 文件名</li>
+<li>vi 文件名</li>
+<li>i 插入模式</li>
+<li>esc + :wq 保存推出</li>
+<li>cat 文件名 （查看文本内容） </li>
+</ul>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/GIT的使用指南.md/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+  
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2018/03/page/2/">2</a><a class="page-number" href="/archives/2018/03/page/3/">3</a><a class="extend next" rel="next" href="/archives/2018/03/page/2/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 
@@ -524,9 +1278,9 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: false,
+		isHome: true,
 		isPost: false,
-		isArchive: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

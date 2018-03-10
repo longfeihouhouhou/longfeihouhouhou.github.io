@@ -6,18 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://longfeihouhouhou.github.io">
-  <title>Archives: 2018/3 | LoongFly的博客</title>
+  <title>GIT进阶操作 | LoongFly的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前端攻城狮，此为博客一枚">
-<meta name="keywords" content="前端,js,jQuery,javascript,html5,开发者,程序猿,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验,Vue,React,node.js">
-<meta property="og:type" content="website">
-<meta property="og:title" content="LoongFly的博客">
-<meta property="og:url" content="http://longfeihouhouhou.github.io/archives/2018/03/index.html">
+  <meta name="description" content="通常我们在做团队项目时会使用GIT来进行团队分工和配合，那么正确使用GIT的流程是什么样子的呢，分支又是如何利用的呢？  最开始我们在git hub上创建一个仓库，然后在项目的setting选项中选择Collaborators，通过用户名来邀请合作者，邀请发出后，被邀请额合作者会在绑定邮箱中收到邀请函。接受邀请后就可以一同开发这个在GIT上的项目了 我们会首先使用git clone https:/">
+<meta name="keywords" content="Git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GIT进阶操作">
+<meta property="og:url" content="http://longfeihouhouhou.github.io/GIT进阶操作.md/index.html">
 <meta property="og:site_name" content="LoongFly的博客">
-<meta property="og:description" content="前端攻城狮，此为博客一枚">
+<meta property="og:description" content="通常我们在做团队项目时会使用GIT来进行团队分工和配合，那么正确使用GIT的流程是什么样子的呢，分支又是如何利用的呢？  最开始我们在git hub上创建一个仓库，然后在项目的setting选项中选择Collaborators，通过用户名来邀请合作者，邀请发出后，被邀请额合作者会在绑定邮箱中收到邀请函。接受邀请后就可以一同开发这个在GIT上的项目了 我们会首先使用git clone https:/">
+<meta property="og:updated_time" content="2018-03-09T14:51:30.366Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LoongFly的博客">
-<meta name="twitter:description" content="前端攻城狮，此为博客一枚">
+<meta name="twitter:title" content="GIT进阶操作">
+<meta name="twitter:description" content="通常我们在做团队项目时会使用GIT来进行团队分工和配合，那么正确使用GIT的流程是什么样子的呢，分支又是如何利用的呢？  最开始我们在git hub上创建一个仓库，然后在项目的setting选项中选择Collaborators，通过用户名来邀请合作者，邀请发出后，被邀请额合作者会在绑定邮箱中收到邀请函。接受邀请后就可以一同开发这个在GIT上的项目了 我们会首先使用git clone https:/">
   
     <link rel="alternative" href="/atom.xml" title="LoongFly的博客" type="application/atom+xml">
   
@@ -155,353 +156,211 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-GIT进阶操作" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      GIT进阶操作
+    </h1>
+  
+
+        
+        <a href="/GIT进阶操作.md/" class="archive-article-date">
+  	<time datetime="2018-03-09T14:34:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>通常我们在做团队项目时会使用GIT来进行团队分工和配合，那么正确使用GIT的流程是什么样子的呢，分支又是如何利用的呢？</p>
+<ul>
+<li>最开始我们在<code>git hub</code>上创建一个仓库，然后在项目的setting选项中选择<code>Collaborators</code>，通过用户名来邀请合作者，邀请发出后，被邀请额合作者会在绑定邮箱中收到邀请函。接受邀请后就可以一同开发这个在GIT上的项目了</li>
+<li>我们会首先使用<code>git clone https://github.com/xxxxx/xxxxxx.git</code>指令在<code>git bash</code>命令行中来将仓库下载下来，当你推送修改的时候要使用<code>git push origin master</code>指令推送。不过在<code>git push</code>之前 必须要执行 <code>git add .</code>和<code>git commit -m&#39;本次提交名字&#39;</code>  两个步骤操作，这个是必须的，要弄白为什么，就得理解<code>git hub</code>的三个分区。</li>
+<li><code>git hub</code>有三个分区，分别是 <code>工作区</code> <code>暂存区</code> <code>历史区</code> <ul>
+<li>工作区指的是当前当前代码编辑进行区域，暂存区是执行<code>git add</code>指令后文件暂存的区域，而历史区则是你的版本历史区域，也就是说你可以有多个历史区文件，但是暂存区只有一个（只有一个分支情况下），那么暂存区和历史区有什么必要性呢？</li>
+<li>先说历史区，他能收集你多个时间段的代码，多个时间段的版本也就是<code>git commit</code>，多次提交的版本，例如 1.0版 1.1版 2.1版，当你代码出错找不到解决办法的时候，可以使用版本回退，来回到你想回到的版本，而<code>git commit -m</code>后面的字段就是版本的名称，所以写好版本名是非常有必要的</li>
+<li>再说暂存区，说到暂存区就不得不提及<code>git</code>  分支的好处了，当同时有多人开发同一个项目时，难免会出现冲突，所谓冲突就是多个人对同一个文件进行了不同的修改，例如<code>README</code>文件的第一行，如果张三和李四都对这个文件的第一行进行了修改，并且是有差异的修改，那么<code>git hub</code> 会对这两个两个修改表示出无法处理，它不知道第一行到底是接受张三的还是李四的。</li>
+</ul>
+</li>
+<li><p>所以一般我们在提交代码之前先要使用<code>git pull origin master</code>将<code>git hub</code>仓库中最新的代码在本地更新一下，但是这就是导致了工作区（也就是当前编辑区）下的代码会受到干扰，因为拉下的文件也可能与工作区下的代码冲突，所以这个时候，如果我们将当前的修改放到一个区域，拉下来的代码放到另一个区域，再将这两个区域进行合并就方便多了，而暂存区就是用来存放代码的，我们可以通过<code>git add .</code>指令将工作区代码存放到暂存区，然后通过<code>git pull origin master</code>指令将<code>GIT</code>仓库中最新的版本更新到工作区，但是这样虽然达到了工作区内容是<code>GIT</code>仓库最新版，暂存区内容是我编辑的最新版的目的，但是如何进行智能的合并呢？这就涉及到了分支问题。</p>
+<blockquote>
+<p>默认情况下，只有一个主分支:  <code>master</code> ，我们可以通过<code>git checkout -b &#39;xxxx&#39;</code>来创建一个名为<code>xxxx</code> 的分支，然后通过 <code>git checkout xxxx</code>来进行分支切换, 通过<code>git branch</code>指令查看所有分支 ，通过<code>git merge xxxx</code>合并分支，通过<code>git branch -D xxxx</code>删除分支，值得注意的是你可以合并、删除任何分支，但是不能在当前分支下进行删除当前分支的操作。</p>
+</blockquote>
+</li>
+<li><p>如果我们在<code>git pull</code>之前 创建一个分支例如<code>git checkout -b &#39;loong&#39;</code>，通过<code>git add .</code>将我的修改添加到<code>loong</code>分支的暂存区上，再切换回主分支<code>git checkout master</code> 然后在进行<code>pull pull</code>操作，  将<code>GIT</code>仓库最新版本更新到本地主分支上面，这就相当于主分支<code>master</code>下的文件和<code>git hub</code>上是一致的，而<code>loong</code>分支上是我的修改。这样就实现了我既有了网上最新的版本，分支上也有了我当前修改的版本。这个时候我们就可以将两个分支进行合并，从而获得完全体的最新版本。</p>
+<blockquote>
+<p>假如我们不使用分支，直接将工作区内容添加到暂存区，然后跟新本地<code>master</code>，这样虽然达到了工作区是网上最新的版本，暂存区是我的修改，但是无法达到代码合并的目的。</p>
+</blockquote>
+<ul>
+<li>在主分支上通过 <code>git merge loong</code>指令将分支合并到主分支，然后通过<code>git add .</code>，<code>git commit -m&#39;提交版本名&#39;</code>, <code>git push origin mstare</code>指令将合并完成后的代码推送到<code>git hub</code>仓库<blockquote>
+<p>如果这个时候分支名从<code>master</code>变成<code>Merging|Master</code>那就说明你的修改和<code>GIT</code>仓库上最新的版本有了冲突，你可以到编辑器内进行冲突处理，然后再<code>git push</code>这种冲突是具体到某一个文件的某一行的差异，是比较好处理的。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://ww1.sinaimg.cn/large/c3fd4c29ly1fp5gbsv27tj20la0ogwg3.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://ww1.sinaimg.cn/large/c3fd4c29ly1fp5gc2g8gyj20oa0o940n.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/html5的web语义化.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:39:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/html5的web语义化.md/">html5的web语义化</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">html</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://longfeihouhouhou.github.io/GIT进阶操作.md/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/总结JS中MAth方法.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:38:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/初识express.md/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          初识express
+        
+      </div>
+    </a>
+  
+  
+    <a href="/hello-world.md/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hello World</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/总结JS中MAth方法.md/">总结JS中MAth方法</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Math</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/总结JS数组的30种方法.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:37:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/总结JS数组的30种方法.md/">总结JS数组的30种方法</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Array</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/七种布局技巧.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:35:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/七种布局技巧.md/">七种布局技巧</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Css</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">布局</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/怪异模式.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:33:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/怪异模式.md/">怪异模式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Css</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/flex布局和弹性盒子.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:32:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/flex布局和弹性盒子.md/">flex布局和弹性盒子</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CSS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">flex</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/Css特性.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:31:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/Css特性.md/">Css特性</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Css</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">布局</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/简单总结js的设计模式.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:28:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/简单总结js的设计模式.md/">简单总结js的设计模式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2018/03/page/2/">2</a><a class="page-number" href="/archives/2018/03/page/3/">3</a><a class="extend next" rel="next" href="/archives/2018/03/page/2/">Next &raquo;</a>
-    </nav>
   
 
 
@@ -525,8 +384,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

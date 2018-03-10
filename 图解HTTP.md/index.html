@@ -6,18 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://longfeihouhouhou.github.io">
-  <title>Archives: 2018/3 | LoongFly的博客</title>
+  <title>图解HTTP | LoongFly的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前端攻城狮，此为博客一枚">
-<meta name="keywords" content="前端,js,jQuery,javascript,html5,开发者,程序猿,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验,Vue,React,node.js">
-<meta property="og:type" content="website">
-<meta property="og:title" content="LoongFly的博客">
-<meta property="og:url" content="http://longfeihouhouhou.github.io/archives/2018/03/index.html">
+  <meta name="description" content="#图解HTTP ###HTTP 超文本传输协议HTTP： HyperText Transfer Protocol   一个请求从客户端到服务端的流程客户端从应用层（HTTP协议）发送一个HTTP请求。接着，为了传输方便，会在传输层（TCP协议）把从应用层收到的HTTP请求报文进行分割，并在各个报文打上端口号和序号转发给网络层。在网络层（IP协议），增加作为通信目的地MAC地址后转发给链路层。这样给">
+<meta name="keywords" content="计算机基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图解HTTP">
+<meta property="og:url" content="http://longfeihouhouhou.github.io/图解HTTP.md/index.html">
 <meta property="og:site_name" content="LoongFly的博客">
-<meta property="og:description" content="前端攻城狮，此为博客一枚">
+<meta property="og:description" content="#图解HTTP ###HTTP 超文本传输协议HTTP： HyperText Transfer Protocol   一个请求从客户端到服务端的流程客户端从应用层（HTTP协议）发送一个HTTP请求。接着，为了传输方便，会在传输层（TCP协议）把从应用层收到的HTTP请求报文进行分割，并在各个报文打上端口号和序号转发给网络层。在网络层（IP协议），增加作为通信目的地MAC地址后转发给链路层。这样给">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/c3fd4c29ly1flxr2yyvi2j20h90fkjww.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/c3fd4c29ly1fly05ta14mj20cl0i2dld.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/c3fd4c29ly1fly0z5ra0hj20cs06gabc.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/c3fd4c29ly1fly129hjsjj20b305njsd.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/c3fd4c29ly1fly48gcrr0j20dz08zgmx.jpg">
+<meta property="og:updated_time" content="2018-03-09T15:12:58.436Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LoongFly的博客">
-<meta name="twitter:description" content="前端攻城狮，此为博客一枚">
+<meta name="twitter:title" content="图解HTTP">
+<meta name="twitter:description" content="#图解HTTP ###HTTP 超文本传输协议HTTP： HyperText Transfer Protocol   一个请求从客户端到服务端的流程客户端从应用层（HTTP协议）发送一个HTTP请求。接着，为了传输方便，会在传输层（TCP协议）把从应用层收到的HTTP请求报文进行分割，并在各个报文打上端口号和序号转发给网络层。在网络层（IP协议），增加作为通信目的地MAC地址后转发给链路层。这样给">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/c3fd4c29ly1flxr2yyvi2j20h90fkjww.jpg">
   
     <link rel="alternative" href="/atom.xml" title="LoongFly的博客" type="application/atom+xml">
   
@@ -155,353 +162,212 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-图解HTTP" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      图解HTTP
+    </h1>
+  
+
+        
+        <a href="/图解HTTP.md/" class="archive-article-date">
+  	<time datetime="2018-03-09T15:12:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#图解HTTP</p>
+<p>###HTTP 超文本传输协议<br>HTTP： HyperText Transfer Protocol </p>
+<hr>
+<p>一个请求从客户端到服务端的流程<br><img src="http://ww1.sinaimg.cn/large/c3fd4c29ly1flxr2yyvi2j20h90fkjww.jpg" alt=""><br>客户端从应用层（HTTP协议）发送一个HTTP请求。<br>接着，为了传输方便，会在传输层（TCP协议）把从应用层收到的HTTP请求报文进行分割，并在各个报文打上端口号和序号转发给网络层。<br>在网络层（IP协议），增加作为通信目的地MAC地址后转发给链路层。这样给发往网络的通信请求就齐全了。</p>
+<blockquote>
+<p>发送端在层与层的传递时，每经过一层都会打上该层所属的首部信息，相反，服务端在接受信息时每经过一层都会去掉该层所属的首部信息。<br>TCP/IP 协议族中IP占了一半，IP就是网络协议，IP协议的作用就是将数据包传送给对方，而为了确保准确传送，IP地址和MAC地址就是重要条件</p>
+</blockquote>
+<hr>
+<p>###TCP的三次握手<br>TCP位于传输层，提供可靠的字节流服务，字节流是指为了方便传输，将大块数据分割以报文段为单位的数据包进行管理，可靠的传输服务是指TCP协议为了更容易传送大数据才把数据分割，而且TCP协议能够确认数据最终是否到达对方<br>，为了确保数据送达，TCP协议采用三次握手策略：<br>发送端首先发送一个带SYN标志的数据包给对方，接收端收到后回复带SYN/ACK标志的数据包以示消息传达确认消息，最后发送端再传回一个带ACK标志的数据包代表握手结束</p>
+<p>###DNS（Domian Name System）<br>域名服务系统和HTTP协议一样位于应用层的协议，它提供域名到IP地址之间的解析服务。用户通常使用主机名或域名来访问对方的计算机，而不是直接通过IP地址访问，因为与IP地址的一组纯数字相比，用字母配合数字更符合人类的记忆习惯。<br>DNS协议提供通过域名查找IP地址，或逆向从IP地址反查找域名的服务。</p>
+<hr>
+<p>###各种协议与HTTP协议的关系<br><img src="http://ww1.sinaimg.cn/large/c3fd4c29ly1fly05ta14mj20cl0i2dld.jpg" alt=""></p>
+<p>###URI与URL<br>即 统一资源标识符和统一资源定位符，URI用字符串表示某一互联网资源，而URL表示资源在互联网所处的位置。</p>
+<p>##HTTP协议</p>
+<ul>
+<li>用于客户端和服务端的通信</li>
+<li>通过请求和响应的交换达成通信<blockquote>
+<p>请求报文是由请求方法、请求URI、协议版本、可选的请求首部字段和内容实体构成的</p>
+</blockquote>
+</li>
+</ul>
+<p>请求报文的构成<br> <img src="http://ww1.sinaimg.cn/large/c3fd4c29ly1fly0z5ra0hj20cs06gabc.jpg" alt=""></p>
+<hr>
+<p> 响应报文的构成<br> <img src="http://ww1.sinaimg.cn/large/c3fd4c29ly1fly129hjsjj20b305njsd.jpg" alt=""><br> HTTP协议本身不具备保存之前发送过的请求或响应的功能，使用HTTP协议本身并不保留之前一切的请求或响应报文的信息。HTTP虽然是无状态协议，但是为了实现期望的保存状态功能，于是引入了Cookie技术，有了Cookie再用HTTP协议通信，就可以管理状态了。<br> 使用URI来定位访问的资源</p>
+<p>###HTTP方法<br>使用HTTP方法来告诉服务器意图<br>GET：获取资源<br>POST：传输实体主体<br>GET和POST使用很相似，但POST的主要目的并不是获取相应的主体内容<br>PUT：用来传输文件，因为HTTP/1.1的PUT方法自身不带验证机制，一般web网站不使用它<br>HEAD：和GET一样，但是不返回报文主体，值返回响应首部<br>DELETE ： 删除文件，同PUT相反，机制类似所以一般网站不会开放DELETE方法。<br>….<br><img src="http://ww1.sinaimg.cn/large/c3fd4c29ly1fly48gcrr0j20dz08zgmx.jpg" alt=""></p>
+<hr>
+<p>###TCP的持久链接<br>当一个网站需要大量请求时，会建立多次TCP，每次请求都会造成TCP的链接和断开，造成通信量的开销HTTP1.1提出HTTP keep-alive的方法，只要任意一端没有提出明显的断开，就是一直持久链接，在HTTP1.1中多有的链接都是持久链接</p>
+<p>###Cookie的状态管理<br>HTTP是无状态协议，它不对之前发生过的请求和响应进行状态管理，无状态的优点是：由于不必保存状态，自然可以减少服务器的CPU以及内存的消耗，从侧面说正是HTTP协议本身简单才会被应用各种场景。<br>Cookie技术通过在请求和响应报文中写入cookie信息来控制客户端的状态。<br>cookie会根据从服务器端发送的响应报文内的一个叫做Set-Cookie的首部字段信息，通知客户端保存Cookie，当下次客户端再往该服务器发送请求时，客户端会自动在报文中加入cookie值后发送出去。<br>服务器端发现客户端发送过来的cookie后，会去检查究竟是从哪一个客户端发来的链接请求，然后对比服务器上的记录，最后得到之前的状态信息。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://ww1.sinaimg.cn/large/c3fd4c29ly1fp5gbsv27tj20la0ogwg3.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://ww1.sinaimg.cn/large/c3fd4c29ly1fp5gc2g8gyj20oa0o940n.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/html5的web语义化.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:39:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/html5的web语义化.md/">html5的web语义化</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">html</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">计算机基础</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://longfeihouhouhou.github.io/图解HTTP.md/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/总结JS中MAth方法.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:38:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/浏览器都有那些分类？.md/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          浏览器都有那些分类？
+        
+      </div>
+    </a>
+  
+  
+    <a href="/react入门.md/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">react入门</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/总结JS中MAth方法.md/">总结JS中MAth方法</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Math</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/总结JS数组的30种方法.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:37:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/总结JS数组的30种方法.md/">总结JS数组的30种方法</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Array</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/七种布局技巧.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:35:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/七种布局技巧.md/">七种布局技巧</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Css</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">布局</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/怪异模式.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:33:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/怪异模式.md/">怪异模式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Css</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/flex布局和弹性盒子.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:32:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/flex布局和弹性盒子.md/">flex布局和弹性盒子</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CSS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">flex</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/Css特性.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:31:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/Css特性.md/">Css特性</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Css</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">布局</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/简单总结js的设计模式.md/" class="archive-article-date">
-  	<time datetime="2018-03-09T15:28:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/简单总结js的设计模式.md/">简单总结js的设计模式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2018/03/page/2/">2</a><a class="page-number" href="/archives/2018/03/page/3/">3</a><a class="extend next" rel="next" href="/archives/2018/03/page/2/">Next &raquo;</a>
-    </nav>
   
 
 
@@ -525,8 +391,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
