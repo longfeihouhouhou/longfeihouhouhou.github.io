@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://longfeihouhouhou.github.io">
   <title>相册 | LoongFly的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="图片来自instagram，正在加载中…">
+  <meta name="description" content="图片来自instagram，正在加载中…                     function add0(m){return m">
 <meta name="keywords" content="前端,js,jQuery,javascript,html5,开发者,程序猿,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验,Vue,React,node.js">
 <meta property="og:type" content="website">
 <meta property="og:title" content="相册">
 <meta property="og:url" content="http://longfeihouhouhou.github.io/instagram/index.html">
 <meta property="og:site_name" content="LoongFly的博客">
-<meta property="og:description" content="图片来自instagram，正在加载中…">
-<meta property="og:updated_time" content="2018-03-10T02:44:22.292Z">
+<meta property="og:description" content="图片来自instagram，正在加载中…                     function add0(m){return m">
+<meta property="og:updated_time" content="2018-03-09T09:49:18.459Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="相册">
-<meta name="twitter:description" content="图片来自instagram，正在加载中…">
+<meta name="twitter:description" content="图片来自instagram，正在加载中…                     function add0(m){return m">
   
     <link rel="alternative" href="/atom.xml" title="LoongFly的博客" type="application/atom+xml">
   
@@ -53,7 +53,7 @@
 		  <h1 class="header-author"><a href="/">LoongFly</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">天生竞争者</p>
+		<p class="header-subtitle">前端攻城狮一枚</p>
 		
 
 		<nav class="header-menu">
@@ -109,7 +109,7 @@
 			  <h1 class="header-author js-header-author">LoongFly</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>天生竞争者<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>前端攻城狮一枚<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -152,7 +152,7 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-instagram" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-photos" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -168,9 +168,36 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><div class="instagram" data-client-id="29b66a4646fa424486978b80dcbb8e9f" data-user-id="7247152150"><br>        <a href="http://instagram.com/longflyhou" target="_blank" class="open-ins">图片来自instagram，正在加载中…</a><br></div></p>
-<script src="/js/jquery.lazyload.js"></script>
-<script src="/js/instagram.js"></script>
+        <link rel="stylesheet" href="./ins.css">
+<div class="instagram itemscope">
+    <section class="archives album">
+        <ul class="img-box-ul">
+            <a href="https://www.instagram.com/longflyhou/" target="_blank" class="open-ins">图片来自instagram，正在加载中…</a>
+        </ul>
+    </section>
+</div>
+<script>
+    function add0(m){return m<10?'0'+m:m };
+    function getDate(timeString) {
+        var time = new Date(parseInt(timeString) * 1000);
+        var y = time.getFullYear();
+        var m = time.getMonth()+1;
+        var d = time.getDate();
+        return y+'-'+add0(m)+'-'+add0(d);
+    };
+</script>
+<script>
+    (function() {
+        var loadScript = function(path) {
+            var $script = document.createElement('script')
+            document.getElementsByTagName('body')[0].appendChild($script)
+            $script.setAttribute('src', path)
+        }
+        setTimeout(function() {
+            loadScript('./ins.js')
+        }, 0)
+    })()
+</script>
       
 
       
@@ -399,11 +426,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
               </li>
              
               <li class="article-tag-list-item">

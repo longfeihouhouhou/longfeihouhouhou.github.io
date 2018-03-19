@@ -52,7 +52,7 @@
 		  <h1 class="header-author"><a href="/">LoongFly</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">天生竞争者</p>
+		<p class="header-subtitle">前端攻城狮一枚</p>
 		
 
 		<nav class="header-menu">
@@ -108,7 +108,7 @@
 			  <h1 class="header-author js-header-author">LoongFly</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>天生竞争者<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>前端攻城狮一枚<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -153,98 +153,39 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-JS标准内置对象总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Js中的事件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/JS标准内置对象总结.md/">JS标准内置对象总结</a>
+      <a class="article-title" href="/Js中的事件.md/">Js中的事件</a>
     </h1>
   
 
         
-        <a href="/JS标准内置对象总结.md/" class="archive-article-date">
-  	<time datetime="2017-04-02T15:24:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-02</time>
+        <a href="/Js中的事件.md/" class="archive-article-date">
+  	<time datetime="2016-07-09T15:15:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-07-09</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>##JavaScript标准内置对象</p>
+        <p>#JS中的事件</p>
+<p>##事件冒泡</p>
 <blockquote>
-<p>全局属性和函数可用于所有内建的JavaScript对象</p>
+<p>事件的触发顺序自内向外，这就是事件冒泡。例如点击事件，点击子元素，由于事件冒泡会触发父元素的点击事件，一直到body<br>在监听函数中第三个参数是布尔值，true为捕获，false为冒泡，默认是false，由下向上触发事件<br>IE浏览器只支持事件冒泡，它也不支持addEventListener函数，而是提供另一个函数attachEvent<br> <img src="http://ww1.sinaimg.cn/large/c3fd4c29ly1fm28nx50jcj20ja0eft9e.jpg" alt=""><br>解决冒泡的方法：</p>
 </blockquote>
-<p>###顶层函数（全局函数）<br>|函数            |描述                                   |<br>| ：——：   | ：——–：                       |<br>|decodeURI()|解码某个编码的URI           |</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">函数</th>
-<th style="text-align:right">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">decodeURI()</td>
-<td style="text-align:right">解码某个编码的URI</td>
-</tr>
-<tr>
-<td style="text-align:left">decodeURIComponent</td>
-<td style="text-align:right">解码一个编码的URI组件</td>
-</tr>
-<tr>
-<td style="text-align:left">encodeURI()</td>
-<td style="text-align:right">把字符串编码为URI</td>
-</tr>
-<tr>
-<td style="text-align:left">endcodeURIComponent</td>
-<td style="text-align:right">把字符串编码为URI组件</td>
-</tr>
-<tr>
-<td style="text-align:left">escape()</td>
-<td style="text-align:right">对字符串进行编码</td>
-</tr>
-<tr>
-<td style="text-align:left">eval()</td>
-<td style="text-align:right">计算JavaScript字符串，并把它作为脚本代码来执行</td>
-</tr>
-<tr>
-<td style="text-align:left">getClass()</td>
-<td style="text-align:right">返回一个JavaObject的JavaClass</td>
-</tr>
-<tr>
-<td style="text-align:left">isFinite()</td>
-<td style="text-align:right">检查某个值是否有无穷大的数</td>
-</tr>
-<tr>
-<td style="text-align:left">isNaN()</td>
-<td style="text-align:right">检查某个值是否是数字</td>
-</tr>
-<tr>
-<td style="text-align:left">Number()</td>
-<td style="text-align:right">把对象的值转为数字</td>
-</tr>
-<tr>
-<td style="text-align:left">parseFloat()</td>
-<td style="text-align:right">解析一个字符串，并返回一个浮点数</td>
-</tr>
-<tr>
-<td style="text-align:left">parseInt()</td>
-<td style="text-align:right">解析一个字符串，并返回一个整数</td>
-</tr>
-<tr>
-<td style="text-align:left">String()</td>
-<td style="text-align:right">把对象的值转换为字符串</td>
-</tr>
-<tr>
-<td style="text-align:left">unescape()</td>
-<td style="text-align:right">对由escape()编码的字符串进行解码</td>
-</tr>
-</tbody>
-</table>
-<p>###顶层属性（全局属性）<br>|方法|描述|<br>| :–|–:|<br>|Infinity|代表正的无穷大的数值。|<br>|java|代表java.*包层级的一个JavaPackage。|<br>|NaN|指示某一个只是不是数字值|<br>|Packages|根JavaPackage对象|<br>|undefined|指示未定义的值|</p>
+<ol>
+<li><p>阻止冒泡传播，加入event.stopPropagation，终止事件的广播分发，这样事件就会停留在本节点，不会在向上传播</p>
+</li>
+<li><p>判断事件触发的节点和当前处理事件节点的引用是否相等</p>
+ <figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">event</span>.target==<span class="keyword">event</span>.currentTarget</span><br></pre></td></tr></table></figure>
+<p> 弊端是需要每一个节点都要处理，代码量冗余，解决办法是使用事件委托</p>
+<figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">	  <span class="built_in">window</span>.onload=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">document</span>.getElementById(<span class="string">'body'</span>).addEventListener(<span class="string">'click'</span>,fn);</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> target=e.target</span><br><span class="line">	swich (target.id)&#123;</span><br><span class="line">		<span class="keyword">case</span>: <span class="string">'parent'</span>:</span><br><span class="line">			alert (<span class="string">'您好，我是'</span>+target.id);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span>: <span class="string">'child'</span>:</span><br><span class="line">			alert (<span class="string">'您好，我是'</span>+target.id);</span><br><span class="line">			<span class="keyword">break</span>;	</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
 
       
 
@@ -257,13 +198,13 @@
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
         		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
       		
 		</ul>
 	</div>
@@ -272,7 +213,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/JS标准内置对象总结.md/">展开全文 >></a>
+          <a class="article-more-a" href="/Js中的事件.md/">展开全文 >></a>
         </p>
       
 
@@ -302,48 +243,30 @@
 
 
   
-    <article id="post-使用hexo-git搭建个人blog（下）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="w-总结JS中MAth方法" class="article article-type-w  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/使用hexo-git搭建个人blog（下）.md/">使用hexo+git搭建个人blog（下）</a>
+      <a class="article-title" href="/总结JS中MAth方法.md/">总结JS中MAth方法</a>
     </h1>
   
 
         
-        <a href="/使用hexo-git搭建个人blog（下）.md/" class="archive-article-date">
-  	<time datetime="2017-03-15T15:34:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-15</time>
+        <a href="/总结JS中MAth方法.md/" class="archive-article-date">
+  	<time datetime="2016-06-19T05:38:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-06-19</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="参考教程"><a href="#参考教程" class="headerlink" title="参考教程:"></a>参考教程:</h3><ul>
-<li><p><a href="http://www.zhihu.com/question/24422335/answer/46357100" target="_blank" rel="noopener">有哪些好看的 Hexo 主题?</a></p>
-<h3 id="1-安装主题"><a href="#1-安装主题" class="headerlink" title="1. 安装主题"></a>1. 安装主题</h3><ul>
-<li>下载需要的 <code>theme</code> 文件包放到博客目录下的 <code>themes</code> 文件夹下<blockquote>
-<p>为了防止出错先清除缓存</p>
-</blockquote>
-</li>
-</ul>
-<p><code></code></p>
-<blockquote>
-<p>启动本地 <code>localhost:4000</code> 并开启 <code>debug</code> 检测本地 blog是否启动成功</p>
-</blockquote>
-<p><code>hexo s -debug</code></p>
-<h3 id="2-主题设定"><a href="#2-主题设定" class="headerlink" title="2. 主题设定"></a>2. 主题设定</h3></li>
-</ul>
-<ul>
-<li>更改主目录下的_config.yml<blockquote>
-<p>修改 deploy 值,其中 rope 修改为博客地址</p>
-</blockquote>
-</li>
-</ul>
-<h3 id="3-添加插件-sitemap-和-feed-RSS"><a href="#3-添加插件-sitemap-和-feed-RSS" class="headerlink" title="3. 添加插件 sitemap 和 feed (RSS)"></a>3. 添加插件 sitemap 和 feed (RSS)</h3><h3 id="4-添加-404-推荐使用腾讯公益-404"><a href="#4-添加-404-推荐使用腾讯公益-404" class="headerlink" title="4. 添加 404 推荐使用腾讯公益 404"></a>4. 添加 404 推荐使用腾讯公益 404</h3>
+        <p>##Math<br><code>Math</code>是一个内置对象，它具有数学常数和函数的属性和方法。不是一个函数对象。</p>
+<p>###属性<br><code>Math.E</code><br>欧拉常数，也是自然对数的底数, 约等于 2.718.<br><code>Math.LN2</code><br>2的自然对数, 约等于0.693.<br><code>Math.LN10</code><br>10的自然对数, 约等于 2.303.<br><code>Math.LOG2E</code><br>以2为底E的对数, 约等于 1.443.<br><code>Math.LOG10E</code><br>以10为底E的对数, 约等于 0.434.<br><code>Math.PI</code><br>圆周率，一个圆的周长和直径之比，约等于 3.14159.<br><code>Math.SQRT1_2</code><br>1/2的平方根, 约等于 0.707.<br><code>Math.SQRT2</code><br>2的平方根,约等于 1.414.</p>
+<p>###方法<br>Math.abs(x)<br>返回绝对值<br>Math.acos(x)<br>返回x的反余弦值<br>Math.acosh(x)<br>返回X的反双曲余弦值<br>Math.asin(x)<br>返回x的反正弦值<br>Math.asinin(x)<br>返回反双正弦<br>Math.atan(x)<br>返回反正切<br>Math.atanh(x)<br>返回反双正切<br>Math.tan2(y,x)<br>…<br><code>Math.floor(x)</code><br>返回小于x的最大整数，也就是向下取整<br><code>Math.fround(x)</code><br>返回大于x的最小整数，也就是向上取整<br><code>Math.max([x[,y],...])</code><br>返回0到多个数值中的最大值<br><code>Math.min([x[,y],...])</code><br>返回0到多个数值中的最小值<br> <code>Math.random()</code><br> 返回0-1之间的伪随机数<br> <code>Math.round()</code><br> 四舍五入的整数<br> <code>Math.trunc(x)</code><br> 舍去小数。<br> <code>Math.sign(x)</code><br> 返回四种数值<code>0</code>,<code>1</code>,<code>1</code>,<code>NaN</code>分别代表着<strong>正零，整数，负数，NaN</strong><br> 此处加深记忆，可以转化为false的五种值<br><code>0</code>,<code>&quot;&quot;</code>,<code>null</code>,<code>undefiend</code>,<code>false</code> </p>
+
       
 
       
@@ -356,11 +279,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">blog</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Math</a>
         		</li>
       		
 		</ul>
@@ -370,7 +293,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/使用hexo-git搭建个人blog（下）.md/">展开全文 >></a>
+          <a class="article-more-a" href="/总结JS中MAth方法.md/">展开全文 >></a>
         </p>
       
 
@@ -400,71 +323,30 @@
 
 
   
-    <article id="post-使用hexo-git搭建个人blog（上）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="w-怪异模式" class="article article-type-w  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/使用hexo-git搭建个人blog（上）.md/">使用hexo+git搭建个人blog（上）</a>
+      <a class="article-title" href="/怪异模式.md/">怪异模式</a>
     </h1>
   
 
         
-        <a href="/使用hexo-git搭建个人blog（上）.md/" class="archive-article-date">
-  	<time datetime="2017-03-13T17:25:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-14</time>
+        <a href="/怪异模式.md/" class="archive-article-date">
+  	<time datetime="2016-06-01T15:33:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-06-01</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="使用hexo-git搭建个人blog的步骤-一-搭建篇"><a href="#使用hexo-git搭建个人blog的步骤-一-搭建篇" class="headerlink" title="使用hexo+git搭建个人blog的步骤(一) 搭建篇"></a>使用hexo+git搭建个人blog的步骤(一) 搭建篇</h1><h3 id="参考教程"><a href="#参考教程" class="headerlink" title="参考教程:"></a>参考教程:</h3><ul>
-<li><p><a href="http://www.cnblogs.com/visugar/p/6821777.html" target="_blank" rel="noopener">hexo从零开始到搭建完整</a> </p>
-<p>###1 安装 <code>git bash</code> <code>node.js</code></p>
-<p>###2 安装 <code>hexo</code></p>
-<p>   npm i -g hexo<br>   hexo init<br>###3 创建 git 仓库,以用户名 + github.io 为名<br>   <img src="https://i.loli.net/2017/07/24/597578ab8cf77.png" alt="2.png"></p>
-<p>###4 配置 GitHub 账户<br>   git config –global user.name ‘username<br>   git config –global user.email <a href="mailto:&#39;example@xx.com" target="_blank" rel="noopener">&#39;example@xx.com</a><br>###5 在 Git Bash 中创建 <code>ssh</code> </p>
-<pre><code>ssh-keygen -t rsa -C &apos;youremail@examole.com
-cd ~/.ssh
-cat id_rsa.pub
-</code></pre><p>###6 在 GitHub 中添加 ssh </p>
-<blockquote>
-<p>主页 =&gt; Settings =&gt; SSH and GPG keys =&gt; New SSH Key 添加从 gitbash 中获取到的SSH即可 titile随意</p>
-</blockquote>
-</li>
-</ul>
-<ul>
-<li><p>验证是否成功</p>
-<pre><code>`git bash  
- ssh -T git@github.com`
-</code></pre><p>###1.7 本地运行</p>
-</li>
-<li><p>修改 _config.yml 文件,添加以下字段</p>
-<pre><code>`deploy:
-            type: git 
-            repo: http: //github.com/your username/your username.gitub.io.git
-            branch: master`
-</code></pre></li>
-<li><p>回到 git bash 中, 执行以下命令</p>
-<pre><code>hexo clean
-hexo generate
-hexo server 
-</code></pre></li>
-<li><em>注: hexo 3.0 把服务器独立成个别模块, 需要单独安装 <code>npm i hexo- server</code></em></li>
-<li><p>打开浏览器输入: <code>localhost:4000</code> 可以看到已经在本地看到 blog 了    </p>
-<h3 id="1-8-上传到-GitHub"><a href="#1-8-上传到-GitHub" class="headerlink" title="1.8 上传到 GitHub"></a>1.8 上传到 GitHub</h3></li>
-<li><p>安装 <code>npm install hexo-depolyer-git --save</code> (这样能让写好的文章部署到 GitHub 服务器让别人可以浏览到)  </p>
-</li>
-<li><p>执行命令( 每次都按照以下步骤部署)</p>
-<pre><code>hexo clean
-hexo generate
-hexo deploy
-</code></pre></li>
-<li><p>接下来 浏览器输入 <code>http:\\yourusername.github.io</code> 就可以看到个人博客了!</p>
-</li>
-</ul>
+        <p>CSS盒子模型<br>一个盒子模型是由长宽，边框，内填充，外边距构成的如下图<br><img src="http://ww1.sinaimg.cn/large/c3fd4c29ly1fm11r9p5dij205j05bglh.jpg" alt=""><br>可以知道总元素的实际宽度应该是：<br>宽度+左右外边距+左右内填充+左右边框，高度同理</p>
+<p>##怪异模式</p>
+<p>@(CSS)</p>
+<p>怪异模式：也叫兼容模式，服务于旧规则，在早期浏览器实现css机制时，浏览器并没有遵循当时的标准，导致网页开发者不得不依据各个浏览器的规范来使用css导致大部分网站的css不符合标准，但是现在标准一致性越来越重要，如果遵循标准会产生问题，忽略标准又会维持浏览器大战时期的混乱，这就是怪异模式<br>解决方案：<br>所有的浏览器提供两种模式兼容和标准，而触发器就是DOCTYPE，没有DCTYPE意味着触发怪异模式，任何新的或者未知的DUCTYPE会触发严格模式</p>
 
       
 
@@ -478,11 +360,7 @@ hexo deploy
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">blog</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Css</a>
         		</li>
       		
 		</ul>
@@ -492,7 +370,7 @@ hexo deploy
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/使用hexo-git搭建个人blog（上）.md/">展开全文 >></a>
+          <a class="article-more-a" href="/怪异模式.md/">展开全文 >></a>
         </p>
       
 
@@ -522,171 +400,34 @@ hexo deploy
 
 
   
-    <article id="post-什么是hybrid-App开发模式？" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-浏览器都有那些分类？" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/什么是hybrid-App开发模式？.md/">什么是hybrid-App开发模式？</a>
+      <a class="article-title" href="/浏览器都有那些分类？.md/">浏览器都有那些分类？</a>
     </h1>
   
 
         
-        <a href="/什么是hybrid-App开发模式？.md/" class="archive-article-date">
-  	<time datetime="2017-03-09T14:33:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-09</time>
+        <a href="/浏览器都有那些分类？.md/" class="archive-article-date">
+  	<time datetime="2016-04-02T11:13:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-04-02</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Native-App"><a href="#Native-App" class="headerlink" title="Native App"></a>Native App</h2><p>移动互联网刚开始兴起的时候，我们手机上的应用(App)都是通过Native App开发而成的；Native App的开发具备很多的优势：</p>
-<p>-&gt;开发出来的产品具备良好的用户体验，动画和运行的速度非常的流畅。<br>-&gt;能够对手机的内部软件或者硬件进行直接的操作，例如：可以调取用户的通讯论、读取用户的短信(当然需要用户同意)，可以调取用户的摄像头，调取手机的重力感应等<br>…<br>但是Native App的开发也存在自己的很多不足：</p>
+        <p>##浏览器的分类</p>
+<p>@(计算机基础)</p>
+<p>根据内核属性将浏览器分为四类：</p>
 <ul>
-<li><blockquote>
-<p>首先是不能跨平台，针对目前最常用的IOS和安卓平台，需要用不同的技术来开发：IOS一般使用的是Object-c，而安卓平台使用的一般是Java-Native，这样就导致了开发一款App需要两队人马去做，随之而来的问题也会很多，比如：开发成本高，开发周期长，有的功能IOS有但是安卓没有(手Q就是这样的)等。</p>
-</blockquote>
-</li>
-<li><blockquote>
-<p>开发出来的产品需要用户自主性比较强：首先需要客户到应用商店安装，后期如果版本升级，用户想要看到最新的版本还需要重新的进行下载安装升级等。</p>
-</blockquote>
-</li>
-<li><blockquote>
-<p>在IOS平台上，开发出一款App上传到苹果App Store需要7天的审核期，在此期间如果审核失败，在此上传还需要七天，这样就有可能导致产品不能按时发布等。</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="Web-App"><a href="#Web-App" class="headerlink" title="Web App"></a>Web App</h2><p>而HTML5的出现让Web App露出曙光。HTML5基本上不需要考虑是IOS还是安卓，两个平台一套代码基本上都是支持的；更新版本只需要在自己的服务器上更新了即可，这样用户再次访问的时候看到的就已经是最新版本的了；不需要经过漫长审核…这些优势让开发者们大为心动，但是HTML5的本质是运行在浏览器中的页面(App是直接运行在操作系统中的)，由于浏览器的差异以及对一些特殊功能支持力度的不够，导致HTML5开发存在一些局限性问题：</p>
-<ul>
-<li><blockquote>
-<p>开发出来的产品性能和运行速度没有App的好，用户体验不是很好。<br>-&gt;虽然安卓和IOS平台上的浏览器大部分都是webkit内核的，但是浏览器厂商为了自己的特殊化，移动设备上的浏览器兼容也不少，甚至一些兼容问题是无法解决的(例如:position:fixed的支持非常的不好)。</p>
-</blockquote>
-</li>
-<li><blockquote>
-<p>由于HTML5的本质是运行在浏览器中的，所以想要操作系统中的软件或者硬件都需要所在的浏览器支持，很遗憾大部分浏览器对于这方面的操作都支持的不好，所以也就导致了，H5的产品在调取通讯录、摄像头、读取短信等方面存在了很大的短板，基本上很少用H5去做这些事情的。</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="Hybrid-App"><a href="#Hybrid-App" class="headerlink" title="Hybrid App"></a>Hybrid App</h2><p>正是在这样是机缘巧合下，基于HTML5低成本跨平台开发优势又兼具Native App特质的Hybrid App技术杀入混战，并且很快吸引了众人的目光。Hybrid App是把Native App和Web App混合在一起的新兴模式（目前市场上的大部分App都是混合模式开发的）。利用各自的优势，去开发一款低成本、跨平台、更新快、性能好、功能丰富的App。</p>
-<p>Hybrid App按网页语言与程序语言的混合，通常分为三种类型：多View混合型，单View混合型，Web主体型。</p>
-<h4 id="多View混合型-目前常用的"><a href="#多View混合型-目前常用的" class="headerlink" title="多View混合型(目前常用的)"></a>多View混合型(目前常用的)</h4><p>即Native View和Web View独立展示，交替出现。2012年常见的Hybrid App是Native View与WebView交替的场景出现。这种应用混合逻辑相对简单。即在需要的时候，将WebView当成一个独立的View（Activity）运行起来，在WebView内完成相关的展示操作。这种移动应用主体通常是Native App，Web技术只是起到补充作用。开发难度和Native App基本相当。</p>
-<h4 id="单View混合型"><a href="#单View混合型" class="headerlink" title="单View混合型"></a>单View混合型</h4><p>即在同一个View内，同时包括Native View和Web View。互相之间是覆盖（层叠）的关系。这种Hybrid App的开发成本较高，开发难度较大，但是体验较好。如百度搜索为代表的单View混合型移动应用，既可以实现充分的灵活性，又能实现较好的用户体验。</p>
-<h4 id="Web主体型-目前比较新颖流行的方式"><a href="#Web主体型-目前比较新颖流行的方式" class="headerlink" title="Web主体型(目前比较新颖流行的方式)"></a>Web主体型(目前比较新颖流行的方式)</h4><p>即移动应用的主体是Web View，主要以网页语言编写，穿插Native功能的Hybrid App开发类型。这种类型开发的移动应用体验相对而言存在缺陷，但整体开发难度大幅降低，并且基本可以实现跨平台。通俗来说，就是App中的页面基本上都是H5完成的，我们使用一些技术框架封装一个App的壳子，框架中还提供一些操作系统级别功能的API供H5的调取，一般来说，都是由JS编写代码来完成App壳子搭建的，这样开发的App也就不会在使用JAVA或者Object-c了。</p>
-<p>目前市面上比较流行的框架有：React Native、phoneGap、appcan、APICloud、ionicframework、appMobi、WeX5…(珠峰培训的C阶段课程会给大家讲解React Native)</p>
-<h2 id="接下来我们分享一下，关于多View混合型中的H5和Native-App是如何的实现交互与通信的。"><a href="#接下来我们分享一下，关于多View混合型中的H5和Native-App是如何的实现交互与通信的。" class="headerlink" title="接下来我们分享一下，关于多View混合型中的H5和Native App是如何的实现交互与通信的。"></a>接下来我们分享一下，关于多View混合型中的H5和Native App是如何的实现交互与通信的。</h2><p>在这之前，我们首先需要知道，在多View混合型中，我们的HTML5页面主要运行在Native App提供的Web View中（你也可以把web view理解成为一个浏览器，因为他和浏览器基本上差不多）。但是我们知道H5是存在一些局限性的，比如我们想调取用户的摄像头拍照，这个H5解决不了，这样的话我们需要先用App把这个功能实现了，然后由H5在调取App的相关功能。这样就需要实现H5和App之间的通信交互。</p>
-<p>####第一种常用方式：jsBridge(微信平台的JS SDK就是基于这个开发的)</p>
-<p>WebView有一个方法，叫setWebChromeClient，可以设置WebChromeClient对象，而这个对象中有三个方法，分别是onJsAlert,onJsConfirm,onJsPrompt，当js调用window对象的对应的方法，即window.alert，window.confirm，window.prompt，WebChromeClient对象中的三个方法对应的就会被触发，利用这个机制我们就可以做一些特殊的处理。但是在项目中我们一般对于alert和confirm使用的频率较高，如果我们使用onJsAlert,onJsConfirm，那么我们普通的弹框也会受到影响，所以目前市场上最长使用的是onJsPrompt。</p>
-<p>以上的操作基本上都需要由App那边进行开发，我们主要讲的是H5，所以此处不对App的机制做过多的描述。大家只需要知道，只要App那边做了特殊的处理（就是在webView中注入一个对象，对象中包含了我们需要调取的方法），那么在H5的js中，我们就可以调取WebView中提供的方法。一般来说需要我们给方法传递一个callback进去，这样App就会在具体的某个阶段，把我们的callback执行，从而实现对应的通信效果。下面是我们使用JS调取微信接口的DEMO：</p>
-<ul>
-<li><blockquote>
-<p>首先需要引入微信提供好的一个JS：<a href="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" target="_blank" rel="noopener">http://res.wx.qq.com/open/js/jweixin-1.0.0.js</a> (其实App就是把这个JS中提供的方法注入到了web view中，所以我们只要引入这个JS进来就可以调用App的一些方法了)</p>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">wx</span><span class="selector-class">.config</span>(&#123;</span><br><span class="line">       <span class="attribute">debug</span>: false,</span><br><span class="line">       <span class="attribute">appId</span>: <span class="string">"你的AppID"</span>,</span><br><span class="line">       <span class="attribute">timestamp</span>: <span class="string">'时间戳(需要后台生成)'</span>,</span><br><span class="line">       <span class="attribute">nonceStr</span>: <span class="string">'字符串(需要后台生成)'</span>,</span><br><span class="line">       <span class="attribute">signature</span>: <span class="string">'签名(需要后台生成)'</span>,</span><br><span class="line">       <span class="attribute">jsApiList</span>: [<span class="string">'onMenuShareTimeline'</span>, <span class="string">'onMenuShareAppMessage'</span>]  <span class="comment">//功能列表，我们要使用JS-SDK的什么功能</span></span><br><span class="line">   &#125;);</span><br></pre></td></tr></table></figure>
-</blockquote>
-</li>
-<li><blockquote>
-<p>首先调取ready方法，这里说明一下，web view中注入的对象其实就是wx，read就是提供的一个方法，此处的匿名函数就是我们传递进去的callback，当微信检测到已经准备就绪的时候就会把我们的callback执行</p>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">wx</span><span class="selector-class">.ready</span>(function () &#123;         <span class="comment">//获取“分享到朋友圈”按钮点击状态及自定义分享内容接口</span></span><br><span class="line">            <span class="selector-tag">wx</span><span class="selector-class">.onMenuShareTimeline</span>(&#123;</span><br><span class="line">                <span class="attribute">title</span>: <span class="string">'分享标题'</span>,</span><br><span class="line">                <span class="attribute">link</span>: <span class="string">"分享的url,以http或https开头"</span>,</span><br><span class="line">                <span class="attribute">imgUrl</span>: <span class="string">"分享图标的url,以http或https开头"</span></span><br><span class="line">            &#125;);         <span class="comment">//获取“分享给朋友”按钮点击状态及自定义分享内容接口</span></span><br><span class="line">            <span class="selector-tag">wx</span><span class="selector-class">.onMenuShareAppMessage</span>(&#123;</span><br><span class="line">                <span class="attribute">title</span>: <span class="string">'分享标题'</span>,</span><br><span class="line">                <span class="attribute">desc</span>: <span class="string">"分享描述"</span>,</span><br><span class="line">                <span class="attribute">link</span>: <span class="string">"分享的url,以http或https开头"</span>,</span><br><span class="line">                <span class="attribute">imgUrl</span>: <span class="string">"分享图标的url,以http或https开头"</span>,</span><br><span class="line">                <span class="attribute">type</span>: <span class="string">'link'</span>         </span><br><span class="line">            &#125;);</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
-</blockquote>
-</li>
-</ul>
-<h4 id="第二种常用方式：伪装的URL或者伪装的协议"><a href="#第二种常用方式：伪装的URL或者伪装的协议" class="headerlink" title="第二种常用方式：伪装的URL或者伪装的协议"></a>第二种常用方式：伪装的URL或者伪装的协议</h4><p>相对于第一种jsBridge，第二种方式就比较的简单了。首先H5开发人员和App人员协商一套协议或者伪装的URL地址（也有可能是一放制定好，双方都按照执行即可）。然后App开发者开始实现对应的功能：第一个是实现具体业务操作的功能，例如调取摄像头拍照；第二个是劫持H5中所有发送的URL地址，然后把符合事先制定的规则的URL拦截下来，通过解析URL后面的参数值等调取对应的功能实现需求即可。下面是H5部分的代码样本：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">img</span>)</span>&#123;</span><br><span class="line">        <span class="comment">// 打开摄像头拍照后执行的后续操作 img是拍下来的照片</span></span><br><span class="line">    &#125;</span><br><span class="line"> <span class="built_in">window</span>.location.href=<span class="string">"zhufeng://phone?callback=fn"</span>;</span><br><span class="line"> <span class="comment">//-&gt;zhufeng:// 就是我们事先制定的一个假协议，所有这种协议的都代表需要调取App的某个功能</span></span><br><span class="line"><span class="comment">// -&gt;phone 这个标识就是事先制定的需要调取拍照功能</span></span><br><span class="line"><span class="comment">// -&gt;callback=fn 把自己JS中的某一个方法传递给App，App可以在拍照完成后执行这个方法，并且把保存的照片传递给这个方法(类似于JSONP)</span></span><br></pre></td></tr></table></figure></p>
-<p>目前前移动市场还没有完全的成熟，技术也在不断的变革，但是我坚信HTML5和JS的市场份额会越来越大，逐渐的将会替代Native App，而是由Web App来引领移动市场的潮流…</p>
-<p>以上文章转载自<a href="http://old.zhufengpeixun.cn/qianduanjishuziliao/CSS3heHTML5zhuanti/2016-07-15/511.html" target="_blank" rel="noopener">珠峰</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">hybrid</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/什么是hybrid-App开发模式？.md/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-nodeJS小结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/nodeJS小结.md/">nodeJS小结</a>
-    </h1>
-  
-
-        
-        <a href="/nodeJS小结.md/" class="archive-article-date">
-  	<time datetime="2016-11-08T18:25:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-11-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="nodeJs-小结"><a href="#nodeJs-小结" class="headerlink" title="nodeJs 小结"></a><code>nodeJs</code> 小结</h2><h2 id="request"><a href="#request" class="headerlink" title="request"></a>request</h2><p>request 有三个部分： 请求行 ，请求头 ，请求体<br><img src="http://ww1.sinaimg.cn/mw690/c3fd4c29ly1flqvpn5mbzj20kd0fedi7.jpg" alt=""><br>按照现在的理解，一个完整的请求头域request.headers是包括请求行，和请求头的</p>
-<ul>
-<li><p>请求行有三个部分组成：</p>
-<ul>
-<li>请求方法：request.method(GET,POST,DELETE,HEAD,OPTIONS,PUT,PATCH.不过当前最常用的是GET和POST 。)</li>
-<li>请求路径request.headers.host</li>
-<li>请求协议<blockquote>
-<p>需要注意的仅有POST,PUT,PATCH这三个动词是包含请求体的，也就是说，如果你想要从客户端向服务器传输重要信息的时候，最好还是使用POST方法，将重要信息放到请求体内完成传输</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>请求头 Header<br>Accept    ：指定客户端能够接收的内容类型<br>Cookie    ：HTTP请求发送时，会把保存在该请求域名下的所有                    cookie值一起发送给web服务器。<br>Content-Type    请求的与实体对应的MIME信息<br>Host     ：    指定请求的服务器的域名和端口号<br>Referer     先前网页的地址，当前请求网页紧随其后,即来路</p>
-</li>
-<li>fs ：内置核心模块 file System <ul>
-<li>使用readFile读取内容必须存在</li>
-<li>默认读取buffer类型</li>
-</ul>
-</li>
-<li>node支持99%的es6 但是没有实现import</li>
+<li>1 . <strong>IE6/7/8/9/10/11  Trident  (IE内核)</strong><br>常见的浏览器：<br>2345浏览器、腾讯TT、淘宝浏览器、阿云浏览器（早期版本）、瑞星安全浏览器、蚂蚁浏览器、飞腾浏览器、速达浏览器、佐罗浏览器、海豚浏览器等等</li>
+<li>2 .  <strong>firefox    (Gecko/Firefox)</strong><br>特点：代码完全公开，任何人都可以为其编写代码。不过以gecko为内核的浏览器Firefox最多，所以也称firefox内核<br>常见的浏览器：<br>Mozilla Firefox、Mozilla SeaMonkey、waterfox（Firefox的64位开源版）、Iceweasel、Epiphany（早期版本）、Flock（早期版本）等等 </li>
+<li>3 . <strong>WebKit   (webkit内核是chrome和safair的内核原型)</strong><br>  webkit是苹果公司研发，两大主力浏览器chrome和safair都是基于webkit，严格来说chrome的内核是基于webkit的分支而发展成的chromuim<br>  常见浏览器：<br>  Chrome(v8引擎)360 浏览器、搜狗浏览器 、傲游浏览器3、 Apple Safari (Win/Mac/iPhone/iPad)、Symbian手机浏览器、Android 默认浏览器</li>
+<li>4 . <strong>opera (presto内核)</strong><br>  公认网页浏览速度最快的浏览器内核，代价是牺牲了网页的兼容性，执行同等的js所需时间仅为trident和gecko的 1/3 ，由于是商业引擎，使用的浏览器较少<br>  常见浏览器：下NDSBrowser、Wii Internet Channle、Nokia 770网络浏览器等</li>
 </ul>
 
       
@@ -701,7 +442,7 @@ hexo deploy
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">nodeJs</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">浏览器</a>
         		</li>
       		
 		</ul>
@@ -711,7 +452,7 @@ hexo deploy
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/nodeJS小结.md/">展开全文 >></a>
+          <a class="article-more-a" href="/浏览器都有那些分类？.md/">展开全文 >></a>
         </p>
       
 
@@ -846,11 +587,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
               </li>
              
               <li class="article-tag-list-item">
