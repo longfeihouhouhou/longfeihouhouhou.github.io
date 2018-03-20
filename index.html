@@ -153,6 +153,740 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-es6-3-StringExt" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/es6-3-StringExt.md/">ES6(3) 字符串扩展</a>
+    </h1>
+  
+
+        
+        <a href="/es6-3-StringExt.md/" class="archive-article-date">
+  	<time datetime="2017-10-01T13:33:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;字符串数据类型新增了很多功能，其中对Unicode进行了大幅度的增强，新增了若干方法，同时引进了模板字符串，本节只讨论模板字符串的部分功能。</p>
+<h2 id="字符的Unicode表示法增强。"><a href="#字符的Unicode表示法增强。" class="headerlink" title="字符的Unicode表示法增强。"></a>字符的Unicode表示法增强。</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;javascript允许采用\uxxxx形式表示一个字符，其中xxxx表示字符Unicode码点。\u0061’ == ‘a’;但是这种表示法只限于码点在\u0000~\uFFFF之间的字符。超出这个范围的字符，必输用两个双字节的形式表示。如，’\uD842\uDFB7’ =&gt;  𠮷,  ‘\u20BB7’ =&gt; 7。</p>
+<pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+  '\uD842\uDFB7' //  𠮷
+  '\u20BB7' // 7
+</code>
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上面代码表示，如果直接在\u后面跟上超过0xFFFF的数值（如\u20BB7），javascript会理解成\u20BB + 7，由于\u20BB 是一个不可打印字符，只会显示一个空格，后面跟着一个7。ES6对此进行了改进，只要将码点放入大括号，就能正确解读该字符。示例</p>
+<pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+  "\u{20BB7}"  //"𠮷"
+
+  "\u{41}\u{42}\u{43}"  //"ABC"
+
+  let hello = 123;
+  hell\u{6F}  //123
+
+  '\u{1F680}' === '\uD83D\uDE80'
+   //true
+</code>
+</pre>
+
+<h2 id="codePointAt"><a href="#codePointAt" class="headerlink" title="codePointAt()"></a>codePointAt()</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;javascript内部，字符以UTF-16的格式存储，每个字符固定为2个字节。对于那些需要4个字节存储的字符（Unicode码点大于0xFFFF），javascript会认为他们是两个字符。codePointAt()方法用于正确处理4个字节存储的字符，返回一个字符的码点。示例：</p>
+<pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+    let s = '𠮷a';
+
+    s.codePointAt(0).toString(16) // "20bb7"
+    s.codePointAt(2).toString(16) // "61"
+</code>
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;编码的问题是解决了，但是codePointAt方法的参数还是不正确，要解决这个问题需要for of循环</p>
+<pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+    let s = '𠮷a';
+    for (let ch of s) {
+        console.log(ch.codePointAt(0).toString(16));
+    }
+    // 20bb7
+    // 61
+</code>
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;codePointAt方法是测试一个字符由两个字节还是由四个字节组成的最简单方法。</p>
+<pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+    function is32Bit(c) {
+        return c.codePointAt(0) > 0xFFFF;
+    }
+
+    is32Bit("𠮷") // true
+    is32Bit("a") // false
+</code>
+</pre>
+
+
+<h2 id="String-fromCodePoint"><a href="#String-fromCodePoint" class="headerlink" title="String.fromCodePoint()"></a>String.fromCodePoint()</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ES5提供String.fromCharCode方法，用于从码点返回对应字符，但是这个方法不能识别32位的UTF-16字符（Unicode编号大于0xFFFF）。因此String.fromCodePoint方法可以弥补这一点，其实就是将16进制的码点转换成字符，且可以识别4个字节字符</p>
+<pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+    String.fromCodePoint(0x20BB7)
+    // "𠮷"
+    String.fromCodePoint(0x78, 0x1f680, 0x79) === 'x\uD83D\uDE80y'
+    // true
+</code>
+</pre>
+
+<h2 id="字符串的遍历器接口"><a href="#字符串的遍历器接口" class="headerlink" title="字符串的遍历器接口"></a>字符串的遍历器接口</h2><pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+    //1.字符串添加了遍历器接口，使得字符串可以for of 循环遍历：示例
+    for (let basic of 'JavaScript') {
+        console.log(basic);
+    }
+    //J a v a S c r i p t
+</code>
+</pre>
+
+<h2 id="at-方法"><a href="#at-方法" class="headerlink" title="at()方法"></a>at()方法</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ES5 对字符串对象提供charAt方法，返回字符串给定位置的字符。该方法不能识别码点大于0xFFFF的字符。at方法作用同charAt()方法作用相同，返回参数位置的字符，且可以识别码点大于 0xFFFF的字符。</p>
+<pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+   'abc'.at(0) // "a"
+   '𠮷'.at(0) // "𠮷"
+</code>
+</pre>
+
+<h2 id="normalize-方法"><a href="#normalize-方法" class="headerlink" title="normalize()方法"></a>normalize()方法</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;许多欧洲语言有语调符号，为了表示它们，Unicode提供了两种方法。一种是直接提供带符号的字符，比如Ǒ（\u01D1）。另一种是提供合成字符，即两个字符合成一个带符号的字符，O（\u004F）和ˇ（\u030C）合成Ǒ（\u004F\u030C）。这两种方法在视觉和语义上都等价，但是JavaScript不能识别，es6解决了这个问题，es6的normalize方法，用来将字符串的不同表示方法统一为永阳的形式，这称为Unicode正规化。</p>
+<pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+  '\u01D1'.normalize() === '\u004F\u030C'.normalize()
+  // true
+</code>
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;normalize()方法可以接受一个参数，表示normalize的方式，参数的四个可选值如下</p>
+<p> NFC，默认参数，表示“标准等价合成”（Normalization Form Canonical Composition），返回多个简单字符的合成字符。所谓“标准等价”指的是视觉和语义上的等价。<br> NFD，表示“标准等价分解”（Normalization Form Canonical Decomposition），即在标准等价的前提下，返回合成字符分解的多个简单字符。<br> NFKC，表示“兼容等价合成”（Normalization Form Compatibility Composition），返回合成字符。所谓“兼容等价”指的是语义上存在等价，但视觉上不等价，比如“囍”和“喜喜”。（这只是用来举例，normalize方法不能识别中文。）<br> NFKD，表示“兼容等价分解”（Normalization Form Compatibility Decomposition），即在兼容等价的前提下，返回合成字符分解的多个简单字符。</p>
+<pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+  '\u004F\u030C'.normalize('NFC').length // 1
+  '\u004F\u030C'.normalize('NFD').length // 2
+</code>
+</pre>
+
+<h2 id="includes-startsWith-endsWith"><a href="#includes-startsWith-endsWith" class="headerlink" title="includes()/startsWith()/endsWith()"></a>includes()/startsWith()/endsWith()</h2><p> includes(); 返回布尔值，表示是否找到了参数字符串；<br> startsWith();返回布尔值，表示参数字符串是否在原字符串的头部；<br> endsWith();返回布尔值，表示参数字符串是否在源字符串的尾部；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以上三个方法均支持第二个参数，表示搜索开始的位置；</p>
+<pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+    let  strOpApi = 'Hello world';
+    var isStartWith = strOpApi.startsWith('Hello');
+    var isIn = strOpApi.includes('llo');
+    var isEndWith = strOpApi.endsWith('ld');
+    console.log(isStartWith); //true
+    console.log(isIn); //true
+    console.log(isEndWith); //true
+</code>
+</pre>
+
+<h2 id="repeat"><a href="#repeat" class="headerlink" title="repeat()"></a>repeat()</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;repeat()方法返回一个新的字符串，表示将源字符串重复n次。参数是一个数字，int，如果写小数会自动取整；如果是负数或者infinity则会报错；<a href="区间">-1,0</a>被视为0，NaN视为0；如果传递字符串，则默认会把字符串转化成数字；</p>
+<pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+    var xAfterRepeat = 'x'.repeat(3);
+    console.log(xAfterRepeat);
+</code>
+</pre>
+
+<h2 id="模板字符串"><a href="#模板字符串" class="headerlink" title="模板字符串"></a>模板字符串</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;模板字符串使用<code></code>反引号包裹(如果要在模板字符串中使用反引号，需要转义)，无须拼接，如果模板字符串中欲使用变量，要使用 ${变量} 写在数据的位置，大括号内可以放入任意的js表达式，可以进行运算，以及引用对象的属性，模板字符串中还可以调用函数。<br> 模板字符串还可以嵌套：<br> 使用模板字符串，所有的空格和缩进都会保留在输出中；如果不想要他们，可以用trim方法消除他们；</p>
+<pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+    let obj = {
+        a: 'a',
+        b: 'b',
+        c: 'c'
+    };
+    var str2 = `
+        &lt;div&gt;
+            &lt;h2&gt;
+                这是模板字符串，感觉这么像PHP的界定符？
+            &lt;/h2&gt;
+            &lt;ul&gt;
+                &lt;li&gt;${obj.a}&lt;/li&gt;
+                &lt;li&gt;${obj.b}&lt;/li&gt;
+                &lt;li&gt;${obj.c}&lt;/li&gt;
+                &lt;li&gt;heheheheheh&lt;/li&gt;
+            &lt;/ul&gt;
+        
+    `;
+    $('body').append(str2);
+</code>
+</pre>
+
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;除以上扩展了原来字符串功能外，模板字符串还有标签模板功能；所谓标签模板是指模板字符串紧跟在一个函数名后面，该函数被调用来处理这个模板字符串（tagged template）。标签模板其实不是模板，而是函数调用的一种特殊形式。“标签”指的是函数，紧跟在后面的模板字符串就是它的参数。但是，如果模板字符里面有变量，就不是简单地调用了，而是会将模板字符串先处理成多个参数，再调用函数。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;标签模板是将模板字符串转换成一种特殊格式的参数传进函数，也就是说如果你想用标签模板调用函数，那么在编写函数的时候就需要考虑到这种特殊格式；传入函数的参数由：一个数组，和编译替换后的变量，示例：</p>
+<pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+    alert`123`;//等同于alert('123');
+    function tag(strAry, value1, value2, value3){
+        console.log(arguments);
+    }
+    var a = 10, b = 5;
+    tag`hello ${ a + b } world ${ a  b }`;
+    //上面调用tag函数后的返回结果；
+    //  "Hello "
+    //  " world "
+    //  ""
+    //  15
+    // 50
+    // "OK"
+
+     实际传入函数的参数是样的：(形参定义的时候得个数和下面的结果个数对应)
+     0: [//这个数组中装的是不需要翻译的字符串
+          hello,
+          world,
+          heheda,
+          ""
+     ]//这个数组之外的值都是经过编译和替换后的变量值
+     1:15
+     2:50
+     3:5
+
+
+    function tag(s, v1, v2){
+        console.log(s[0]);
+        console.log(s[1]);
+        console.log(s[2]);
+        console.log(v1);
+        console.log(v2);
+
+        return 'ok';
+    }
+    var total = 30;
+    var msg = passThru`The total is ${total}(${total  1.05}with tax)`;
+    //上面这个msg例子展示了，如何将各个参数按照原来的位置拼合回去。
+
+    function passThru(literals, value1, value2) {
+        console.log(arguments);
+        var result = '';
+        var i = 0;
+        while (i &lt; literals.length) {
+            result += literals[i++];
+            if (i &lt; arguments.length) {
+                result += arguments[i];
+            }
+        }
+        return result;
+    }
+    console.log(msg);
+</code>
+</pre>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">es6</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/es6-3-StringExt.md/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-es6-2-destructing" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/es6-2-destructing.md/">es6(2)destructing</a>
+    </h1>
+  
+
+        
+        <a href="/es6-2-destructing.md/" class="archive-article-date">
+  	<time datetime="2017-09-20T14:00:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本节讨论解构赋值，解构赋值 destructing :解构赋值:ES6允许按照一定的模式，对变量进行赋值，本质上，这种写法数据“模式匹配”，只要等号两边的模式相同，左边的变量就会被赋予对应位置的值。我觉得这个东东真是个宝，用起来相当的爽。不多说，赶紧练起来吧。</p>
+<h2 id="对象解构赋值"><a href="#对象解构赋值" class="headerlink" title="对象解构赋值"></a>对象解构赋值</h2><pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+    //赋值
+     let catT = 'Tom',
+     mouseJ = 'Jerry';
+     let cartoonRole = {catT , mouseJ};
+     console.log(cartoonRole);//{catT: "Tom", mouseJ: "Jerry"}
+
+     //解构
+     let cartoonRole = {catT:'Tom' , mouseJ: 'Jerry',ok:'hahahha'};
+     let {catT,ok} = cartoonRole;
+     console.log(catT,ok);//'Tom' 'hahahha'
+
+     //对象的解构与数组有一个重要的不同，数组的元素是按顺序排列的，变量的取值由它的位置决定；而对象的属性没有次序，变量必须与属性同名，才能取到正确的值；
+     let {ac, ad} = {ac:'aaa', ad: 'bbb'};
+     console.log(ac);
+
+     //对象的嵌套解构赋值：
+     let obj1 = {
+         p:[
+             'hello',
+             {y: 'world'}
+         ]
+     };
+     let { p: [ x,  {yy} ] } = obj1;//注意p不是变量是匹配模式，所以是不会被赋值
+     console.log(x);//hello
+
+    //使用对象的解构赋值，可以很方便的将现有的对象的方法赋值到某个变量上，使用起来将会很方便
+    let {log, sin, cos} = Math;//这行代码将对数，正弦，余弦三个方法赋值到对应的变量上，使用起来将会方便很多；
+
+</code>
+</pre>
+
+<h2 id="数组解构赋值"><a href="#数组解构赋值" class="headerlink" title="数组解构赋值"></a>数组解构赋值</h2><pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+  let cry = ['a','b','c'];
+  let [h, i, j] = cry; //这相当于声明了三个变量 h i j，这三个值分按照顺序分别对应数组项
+  console.log(i);//'b'
+
+  //复合数组的：
+  let [ab, [bc, cd], de] = [1, [2, 3], 4];//这时候等号左边的不是数组，只是一个方括号，里面的是单个的变量，可以直接使用
+  console.log(ab);
+
+  //不完全解构的：(但都是成功解构的)
+  let [fg,[hg],hi] = [1, [2, 3], 4];
+  console.log(hg);//2
+
+  let [jk, lm] = [1, 2, 4];
+  console.log(lm);//2
+</code>
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由上例可知，解构赋值最重要的就是变量名和对象的key值同名，结构赋值数组时，变量和数组的位置对应，你想取得的值的数量和对象中的key-value数量可以不同，但是要求变量名和key相同，同数组项的位置一致。如果在对象结构赋值时变量同key不同名，那需要特殊处理，即写成key:value的形式，key仍是和对象属性名相同的值，value是进行解构赋值后被赋值的变量（可以和对象的属性名不同）；其中ae是匹配模式，aaa才是真正的变量，真正被赋值的是变量aaa不是ae，还要注意一点，采用这种写法时，变量的声明和赋值时一体的，对于let和const来说，变量不能重新声明，所以一旦赋值的变量以前声明过，就会报错；</p>
+<pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+    //对象的解构与数组有一个重要的不同，数组的元素是按顺序排列的，变量的取值由它的位置决定；而对象的属性没有次序，变量必须与属性同名，才能取到正确的值；
+    let {ac, ad} = {ac:'aaa', ad: 'bbb'};
+    console.log(ac);// 'aaa'
+
+    //key同变量名不同名
+    let {ae:aaa} = {ae:'hhhhhh'};
+    console.log(aaa);
+</code>
+</pre>
+
+<h2 id="字符串解构赋值"><a href="#字符串解构赋值" class="headerlink" title="字符串解构赋值"></a>字符串解构赋值</h2><pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+   //字符串也可以解构赋值，因为此时，字符串被转换成了一个类数组对象；
+   const [ai, aj, ak, al, am] = 'hello';
+   console.log(ai);//h
+
+   //类数组对象有一个length属性，因此还可以对这个属性解构赋值。
+   let {length:len} = 'hello';
+   console.log(len);//5
+</code>
+</pre>
+
+<h2 id="其他数据结构"><a href="#其他数据结构" class="headerlink" title="其他数据结构"></a>其他数据结构</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果等号的右边不是数组（或者严格的说，不是可遍历的结构：对象、数组、set对象、map对象等）那么将报错；事实上，只要某种数据结构具有Iterator接口，都可以采用数据形式的解构赋值。</p>
+<pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+    let [uv, vw, wx] = new Set(['a', 'b', 'c']);
+    console.log(uv); //a
+</code>
+</pre>
+
+<h2 id="结构赋值时设置默认值"><a href="#结构赋值时设置默认值" class="headerlink" title="结构赋值时设置默认值"></a>结构赋值时设置默认值</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;结构赋值允许指定默认值。但是注意：ES6中使用严格相等运算符（===），判断一个位置是否有值。所以，如果一个数组成员不严格等于undefined，默认值是不会生效的；</p>
+<pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+    let [xy = true] = [];
+    console.log(xy);//true
+
+    let [yz = 'undefined'] = [null];//null 不严格等于undefined，所以默认值是不生效的
+    console.log(yz);//null
+
+    //如果默认值是一个表达式，那么这个表达式是惰性求值的，即只有在用到的时候才会求值；
+    function faaa(){
+        console.log('abacd');
+    }
+    let [xb = faaa()] = [1];//这行代码中，因为xb能取到值，所以函数f根本不会执行；
+
+    //解构赋值时的默认值可以引用其他解构赋值的变量，但是这个变量必须已经声明过；
+    let [xc = 1, yc = xc] = [];
+    let [aa = bb,bb = 1] = [];//referenceError，因为引用给aa用到默认值(如果用不到就不会报错)，给默认值赋值时，bb还没
+
+    //对象结构赋值也可以指定默认值，同样默认值生效的条件：对象的属性值严格等于undefined。如果解构失败，变量将会被赋值undefined;
+    let {ag = 3} = {x:undefined};
+    console.log(ag);//3
+</code>
+</pre>
+
+<h2 id="函数参数解构赋值"><a href="#函数参数解构赋值" class="headerlink" title="函数参数解构赋值"></a>函数参数解构赋值</h2><pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+//函数的解构赋值意义是：函数形参设置的时候可以设置成数组或者对象，但是通过解构，在函数体内得到的就是一个一个的值
+function add([x, y]){
+    //console.log(arguments);//通过打印arguments，我们发现，函数收到的参数其实是单个的数字，而非数组
+    return x + y;
+}
+var total = add([1, 2]);
+console.log(total);//3
+
+var arr = [[1,2,3],[3,4,5]].map(([a, b, c]) => a + b + c);//map方法经过操作后会映射成一个新的数组，而且map方法的第一个参数是数组项，而经过参数解构赋值后 得到 a=1,b=2,c=3 ，执行一次回调，将原数组第一项映射成6，以此类推
+console.log(arr);//[6, 12]
+
+//参数解构赋值也可以使用默认值
+function move({an = 0, ao = 0} = {}){
+    return [an, ao];
+}
+var ar1 = move({an: 1, ao: 2});
+console.log(ar1);//[1, 2]
+
+var ar2 = move();//{an = 0, ao = 0} = {} 这么写是为了给函数的实参一个默认值{}，当不传的时候就是空对象{}
+console.log(ar2);//[0, 0]
+</code>
+</pre>
+
+<h2 id="解构赋值应用场景"><a href="#解构赋值应用场景" class="headerlink" title="解构赋值应用场景"></a>解构赋值应用场景</h2><h3 id="交换变量"><a href="#交换变量" class="headerlink" title="交换变量"></a>交换变量</h3><pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+    let ap = 1;
+    let aq = 2;
+    [ap, aq] = [aq, ap];
+    console.log(ap);//2
+</code>
+</pre>
+
+<h3 id="函数返回多个值"><a href="#函数返回多个值" class="headerlink" title="函数返回多个值"></a>函数返回多个值</h3><p>原则上函数只能返回一个值，如果要返回多个值，只能将他们放在数组或者对象中，有了解构赋值，去除这些值将会非常的方便；</p>
+<pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+    function eg1(){
+        return [1, 2, 3];
+    }
+    let [ar, as, at] = eg1();
+    console.log(ar);//1
+
+    function eg2(){
+        return {
+            au:'www',
+            av:'itouzi',
+            aw:'com',
+        }
+    }
+    let {au:ax, av:ay, aw:az} = eg2();
+    console.log(ay);//itouzi
+</code>
+</pre>
+
+<h3 id="提取json数据-解构赋值对提取JSON对象中的数据尤其有用；"><a href="#提取json数据-解构赋值对提取JSON对象中的数据尤其有用；" class="headerlink" title="提取json数据:解构赋值对提取JSON对象中的数据尤其有用；"></a>提取json数据:解构赋值对提取JSON对象中的数据尤其有用；</h3><pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+    let json = {
+        id: 42,
+        status: 'ok',
+        data: [333, 444]
+    };
+    let {id ,status, data} = json;
+    console.log(data);//[333, 444]
+</code>
+</pre>
+
+<h3 id="函数参数设置默认值"><a href="#函数参数设置默认值" class="headerlink" title="函数参数设置默认值"></a>函数参数设置默认值</h3><pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+    function plus([x = 0,y = 0] = []){
+        return x + y;
+    }
+    console.log(plus());//0
+</code>
+</pre>
+
+<h3 id="遍历Map解构"><a href="#遍历Map解构" class="headerlink" title="遍历Map解构"></a>遍历Map解构</h3><pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+    for (let [key, value] of map) {
+        //console.log(key + ' is ' + value);
+    }
+    //只获取键
+    for (let [key1] of map) {
+        console.log(key1);
+    }
+    //只获取值
+    for (let [, value1] of map) {
+        //console.log(value1);
+    }
+</code>
+</pre>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">es6</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/es6-2-destructing.md/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-ES6-1-let和const" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/ES6-1-let和const.md/">ES6(1) let和const</a>
+    </h1>
+  
+
+        
+        <a href="/ES6-1-let和const.md/" class="archive-article-date">
+  	<time datetime="2017-09-12T14:32:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;从这篇文章起，后面将会有一系列的文章和大家探讨es6，现在才说es6好像有点晚了，但是我们的前端团队还没有大规模应用es6。一直以来我也零零星星的学过一些es6，早在几年前就了解过，但是始终没有系统的学习过，这一次做分享，也是对自己的一个激励，争取这个系列可以覆盖全部的es6特性。</p>
+<h2 id="块级作用域"><a href="#块级作用域" class="headerlink" title="块级作用域"></a>块级作用域</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在es6以前，ECMAScript是没有块级作用域的，这就带来了很多意外的情况，比如经典的for循环问题。</p>
+<pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+    例 1：
+    var a = [];
+    for (var i = 0; i < 10; i++) {
+        a[i] = function (){
+            console.log(i);
+        }
+    }
+    a[3]();//10
+</code>
+</pre>
+
+<p>引入块级作用域后</p>
+<pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+    例 2：
+    var a = [];
+    for (let i = 0; i < 10; i++) {
+        a[i] = function (){
+            console.log(i);
+        }
+    }
+    a[3]();//3
+</code>
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;看了上面两段代码，块级作用域就是除字面量声明对象（{key: value}）以外的花括号代码块都构成块级作用域，但是现在有个问题值得思考。大家都知道，在js中变量是存在于作用域中的，在上面例1中，var i = 0;i存在的作用域就是全局（for循环外围无函数）作用域，所以for循环的i++每次都会修改全局作用域中的i。那么改成let声明后，变量的保存的作用域是不是改变了呢？下面代码我们模拟了块级作用域（不是很严谨，只是按照自己的猜测），其中循环体中的闭包模拟块级作用域。很显然，每次for循环（let声明）的循环体（花括号空的代码）执行一次就声明了一个块级作用域，变量i就保存在了块级作用域中，按照作用域查找机制，块级作用域延长了作用域链。同时由于数组a的引用，这个块级作用域并不会销毁，因而变量值得以保存。（仅个人理解）</p>
+<pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+    var a = [];
+    for (var i = 0; i < 10; i++) {
+        a[i] = (function (i){
+            return function () {console.log(i)}
+        })(i);
+
+    }
+    a[3]();//3
+</code>
+</pre>
+
+<h2 id="let"><a href="#let" class="headerlink" title="let"></a>let</h2><p>使用let 和 const将带来的暂时性死区：只要块级作用域内存在let命令，它所声明的变量就绑定在这个区域，不再受外部的影响。示例：</p>
+<pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+    var tmp = 123;
+    if (true) {
+        tmp = 'abc';
+        let tmp;
+    }
+</code>
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上面代码中存在全局变量tmp，但是块级作用域内let又声明了一个局部变量tmp，导致后者绑定这个块级作用域，所以在let语句之前调用变量，就会报错；ReferenceError；暂时性死区也意味着typeof不再是一个百分百安全的操作，因为你typeof这个变量仍然是访问变量，仍然会报错。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;与此同时，另一不可忽略的事实产生了，var除是用于变量声明的关键字，还具有变量提声（javascript预解释）的作用。而let和const并无此作用，仅用于变量的声明，因此在使用let和const声明的变量时，确认这些变量在被引用前（代码顺序）是否被声明将变得意义非同寻常。示例</p>
+<pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+    console.log(tmp);//undefined
+    var tmp = 123;
+
+    if (true) {
+         console.log(wrong);//ReferenceError
+         let wrong = 'abc';
+    }
+</code>
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第三，同var不同的是，let和const不允许重复声明。示例</p>
+<pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+   function foo(declareParam){
+       let declareParam = 0; //报错  'declareParam' has already been declared
+   }
+   foo('aaa');//报错   但是得在方法执行的时候才报错
+
+   //但是请注意这种在块级作用域中的声明并不会收到这一影响
+   function fooWithBlockZone(declareParam){
+       { //这一花括号是块级作用域
+           let declareParam = 14;//这个不会报错
+       }
+   }
+   fooWithBlockZone('aa');//不报错
+</code>
+</pre>
+
+<h2 id="const"><a href="#const" class="headerlink" title="const"></a>const</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const的作用域和let一样：只在声明所在的块级作用域内有效。const声明的常量也不存在变量提声，同样存在暂时性死区，只能在声明的位置后面使用。同样不能重复声明一个变量；const实际上保证的，并不是变量的值不得改动，而是变量指向的那个内存地址不得改动，对于简单的数据类型（数值，字符串，布尔值），值就保存在保存变量指向的那个内存地址，因此等同于常量。但是对于复合型数据额类型（主要是对象和数组），变量指向的内存地址，保存的只是一个指针，const只能保证这个指针是固定的，至于他的指向的数据结构是否是不是可变的，就完全不能控制了，因此，将一个对象声明为常量必须非常小心；什么意思呢？就是说啊：当使用const声明一个复杂数据类型时，这个const只能保存指向这个复杂数据类型的地址不被改变，但是这个复杂数据类型的数据仍然可以操作：示例:</p>
+<pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+  const objConst = {};
+  objConst.testAddPropIntoConstObj = 'yes,you guess it';
+  console.log(objConst);//虽然声明的是常量，但是给这个对象的内存地址中的内容还是可以操作的；
+
+
+  //如果你真想声明一个不可以修改的对象使用Object.freeze({})方法；示例
+  const objFrozen = Object.freeze({});//声明一个冻结常量；
+  objFrozen.prop = 'No,what a pity,what you guess is thoroughly wrong!';
+  //严格模式下使用这一行代码报错
+  //非严格模式不理会这行代码；
+  console.log(objFrozen);
+</code>
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注意，在ES5中，在全局中声明的变量和挂载在全局中的属性是等价的，从ES6开始，全局变量将和顶层对象的属性脱离，为了改变这一点，一方面规定，为了保持兼容性，var 和 function声明的全局变量扔等同于顶层对象window/global的属性，但是使用let、const、class声明的全局变量不属于顶层对象。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">es6</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/ES6-1-let和const.md/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-react入门" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -633,563 +1367,6 @@
 
 
   
-    <article id="post-es6-3-StringExt" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/es6-3-StringExt.md/">ES6(3) 字符串扩展</a>
-    </h1>
-  
-
-        
-        <a href="/es6-3-StringExt.md/" class="archive-article-date">
-  	<time datetime="2017-06-01T13:33:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;字符串数据类型新增了很多功能，其中对Unicode进行了大幅度的增强，新增了若干方法，同时引进了模板字符串，本节只讨论模板字符串的部分功能。</p>
-<h2 id="字符的Unicode表示法增强。"><a href="#字符的Unicode表示法增强。" class="headerlink" title="字符的Unicode表示法增强。"></a>字符的Unicode表示法增强。</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;javascript允许采用\uxxxx形式表示一个字符，其中xxxx表示字符Unicode码点。\u0061’ == ‘a’;但是这种表示法只限于码点在\u0000~\uFFFF之间的字符。超出这个范围的字符，必输用两个双字节的形式表示。如，’\uD842\uDFB7’ =&gt;  𠮷,  ‘\u20BB7’ =&gt; 7。</p>
-<pre style="background: #00b38a;">
-<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
-  '\uD842\uDFB7' //  𠮷
-  '\u20BB7' // 7
-</code>
-</pre>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上面代码表示，如果直接在\u后面跟上超过0xFFFF的数值（如\u20BB7），javascript会理解成\u20BB + 7，由于\u20BB 是一个不可打印字符，只会显示一个空格，后面跟着一个7。ES6对此进行了改进，只要将码点放入大括号，就能正确解读该字符。示例</p>
-<pre style="background: #00b38a;">
-<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
-  "\u{20BB7}"  //"𠮷"
-
-  "\u{41}\u{42}\u{43}"  //"ABC"
-
-  let hello = 123;
-  hell\u{6F}  //123
-
-  '\u{1F680}' === '\uD83D\uDE80'
-   //true
-</code>
-</pre>
-
-<h2 id="codePointAt"><a href="#codePointAt" class="headerlink" title="codePointAt()"></a>codePointAt()</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;javascript内部，字符以UTF-16的格式存储，每个字符固定为2个字节。对于那些需要4个字节存储的字符（Unicode码点大于0xFFFF），javascript会认为他们是两个字符。codePointAt()方法用于正确处理4个字节存储的字符，返回一个字符的码点。示例：</p>
-<pre style="background: #00b38a;">
-<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
-    let s = '𠮷a';
-
-    s.codePointAt(0).toString(16) // "20bb7"
-    s.codePointAt(2).toString(16) // "61"
-</code>
-</pre>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;编码的问题是解决了，但是codePointAt方法的参数还是不正确，要解决这个问题需要for of循环</p>
-<pre style="background: #00b38a;">
-<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
-    let s = '𠮷a';
-    for (let ch of s) {
-        console.log(ch.codePointAt(0).toString(16));
-    }
-    // 20bb7
-    // 61
-</code>
-</pre>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;codePointAt方法是测试一个字符由两个字节还是由四个字节组成的最简单方法。</p>
-<pre style="background: #00b38a;">
-<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
-    function is32Bit(c) {
-        return c.codePointAt(0) > 0xFFFF;
-    }
-
-    is32Bit("𠮷") // true
-    is32Bit("a") // false
-</code>
-</pre>
-
-
-<h2 id="String-fromCodePoint"><a href="#String-fromCodePoint" class="headerlink" title="String.fromCodePoint()"></a>String.fromCodePoint()</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ES5提供String.fromCharCode方法，用于从码点返回对应字符，但是这个方法不能识别32位的UTF-16字符（Unicode编号大于0xFFFF）。因此String.fromCodePoint方法可以弥补这一点，其实就是将16进制的码点转换成字符，且可以识别4个字节字符</p>
-<pre style="background: #00b38a;">
-<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
-    String.fromCodePoint(0x20BB7)
-    // "𠮷"
-    String.fromCodePoint(0x78, 0x1f680, 0x79) === 'x\uD83D\uDE80y'
-    // true
-</code>
-</pre>
-
-<h2 id="字符串的遍历器接口"><a href="#字符串的遍历器接口" class="headerlink" title="字符串的遍历器接口"></a>字符串的遍历器接口</h2><pre style="background: #00b38a;">
-<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
-    //1.字符串添加了遍历器接口，使得字符串可以for of 循环遍历：示例
-    for (let basic of 'JavaScript') {
-        console.log(basic);
-    }
-    //J a v a S c r i p t
-</code>
-</pre>
-
-<h2 id="at-方法"><a href="#at-方法" class="headerlink" title="at()方法"></a>at()方法</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ES5 对字符串对象提供charAt方法，返回字符串给定位置的字符。该方法不能识别码点大于0xFFFF的字符。at方法作用同charAt()方法作用相同，返回参数位置的字符，且可以识别码点大于 0xFFFF的字符。</p>
-<pre style="background: #00b38a;">
-<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
-   'abc'.at(0) // "a"
-   '𠮷'.at(0) // "𠮷"
-</code>
-</pre>
-
-<h2 id="normalize-方法"><a href="#normalize-方法" class="headerlink" title="normalize()方法"></a>normalize()方法</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;许多欧洲语言有语调符号，为了表示它们，Unicode提供了两种方法。一种是直接提供带符号的字符，比如Ǒ（\u01D1）。另一种是提供合成字符，即两个字符合成一个带符号的字符，O（\u004F）和ˇ（\u030C）合成Ǒ（\u004F\u030C）。这两种方法在视觉和语义上都等价，但是JavaScript不能识别，es6解决了这个问题，es6的normalize方法，用来将字符串的不同表示方法统一为永阳的形式，这称为Unicode正规化。</p>
-<pre style="background: #00b38a;">
-<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
-  '\u01D1'.normalize() === '\u004F\u030C'.normalize()
-  // true
-</code>
-</pre>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;normalize()方法可以接受一个参数，表示normalize的方式，参数的四个可选值如下</p>
-<p> NFC，默认参数，表示“标准等价合成”（Normalization Form Canonical Composition），返回多个简单字符的合成字符。所谓“标准等价”指的是视觉和语义上的等价。<br> NFD，表示“标准等价分解”（Normalization Form Canonical Decomposition），即在标准等价的前提下，返回合成字符分解的多个简单字符。<br> NFKC，表示“兼容等价合成”（Normalization Form Compatibility Composition），返回合成字符。所谓“兼容等价”指的是语义上存在等价，但视觉上不等价，比如“囍”和“喜喜”。（这只是用来举例，normalize方法不能识别中文。）<br> NFKD，表示“兼容等价分解”（Normalization Form Compatibility Decomposition），即在兼容等价的前提下，返回合成字符分解的多个简单字符。</p>
-<pre style="background: #00b38a;">
-<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
-  '\u004F\u030C'.normalize('NFC').length // 1
-  '\u004F\u030C'.normalize('NFD').length // 2
-</code>
-</pre>
-
-<h2 id="includes-startsWith-endsWith"><a href="#includes-startsWith-endsWith" class="headerlink" title="includes()/startsWith()/endsWith()"></a>includes()/startsWith()/endsWith()</h2><p> includes(); 返回布尔值，表示是否找到了参数字符串；<br> startsWith();返回布尔值，表示参数字符串是否在原字符串的头部；<br> endsWith();返回布尔值，表示参数字符串是否在源字符串的尾部；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以上三个方法均支持第二个参数，表示搜索开始的位置；</p>
-<pre style="background: #00b38a;">
-<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
-    let  strOpApi = 'Hello world';
-    var isStartWith = strOpApi.startsWith('Hello');
-    var isIn = strOpApi.includes('llo');
-    var isEndWith = strOpApi.endsWith('ld');
-    console.log(isStartWith); //true
-    console.log(isIn); //true
-    console.log(isEndWith); //true
-</code>
-</pre>
-
-<h2 id="repeat"><a href="#repeat" class="headerlink" title="repeat()"></a>repeat()</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;repeat()方法返回一个新的字符串，表示将源字符串重复n次。参数是一个数字，int，如果写小数会自动取整；如果是负数或者infinity则会报错；<a href="区间">-1,0</a>被视为0，NaN视为0；如果传递字符串，则默认会把字符串转化成数字；</p>
-<pre style="background: #00b38a;">
-<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
-    var xAfterRepeat = 'x'.repeat(3);
-    console.log(xAfterRepeat);
-</code>
-</pre>
-
-<h2 id="模板字符串"><a href="#模板字符串" class="headerlink" title="模板字符串"></a>模板字符串</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;模板字符串使用<code></code>反引号包裹(如果要在模板字符串中使用反引号，需要转义)，无须拼接，如果模板字符串中欲使用变量，要使用 ${变量} 写在数据的位置，大括号内可以放入任意的js表达式，可以进行运算，以及引用对象的属性，模板字符串中还可以调用函数。<br> 模板字符串还可以嵌套：<br> 使用模板字符串，所有的空格和缩进都会保留在输出中；如果不想要他们，可以用trim方法消除他们；</p>
-<pre style="background: #00b38a;">
-<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
-    let obj = {
-        a: 'a',
-        b: 'b',
-        c: 'c'
-    };
-    var str2 = `
-        &lt;div&gt;
-            &lt;h2&gt;
-                这是模板字符串，感觉这么像PHP的界定符？
-            &lt;/h2&gt;
-            &lt;ul&gt;
-                &lt;li&gt;${obj.a}&lt;/li&gt;
-                &lt;li&gt;${obj.b}&lt;/li&gt;
-                &lt;li&gt;${obj.c}&lt;/li&gt;
-                &lt;li&gt;heheheheheh&lt;/li&gt;
-            &lt;/ul&gt;
-        
-    `;
-    $('body').append(str2);
-</code>
-</pre>
-
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;除以上扩展了原来字符串功能外，模板字符串还有标签模板功能；所谓标签模板是指模板字符串紧跟在一个函数名后面，该函数被调用来处理这个模板字符串（tagged template）。标签模板其实不是模板，而是函数调用的一种特殊形式。“标签”指的是函数，紧跟在后面的模板字符串就是它的参数。但是，如果模板字符里面有变量，就不是简单地调用了，而是会将模板字符串先处理成多个参数，再调用函数。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;标签模板是将模板字符串转换成一种特殊格式的参数传进函数，也就是说如果你想用标签模板调用函数，那么在编写函数的时候就需要考虑到这种特殊格式；传入函数的参数由：一个数组，和编译替换后的变量，示例：</p>
-<pre style="background: #00b38a;">
-<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
-    alert`123`;//等同于alert('123');
-    function tag(strAry, value1, value2, value3){
-        console.log(arguments);
-    }
-    var a = 10, b = 5;
-    tag`hello ${ a + b } world ${ a  b }`;
-    //上面调用tag函数后的返回结果；
-    //  "Hello "
-    //  " world "
-    //  ""
-    //  15
-    // 50
-    // "OK"
-
-     实际传入函数的参数是样的：(形参定义的时候得个数和下面的结果个数对应)
-     0: [//这个数组中装的是不需要翻译的字符串
-          hello,
-          world,
-          heheda,
-          ""
-     ]//这个数组之外的值都是经过编译和替换后的变量值
-     1:15
-     2:50
-     3:5
-
-
-    function tag(s, v1, v2){
-        console.log(s[0]);
-        console.log(s[1]);
-        console.log(s[2]);
-        console.log(v1);
-        console.log(v2);
-
-        return 'ok';
-    }
-    var total = 30;
-    var msg = passThru`The total is ${total}(${total  1.05}with tax)`;
-    //上面这个msg例子展示了，如何将各个参数按照原来的位置拼合回去。
-
-    function passThru(literals, value1, value2) {
-        console.log(arguments);
-        var result = '';
-        var i = 0;
-        while (i &lt; literals.length) {
-            result += literals[i++];
-            if (i &lt; arguments.length) {
-                result += arguments[i];
-            }
-        }
-        return result;
-    }
-    console.log(msg);
-</code>
-</pre>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">es6</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/es6-3-StringExt.md/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-es6-2-destructing" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/es6-2-destructing.md/">es6(2)destructing</a>
-    </h1>
-  
-
-        
-        <a href="/es6-2-destructing.md/" class="archive-article-date">
-  	<time datetime="2017-05-20T14:00:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本节讨论解构赋值，解构赋值 destructing :解构赋值:ES6允许按照一定的模式，对变量进行赋值，本质上，这种写法数据“模式匹配”，只要等号两边的模式相同，左边的变量就会被赋予对应位置的值。我觉得这个东东真是个宝，用起来相当的爽。不多说，赶紧练起来吧。</p>
-<h2 id="对象解构赋值"><a href="#对象解构赋值" class="headerlink" title="对象解构赋值"></a>对象解构赋值</h2><pre style="background: #00b38a;">
-<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
-    //赋值
-     let catT = 'Tom',
-     mouseJ = 'Jerry';
-     let cartoonRole = {catT , mouseJ};
-     console.log(cartoonRole);//{catT: "Tom", mouseJ: "Jerry"}
-
-     //解构
-     let cartoonRole = {catT:'Tom' , mouseJ: 'Jerry',ok:'hahahha'};
-     let {catT,ok} = cartoonRole;
-     console.log(catT,ok);//'Tom' 'hahahha'
-
-     //对象的解构与数组有一个重要的不同，数组的元素是按顺序排列的，变量的取值由它的位置决定；而对象的属性没有次序，变量必须与属性同名，才能取到正确的值；
-     let {ac, ad} = {ac:'aaa', ad: 'bbb'};
-     console.log(ac);
-
-     //对象的嵌套解构赋值：
-     let obj1 = {
-         p:[
-             'hello',
-             {y: 'world'}
-         ]
-     };
-     let { p: [ x,  {yy} ] } = obj1;//注意p不是变量是匹配模式，所以是不会被赋值
-     console.log(x);//hello
-
-    //使用对象的解构赋值，可以很方便的将现有的对象的方法赋值到某个变量上，使用起来将会很方便
-    let {log, sin, cos} = Math;//这行代码将对数，正弦，余弦三个方法赋值到对应的变量上，使用起来将会方便很多；
-
-</code>
-</pre>
-
-<h2 id="数组解构赋值"><a href="#数组解构赋值" class="headerlink" title="数组解构赋值"></a>数组解构赋值</h2><pre style="background: #00b38a;">
-<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
-  let cry = ['a','b','c'];
-  let [h, i, j] = cry; //这相当于声明了三个变量 h i j，这三个值分按照顺序分别对应数组项
-  console.log(i);//'b'
-
-  //复合数组的：
-  let [ab, [bc, cd], de] = [1, [2, 3], 4];//这时候等号左边的不是数组，只是一个方括号，里面的是单个的变量，可以直接使用
-  console.log(ab);
-
-  //不完全解构的：(但都是成功解构的)
-  let [fg,[hg],hi] = [1, [2, 3], 4];
-  console.log(hg);//2
-
-  let [jk, lm] = [1, 2, 4];
-  console.log(lm);//2
-</code>
-</pre>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由上例可知，解构赋值最重要的就是变量名和对象的key值同名，结构赋值数组时，变量和数组的位置对应，你想取得的值的数量和对象中的key-value数量可以不同，但是要求变量名和key相同，同数组项的位置一致。如果在对象结构赋值时变量同key不同名，那需要特殊处理，即写成key:value的形式，key仍是和对象属性名相同的值，value是进行解构赋值后被赋值的变量（可以和对象的属性名不同）；其中ae是匹配模式，aaa才是真正的变量，真正被赋值的是变量aaa不是ae，还要注意一点，采用这种写法时，变量的声明和赋值时一体的，对于let和const来说，变量不能重新声明，所以一旦赋值的变量以前声明过，就会报错；</p>
-<pre style="background: #00b38a;">
-<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
-    //对象的解构与数组有一个重要的不同，数组的元素是按顺序排列的，变量的取值由它的位置决定；而对象的属性没有次序，变量必须与属性同名，才能取到正确的值；
-    let {ac, ad} = {ac:'aaa', ad: 'bbb'};
-    console.log(ac);// 'aaa'
-
-    //key同变量名不同名
-    let {ae:aaa} = {ae:'hhhhhh'};
-    console.log(aaa);
-</code>
-</pre>
-
-<h2 id="字符串解构赋值"><a href="#字符串解构赋值" class="headerlink" title="字符串解构赋值"></a>字符串解构赋值</h2><pre style="background: #00b38a;">
-<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
-   //字符串也可以解构赋值，因为此时，字符串被转换成了一个类数组对象；
-   const [ai, aj, ak, al, am] = 'hello';
-   console.log(ai);//h
-
-   //类数组对象有一个length属性，因此还可以对这个属性解构赋值。
-   let {length:len} = 'hello';
-   console.log(len);//5
-</code>
-</pre>
-
-<h2 id="其他数据结构"><a href="#其他数据结构" class="headerlink" title="其他数据结构"></a>其他数据结构</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果等号的右边不是数组（或者严格的说，不是可遍历的结构：对象、数组、set对象、map对象等）那么将报错；事实上，只要某种数据结构具有Iterator接口，都可以采用数据形式的解构赋值。</p>
-<pre style="background: #00b38a;">
-<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
-    let [uv, vw, wx] = new Set(['a', 'b', 'c']);
-    console.log(uv); //a
-</code>
-</pre>
-
-<h2 id="结构赋值时设置默认值"><a href="#结构赋值时设置默认值" class="headerlink" title="结构赋值时设置默认值"></a>结构赋值时设置默认值</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;结构赋值允许指定默认值。但是注意：ES6中使用严格相等运算符（===），判断一个位置是否有值。所以，如果一个数组成员不严格等于undefined，默认值是不会生效的；</p>
-<pre style="background: #00b38a;">
-<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
-    let [xy = true] = [];
-    console.log(xy);//true
-
-    let [yz = 'undefined'] = [null];//null 不严格等于undefined，所以默认值是不生效的
-    console.log(yz);//null
-
-    //如果默认值是一个表达式，那么这个表达式是惰性求值的，即只有在用到的时候才会求值；
-    function faaa(){
-        console.log('abacd');
-    }
-    let [xb = faaa()] = [1];//这行代码中，因为xb能取到值，所以函数f根本不会执行；
-
-    //解构赋值时的默认值可以引用其他解构赋值的变量，但是这个变量必须已经声明过；
-    let [xc = 1, yc = xc] = [];
-    let [aa = bb,bb = 1] = [];//referenceError，因为引用给aa用到默认值(如果用不到就不会报错)，给默认值赋值时，bb还没
-
-    //对象结构赋值也可以指定默认值，同样默认值生效的条件：对象的属性值严格等于undefined。如果解构失败，变量将会被赋值undefined;
-    let {ag = 3} = {x:undefined};
-    console.log(ag);//3
-</code>
-</pre>
-
-<h2 id="函数参数解构赋值"><a href="#函数参数解构赋值" class="headerlink" title="函数参数解构赋值"></a>函数参数解构赋值</h2><pre style="background: #00b38a;">
-<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
-//函数的解构赋值意义是：函数形参设置的时候可以设置成数组或者对象，但是通过解构，在函数体内得到的就是一个一个的值
-function add([x, y]){
-    //console.log(arguments);//通过打印arguments，我们发现，函数收到的参数其实是单个的数字，而非数组
-    return x + y;
-}
-var total = add([1, 2]);
-console.log(total);//3
-
-var arr = [[1,2,3],[3,4,5]].map(([a, b, c]) => a + b + c);//map方法经过操作后会映射成一个新的数组，而且map方法的第一个参数是数组项，而经过参数解构赋值后 得到 a=1,b=2,c=3 ，执行一次回调，将原数组第一项映射成6，以此类推
-console.log(arr);//[6, 12]
-
-//参数解构赋值也可以使用默认值
-function move({an = 0, ao = 0} = {}){
-    return [an, ao];
-}
-var ar1 = move({an: 1, ao: 2});
-console.log(ar1);//[1, 2]
-
-var ar2 = move();//{an = 0, ao = 0} = {} 这么写是为了给函数的实参一个默认值{}，当不传的时候就是空对象{}
-console.log(ar2);//[0, 0]
-</code>
-</pre>
-
-<h2 id="解构赋值应用场景"><a href="#解构赋值应用场景" class="headerlink" title="解构赋值应用场景"></a>解构赋值应用场景</h2><h3 id="交换变量"><a href="#交换变量" class="headerlink" title="交换变量"></a>交换变量</h3><pre style="background: #00b38a;">
-<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
-    let ap = 1;
-    let aq = 2;
-    [ap, aq] = [aq, ap];
-    console.log(ap);//2
-</code>
-</pre>
-
-<h3 id="函数返回多个值"><a href="#函数返回多个值" class="headerlink" title="函数返回多个值"></a>函数返回多个值</h3><p>原则上函数只能返回一个值，如果要返回多个值，只能将他们放在数组或者对象中，有了解构赋值，去除这些值将会非常的方便；</p>
-<pre style="background: #00b38a;">
-<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
-    function eg1(){
-        return [1, 2, 3];
-    }
-    let [ar, as, at] = eg1();
-    console.log(ar);//1
-
-    function eg2(){
-        return {
-            au:'www',
-            av:'itouzi',
-            aw:'com',
-        }
-    }
-    let {au:ax, av:ay, aw:az} = eg2();
-    console.log(ay);//itouzi
-</code>
-</pre>
-
-<h3 id="提取json数据-解构赋值对提取JSON对象中的数据尤其有用；"><a href="#提取json数据-解构赋值对提取JSON对象中的数据尤其有用；" class="headerlink" title="提取json数据:解构赋值对提取JSON对象中的数据尤其有用；"></a>提取json数据:解构赋值对提取JSON对象中的数据尤其有用；</h3><pre style="background: #00b38a;">
-<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
-    let json = {
-        id: 42,
-        status: 'ok',
-        data: [333, 444]
-    };
-    let {id ,status, data} = json;
-    console.log(data);//[333, 444]
-</code>
-</pre>
-
-<h3 id="函数参数设置默认值"><a href="#函数参数设置默认值" class="headerlink" title="函数参数设置默认值"></a>函数参数设置默认值</h3><pre style="background: #00b38a;">
-<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
-    function plus([x = 0,y = 0] = []){
-        return x + y;
-    }
-    console.log(plus());//0
-</code>
-</pre>
-
-<h3 id="遍历Map解构"><a href="#遍历Map解构" class="headerlink" title="遍历Map解构"></a>遍历Map解构</h3><pre style="background: #00b38a;">
-<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
-    for (let [key, value] of map) {
-        //console.log(key + ' is ' + value);
-    }
-    //只获取键
-    for (let [key1] of map) {
-        console.log(key1);
-    }
-    //只获取值
-    for (let [, value1] of map) {
-        //console.log(value1);
-    }
-</code>
-</pre>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">es6</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/es6-2-destructing.md/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-GIT进阶操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1261,183 +1438,6 @@ console.log(ar2);//[0, 0]
       
         <p class="article-more-link">
           <a class="article-more-a" href="/GIT进阶操作.md/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-ES6-1-let和const" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/ES6-1-let和const.md/">ES6(1) let和const</a>
-    </h1>
-  
-
-        
-        <a href="/ES6-1-let和const.md/" class="archive-article-date">
-  	<time datetime="2017-05-12T14:32:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;从这篇文章起，后面将会有一系列的文章和大家探讨es6，现在才说es6好像有点晚了，但是我们的前端团队还没有大规模应用es6。一直以来我也零零星星的学过一些es6，早在几年前就了解过，但是始终没有系统的学习过，这一次做分享，也是对自己的一个激励，争取这个系列可以覆盖全部的es6特性。</p>
-<h2 id="块级作用域"><a href="#块级作用域" class="headerlink" title="块级作用域"></a>块级作用域</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在es6以前，ECMAScript是没有块级作用域的，这就带来了很多意外的情况，比如经典的for循环问题。</p>
-<pre style="background: #00b38a;">
-<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
-    例 1：
-    var a = [];
-    for (var i = 0; i < 10; i++) {
-        a[i] = function (){
-            console.log(i);
-        }
-    }
-    a[3]();//10
-</code>
-</pre>
-
-<p>引入块级作用域后</p>
-<pre style="background: #00b38a;">
-<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
-    例 2：
-    var a = [];
-    for (let i = 0; i < 10; i++) {
-        a[i] = function (){
-            console.log(i);
-        }
-    }
-    a[3]();//3
-</code>
-</pre>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;看了上面两段代码，块级作用域就是除字面量声明对象（{key: value}）以外的花括号代码块都构成块级作用域，但是现在有个问题值得思考。大家都知道，在js中变量是存在于作用域中的，在上面例1中，var i = 0;i存在的作用域就是全局（for循环外围无函数）作用域，所以for循环的i++每次都会修改全局作用域中的i。那么改成let声明后，变量的保存的作用域是不是改变了呢？下面代码我们模拟了块级作用域（不是很严谨，只是按照自己的猜测），其中循环体中的闭包模拟块级作用域。很显然，每次for循环（let声明）的循环体（花括号空的代码）执行一次就声明了一个块级作用域，变量i就保存在了块级作用域中，按照作用域查找机制，块级作用域延长了作用域链。同时由于数组a的引用，这个块级作用域并不会销毁，因而变量值得以保存。（仅个人理解）</p>
-<pre style="background: #00b38a;">
-<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
-    var a = [];
-    for (var i = 0; i < 10; i++) {
-        a[i] = (function (i){
-            return function () {console.log(i)}
-        })(i);
-
-    }
-    a[3]();//3
-</code>
-</pre>
-
-<h2 id="let"><a href="#let" class="headerlink" title="let"></a>let</h2><p>使用let 和 const将带来的暂时性死区：只要块级作用域内存在let命令，它所声明的变量就绑定在这个区域，不再受外部的影响。示例：</p>
-<pre style="background: #00b38a;">
-<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
-    var tmp = 123;
-    if (true) {
-        tmp = 'abc';
-        let tmp;
-    }
-</code>
-</pre>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上面代码中存在全局变量tmp，但是块级作用域内let又声明了一个局部变量tmp，导致后者绑定这个块级作用域，所以在let语句之前调用变量，就会报错；ReferenceError；暂时性死区也意味着typeof不再是一个百分百安全的操作，因为你typeof这个变量仍然是访问变量，仍然会报错。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;与此同时，另一不可忽略的事实产生了，var除是用于变量声明的关键字，还具有变量提声（javascript预解释）的作用。而let和const并无此作用，仅用于变量的声明，因此在使用let和const声明的变量时，确认这些变量在被引用前（代码顺序）是否被声明将变得意义非同寻常。示例</p>
-<pre style="background: #00b38a;">
-<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
-    console.log(tmp);//undefined
-    var tmp = 123;
-
-    if (true) {
-         console.log(wrong);//ReferenceError
-         let wrong = 'abc';
-    }
-</code>
-</pre>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第三，同var不同的是，let和const不允许重复声明。示例</p>
-<pre style="background: #00b38a;">
-<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
-   function foo(declareParam){
-       let declareParam = 0; //报错  'declareParam' has already been declared
-   }
-   foo('aaa');//报错   但是得在方法执行的时候才报错
-
-   //但是请注意这种在块级作用域中的声明并不会收到这一影响
-   function fooWithBlockZone(declareParam){
-       { //这一花括号是块级作用域
-           let declareParam = 14;//这个不会报错
-       }
-   }
-   fooWithBlockZone('aa');//不报错
-</code>
-</pre>
-
-<h2 id="const"><a href="#const" class="headerlink" title="const"></a>const</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const的作用域和let一样：只在声明所在的块级作用域内有效。const声明的常量也不存在变量提声，同样存在暂时性死区，只能在声明的位置后面使用。同样不能重复声明一个变量；const实际上保证的，并不是变量的值不得改动，而是变量指向的那个内存地址不得改动，对于简单的数据类型（数值，字符串，布尔值），值就保存在保存变量指向的那个内存地址，因此等同于常量。但是对于复合型数据额类型（主要是对象和数组），变量指向的内存地址，保存的只是一个指针，const只能保证这个指针是固定的，至于他的指向的数据结构是否是不是可变的，就完全不能控制了，因此，将一个对象声明为常量必须非常小心；什么意思呢？就是说啊：当使用const声明一个复杂数据类型时，这个const只能保存指向这个复杂数据类型的地址不被改变，但是这个复杂数据类型的数据仍然可以操作：示例:</p>
-<pre style="background: #00b38a;">
-<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
-  const objConst = {};
-  objConst.testAddPropIntoConstObj = 'yes,you guess it';
-  console.log(objConst);//虽然声明的是常量，但是给这个对象的内存地址中的内容还是可以操作的；
-
-
-  //如果你真想声明一个不可以修改的对象使用Object.freeze({})方法；示例
-  const objFrozen = Object.freeze({});//声明一个冻结常量；
-  objFrozen.prop = 'No,what a pity,what you guess is thoroughly wrong!';
-  //严格模式下使用这一行代码报错
-  //非严格模式不理会这行代码；
-  console.log(objFrozen);
-</code>
-</pre>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注意，在ES5中，在全局中声明的变量和挂载在全局中的属性是等价的，从ES6开始，全局变量将和顶层对象的属性脱离，为了改变这一点，一方面规定，为了保持兼容性，var 和 function声明的全局变量扔等同于顶层对象window/global的属性，但是使用let、const、class声明的全局变量不属于顶层对象。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">es6</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/ES6-1-let和const.md/">展开全文 >></a>
         </p>
       
 
@@ -1849,15 +1849,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">es6</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Css</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">布局</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">es6</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1882,6 +1882,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">flex</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">html</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1913,19 +1917,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">html</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Math</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">浏览器</a>
+                <a href="javascript:void(0)" class="js-tag color1">Array</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Array</a>
+                <a href="javascript:void(0)" class="js-tag color4">浏览器</a>
               </li>
             
             <div class="clearfix"></div>
