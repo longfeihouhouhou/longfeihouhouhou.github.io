@@ -6,21 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://longfeihouhouhou.github.io">
-  <title>nodeJS小结 | LoongFly的博客</title>
+  <title>es6(2)destructing | LoongFly的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="nodeJs 小结requestrequest 有三个部分： 请求行 ，请求头 ，请求体按照现在的理解，一个完整的请求头域request.headers是包括请求行，和请求头的  请求行有三个部分组成：  请求方法：request.method(GET,POST,DELETE,HEAD,OPTIONS,PUT,PATCH.不过当前最常用的是GET和POST 。) 请求路径request.heade">
-<meta name="keywords" content="nodeJs">
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;本节讨论解构赋值，解构赋值 destructing :解构赋值:ES6允许按照一定的模式，对变量进行赋值，本质上，这种写法数据“模式匹配”，只要等号两边的模式相同，左边的变量就会被赋予对应位置的值。我觉得这个东东真是个宝，用起来相当的爽。不多说，赶紧练起来吧。 对象解构赋值">
+<meta name="keywords" content="es6">
 <meta property="og:type" content="article">
-<meta property="og:title" content="nodeJS小结">
-<meta property="og:url" content="http://longfeihouhouhou.github.io/nodeJS小结.md/index.html">
+<meta property="og:title" content="es6(2)destructing">
+<meta property="og:url" content="http://longfeihouhouhou.github.io/es6-2-destructing.md/index.html">
 <meta property="og:site_name" content="LoongFly的博客">
-<meta property="og:description" content="nodeJs 小结requestrequest 有三个部分： 请求行 ，请求头 ，请求体按照现在的理解，一个完整的请求头域request.headers是包括请求行，和请求头的  请求行有三个部分组成：  请求方法：request.method(GET,POST,DELETE,HEAD,OPTIONS,PUT,PATCH.不过当前最常用的是GET和POST 。) 请求路径request.heade">
-<meta property="og:image" content="http://ww1.sinaimg.cn/mw690/c3fd4c29ly1flqvpn5mbzj20kd0fedi7.jpg">
-<meta property="og:updated_time" content="2018-03-09T15:03:25.638Z">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;本节讨论解构赋值，解构赋值 destructing :解构赋值:ES6允许按照一定的模式，对变量进行赋值，本质上，这种写法数据“模式匹配”，只要等号两边的模式相同，左边的变量就会被赋予对应位置的值。我觉得这个东东真是个宝，用起来相当的爽。不多说，赶紧练起来吧。 对象解构赋值">
+<meta property="og:updated_time" content="2018-03-20T02:49:34.349Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="nodeJS小结">
-<meta name="twitter:description" content="nodeJs 小结requestrequest 有三个部分： 请求行 ，请求头 ，请求体按照现在的理解，一个完整的请求头域request.headers是包括请求行，和请求头的  请求行有三个部分组成：  请求方法：request.method(GET,POST,DELETE,HEAD,OPTIONS,PUT,PATCH.不过当前最常用的是GET和POST 。) 请求路径request.heade">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/mw690/c3fd4c29ly1flqvpn5mbzj20kd0fedi7.jpg">
+<meta name="twitter:title" content="es6(2)destructing">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;本节讨论解构赋值，解构赋值 destructing :解构赋值:ES6允许按照一定的模式，对变量进行赋值，本质上，这种写法数据“模式匹配”，只要等号两边的模式相同，左边的变量就会被赋予对应位置的值。我觉得这个东东真是个宝，用起来相当的爽。不多说，赶紧练起来吧。 对象解构赋值">
   
     <link rel="alternative" href="/atom.xml" title="LoongFly的博客" type="application/atom+xml">
   
@@ -154,47 +152,228 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-nodeJS小结" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-es6-2-destructing" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      nodeJS小结
+      es6(2)destructing
     </h1>
   
 
         
-        <a href="/nodeJS小结.md/" class="archive-article-date">
-  	<time datetime="2016-11-08T18:25:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-11-09</time>
+        <a href="/es6-2-destructing.md/" class="archive-article-date">
+  	<time datetime="2017-05-20T14:00:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-20</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="nodeJs-小结"><a href="#nodeJs-小结" class="headerlink" title="nodeJs 小结"></a><code>nodeJs</code> 小结</h2><h2 id="request"><a href="#request" class="headerlink" title="request"></a>request</h2><p>request 有三个部分： 请求行 ，请求头 ，请求体<br><img src="http://ww1.sinaimg.cn/mw690/c3fd4c29ly1flqvpn5mbzj20kd0fedi7.jpg" alt=""><br>按照现在的理解，一个完整的请求头域request.headers是包括请求行，和请求头的</p>
-<ul>
-<li><p>请求行有三个部分组成：</p>
-<ul>
-<li>请求方法：request.method(GET,POST,DELETE,HEAD,OPTIONS,PUT,PATCH.不过当前最常用的是GET和POST 。)</li>
-<li>请求路径request.headers.host</li>
-<li>请求协议<blockquote>
-<p>需要注意的仅有POST,PUT,PATCH这三个动词是包含请求体的，也就是说，如果你想要从客户端向服务器传输重要信息的时候，最好还是使用POST方法，将重要信息放到请求体内完成传输</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>请求头 Header<br>Accept    ：指定客户端能够接收的内容类型<br>Cookie    ：HTTP请求发送时，会把保存在该请求域名下的所有                    cookie值一起发送给web服务器。<br>Content-Type    请求的与实体对应的MIME信息<br>Host     ：    指定请求的服务器的域名和端口号<br>Referer     先前网页的地址，当前请求网页紧随其后,即来路</p>
-</li>
-<li>fs ：内置核心模块 file System <ul>
-<li>使用readFile读取内容必须存在</li>
-<li>默认读取buffer类型</li>
-</ul>
-</li>
-<li>node支持99%的es6 但是没有实现import</li>
-</ul>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本节讨论解构赋值，解构赋值 destructing :解构赋值:ES6允许按照一定的模式，对变量进行赋值，本质上，这种写法数据“模式匹配”，只要等号两边的模式相同，左边的变量就会被赋予对应位置的值。我觉得这个东东真是个宝，用起来相当的爽。不多说，赶紧练起来吧。</p>
+<h2 id="对象解构赋值"><a href="#对象解构赋值" class="headerlink" title="对象解构赋值"></a>对象解构赋值</h2><pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+    //赋值
+     let catT = 'Tom',
+     mouseJ = 'Jerry';
+     let cartoonRole = {catT , mouseJ};
+     console.log(cartoonRole);//{catT: "Tom", mouseJ: "Jerry"}
+
+     //解构
+     let cartoonRole = {catT:'Tom' , mouseJ: 'Jerry',ok:'hahahha'};
+     let {catT,ok} = cartoonRole;
+     console.log(catT,ok);//'Tom' 'hahahha'
+
+     //对象的解构与数组有一个重要的不同，数组的元素是按顺序排列的，变量的取值由它的位置决定；而对象的属性没有次序，变量必须与属性同名，才能取到正确的值；
+     let {ac, ad} = {ac:'aaa', ad: 'bbb'};
+     console.log(ac);
+
+     //对象的嵌套解构赋值：
+     let obj1 = {
+         p:[
+             'hello',
+             {y: 'world'}
+         ]
+     };
+     let { p: [ x,  {yy} ] } = obj1;//注意p不是变量是匹配模式，所以是不会被赋值
+     console.log(x);//hello
+
+    //使用对象的解构赋值，可以很方便的将现有的对象的方法赋值到某个变量上，使用起来将会很方便
+    let {log, sin, cos} = Math;//这行代码将对数，正弦，余弦三个方法赋值到对应的变量上，使用起来将会方便很多；
+
+</code>
+</pre>
+
+<h2 id="数组解构赋值"><a href="#数组解构赋值" class="headerlink" title="数组解构赋值"></a>数组解构赋值</h2><pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+  let cry = ['a','b','c'];
+  let [h, i, j] = cry; //这相当于声明了三个变量 h i j，这三个值分按照顺序分别对应数组项
+  console.log(i);//'b'
+
+  //复合数组的：
+  let [ab, [bc, cd], de] = [1, [2, 3], 4];//这时候等号左边的不是数组，只是一个方括号，里面的是单个的变量，可以直接使用
+  console.log(ab);
+
+  //不完全解构的：(但都是成功解构的)
+  let [fg,[hg],hi] = [1, [2, 3], 4];
+  console.log(hg);//2
+
+  let [jk, lm] = [1, 2, 4];
+  console.log(lm);//2
+</code>
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由上例可知，解构赋值最重要的就是变量名和对象的key值同名，结构赋值数组时，变量和数组的位置对应，你想取得的值的数量和对象中的key-value数量可以不同，但是要求变量名和key相同，同数组项的位置一致。如果在对象结构赋值时变量同key不同名，那需要特殊处理，即写成key:value的形式，key仍是和对象属性名相同的值，value是进行解构赋值后被赋值的变量（可以和对象的属性名不同）；其中ae是匹配模式，aaa才是真正的变量，真正被赋值的是变量aaa不是ae，还要注意一点，采用这种写法时，变量的声明和赋值时一体的，对于let和const来说，变量不能重新声明，所以一旦赋值的变量以前声明过，就会报错；</p>
+<pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+    //对象的解构与数组有一个重要的不同，数组的元素是按顺序排列的，变量的取值由它的位置决定；而对象的属性没有次序，变量必须与属性同名，才能取到正确的值；
+    let {ac, ad} = {ac:'aaa', ad: 'bbb'};
+    console.log(ac);// 'aaa'
+
+    //key同变量名不同名
+    let {ae:aaa} = {ae:'hhhhhh'};
+    console.log(aaa);
+</code>
+</pre>
+
+<h2 id="字符串解构赋值"><a href="#字符串解构赋值" class="headerlink" title="字符串解构赋值"></a>字符串解构赋值</h2><pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+   //字符串也可以解构赋值，因为此时，字符串被转换成了一个类数组对象；
+   const [ai, aj, ak, al, am] = 'hello';
+   console.log(ai);//h
+
+   //类数组对象有一个length属性，因此还可以对这个属性解构赋值。
+   let {length:len} = 'hello';
+   console.log(len);//5
+</code>
+</pre>
+
+<h2 id="其他数据结构"><a href="#其他数据结构" class="headerlink" title="其他数据结构"></a>其他数据结构</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果等号的右边不是数组（或者严格的说，不是可遍历的结构：对象、数组、set对象、map对象等）那么将报错；事实上，只要某种数据结构具有Iterator接口，都可以采用数据形式的解构赋值。</p>
+<pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+    let [uv, vw, wx] = new Set(['a', 'b', 'c']);
+    console.log(uv); //a
+</code>
+</pre>
+
+<h2 id="结构赋值时设置默认值"><a href="#结构赋值时设置默认值" class="headerlink" title="结构赋值时设置默认值"></a>结构赋值时设置默认值</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;结构赋值允许指定默认值。但是注意：ES6中使用严格相等运算符（===），判断一个位置是否有值。所以，如果一个数组成员不严格等于undefined，默认值是不会生效的；</p>
+<pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+    let [xy = true] = [];
+    console.log(xy);//true
+
+    let [yz = 'undefined'] = [null];//null 不严格等于undefined，所以默认值是不生效的
+    console.log(yz);//null
+
+    //如果默认值是一个表达式，那么这个表达式是惰性求值的，即只有在用到的时候才会求值；
+    function faaa(){
+        console.log('abacd');
+    }
+    let [xb = faaa()] = [1];//这行代码中，因为xb能取到值，所以函数f根本不会执行；
+
+    //解构赋值时的默认值可以引用其他解构赋值的变量，但是这个变量必须已经声明过；
+    let [xc = 1, yc = xc] = [];
+    let [aa = bb,bb = 1] = [];//referenceError，因为引用给aa用到默认值(如果用不到就不会报错)，给默认值赋值时，bb还没
+
+    //对象结构赋值也可以指定默认值，同样默认值生效的条件：对象的属性值严格等于undefined。如果解构失败，变量将会被赋值undefined;
+    let {ag = 3} = {x:undefined};
+    console.log(ag);//3
+</code>
+</pre>
+
+<h2 id="函数参数解构赋值"><a href="#函数参数解构赋值" class="headerlink" title="函数参数解构赋值"></a>函数参数解构赋值</h2><pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+//函数的解构赋值意义是：函数形参设置的时候可以设置成数组或者对象，但是通过解构，在函数体内得到的就是一个一个的值
+function add([x, y]){
+    //console.log(arguments);//通过打印arguments，我们发现，函数收到的参数其实是单个的数字，而非数组
+    return x + y;
+}
+var total = add([1, 2]);
+console.log(total);//3
+
+var arr = [[1,2,3],[3,4,5]].map(([a, b, c]) => a + b + c);//map方法经过操作后会映射成一个新的数组，而且map方法的第一个参数是数组项，而经过参数解构赋值后 得到 a=1,b=2,c=3 ，执行一次回调，将原数组第一项映射成6，以此类推
+console.log(arr);//[6, 12]
+
+//参数解构赋值也可以使用默认值
+function move({an = 0, ao = 0} = {}){
+    return [an, ao];
+}
+var ar1 = move({an: 1, ao: 2});
+console.log(ar1);//[1, 2]
+
+var ar2 = move();//{an = 0, ao = 0} = {} 这么写是为了给函数的实参一个默认值{}，当不传的时候就是空对象{}
+console.log(ar2);//[0, 0]
+</code>
+</pre>
+
+<h2 id="解构赋值应用场景"><a href="#解构赋值应用场景" class="headerlink" title="解构赋值应用场景"></a>解构赋值应用场景</h2><h3 id="交换变量"><a href="#交换变量" class="headerlink" title="交换变量"></a>交换变量</h3><pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+    let ap = 1;
+    let aq = 2;
+    [ap, aq] = [aq, ap];
+    console.log(ap);//2
+</code>
+</pre>
+
+<h3 id="函数返回多个值"><a href="#函数返回多个值" class="headerlink" title="函数返回多个值"></a>函数返回多个值</h3><p>原则上函数只能返回一个值，如果要返回多个值，只能将他们放在数组或者对象中，有了解构赋值，去除这些值将会非常的方便；</p>
+<pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+    function eg1(){
+        return [1, 2, 3];
+    }
+    let [ar, as, at] = eg1();
+    console.log(ar);//1
+
+    function eg2(){
+        return {
+            au:'www',
+            av:'itouzi',
+            aw:'com',
+        }
+    }
+    let {au:ax, av:ay, aw:az} = eg2();
+    console.log(ay);//itouzi
+</code>
+</pre>
+
+<h3 id="提取json数据-解构赋值对提取JSON对象中的数据尤其有用；"><a href="#提取json数据-解构赋值对提取JSON对象中的数据尤其有用；" class="headerlink" title="提取json数据:解构赋值对提取JSON对象中的数据尤其有用；"></a>提取json数据:解构赋值对提取JSON对象中的数据尤其有用；</h3><pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+    let json = {
+        id: 42,
+        status: 'ok',
+        data: [333, 444]
+    };
+    let {id ,status, data} = json;
+    console.log(data);//[333, 444]
+</code>
+</pre>
+
+<h3 id="函数参数设置默认值"><a href="#函数参数设置默认值" class="headerlink" title="函数参数设置默认值"></a>函数参数设置默认值</h3><pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+    function plus([x = 0,y = 0] = []){
+        return x + y;
+    }
+    console.log(plus());//0
+</code>
+</pre>
+
+<h3 id="遍历Map解构"><a href="#遍历Map解构" class="headerlink" title="遍历Map解构"></a>遍历Map解构</h3><pre style="background: #00b38a;">
+<code lang="javascript" style="color: yellow;font-size: 12px;background: #00b38a;">
+    for (let [key, value] of map) {
+        //console.log(key + ' is ' + value);
+    }
+    //只获取键
+    for (let [key1] of map) {
+        console.log(key1);
+    }
+    //只获取值
+    for (let [, value1] of map) {
+        //console.log(value1);
+    }
+</code>
+</pre>
 
       
 
@@ -239,7 +418,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">nodeJs</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">es6</a>
         		</li>
       		
 		</ul>
@@ -295,7 +474,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://longfeihouhouhou.github.io/nodeJS小结.md/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://longfeihouhouhou.github.io/es6-2-destructing.md/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -309,18 +488,18 @@
   
 <nav id="article-nav">
   
-    <a href="/总结JS数组的30种方法.md/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/es6-3-StringExt.md/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          总结JS数组的30种方法
+          ES6(3) 字符串扩展
         
       </div>
     </a>
   
   
-    <a href="/Js中的事件.md/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Js中的事件</div>
+    <a href="/GIT进阶操作.md/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">GIT进阶操作</div>
       <i class="icon-circle-right"></i>
     </a>
   
