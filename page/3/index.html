@@ -153,6 +153,100 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-nodeJS小结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/nodeJS小结.md/">nodeJS小结</a>
+    </h1>
+  
+
+        
+        <a href="/nodeJS小结.md/" class="archive-article-date">
+  	<time datetime="2016-11-08T18:25:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-11-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="nodeJs-小结"><a href="#nodeJs-小结" class="headerlink" title="nodeJs 小结"></a><code>nodeJs</code> 小结</h2><h2 id="request"><a href="#request" class="headerlink" title="request"></a>request</h2><p>request 有三个部分： 请求行 ，请求头 ，请求体<br><img src="http://ww1.sinaimg.cn/mw690/c3fd4c29ly1flqvpn5mbzj20kd0fedi7.jpg" alt=""><br>按照现在的理解，一个完整的请求头域request.headers是包括请求行，和请求头的</p>
+<ul>
+<li><p>请求行有三个部分组成：</p>
+<ul>
+<li>请求方法：request.method(GET,POST,DELETE,HEAD,OPTIONS,PUT,PATCH.不过当前最常用的是GET和POST 。)</li>
+<li>请求路径request.headers.host</li>
+<li>请求协议<blockquote>
+<p>需要注意的仅有POST,PUT,PATCH这三个动词是包含请求体的，也就是说，如果你想要从客户端向服务器传输重要信息的时候，最好还是使用POST方法，将重要信息放到请求体内完成传输</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>请求头 Header<br>Accept    ：指定客户端能够接收的内容类型<br>Cookie    ：HTTP请求发送时，会把保存在该请求域名下的所有                    cookie值一起发送给web服务器。<br>Content-Type    请求的与实体对应的MIME信息<br>Host     ：    指定请求的服务器的域名和端口号<br>Referer     先前网页的地址，当前请求网页紧随其后,即来路</p>
+</li>
+<li>fs ：内置核心模块 file System <ul>
+<li>使用readFile读取内容必须存在</li>
+<li>默认读取buffer类型</li>
+</ul>
+</li>
+<li>node支持99%的es6 但是没有实现import</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">nodeJs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/nodeJS小结.md/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Js中的事件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -583,6 +677,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">es6</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
@@ -623,10 +721,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">hybrid</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
@@ -635,11 +729,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机基础</a>
+                <a href="javascript:void(0)" class="js-tag color2">hybrid</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Math</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">计算机基础</a>
               </li>
              
               <li class="article-tag-list-item">
