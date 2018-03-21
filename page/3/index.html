@@ -153,6 +153,134 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Vue组件化开发" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Vue组件化开发.md/">Vue组件化开发</a>
+    </h1>
+  
+
+        
+        <a href="/Vue组件化开发.md/" class="archive-article-date">
+  	<time datetime="2017-01-09T13:56:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##Vue组件化开发</p>
+<ul>
+<li>单页应用（一个页面）<br>##组件</li>
+<li>把一个复杂的页面拆分成若干个组件，最后拼成一个完整的页面。组件就是自定义标签，封装可重用代码<h2 id="组件的分类"><a href="#组件的分类" class="headerlink" title="组件的分类"></a>组件的分类</h2></li>
+<li>页面级组件（home组件 list组件）</li>
+<li>基础组件（页面级包含基础级，也可以叫可复用组件）<h2 id="组件化开发的好处"><a href="#组件化开发的好处" class="headerlink" title="组件化开发的好处"></a>组件化开发的好处</h2></li>
+<li>提高开发效率</li>
+<li>方便重复使用</li>
+<li>便于协同开发</li>
+<li>更容易被管理和维护<h2 id="组件的使用"><a href="#组件的使用" class="headerlink" title="组件的使用"></a>组件的使用</h2></li>
+<li>全局组件（不需要在组件中再次声明）<ul>
+<li>写插件时可能会需要用到全局组件</li>
+</ul>
+</li>
+<li>局部组件（在某个组件中声明的）<ul>
+<li>自己写的组件一般是局部组件<br>##组件的特点<br>1、组件的名字不能使用已经存在的东西<br>2、一个组件就是一个对象<br>3、名字规范，js中不区分标签大小写<br>4、组件模版中只能有一个根节点，所有组件都是基于根实          例的<br>5、 组件中的data 必须是一个函数，<br>6、组件中的data 只能自己组件使用<br>7、组件相互独立，两个人之间没有任何关系<h2 id="全局组件"><a href="#全局组件" class="headerlink" title="全局组件"></a>全局组件</h2><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">component</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> my=&#123;</span><br><span class="line">	template:<span class="string">'&lt;div&gt;&#123;&#123;msg&#125;&#125;&lt;/div&gt;'</span>,</span><br><span class="line">	data()&#123;</span><br><span class="line">		return &#123;msg:<span class="string">'hello'</span>&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">Vue.component(<span class="string">'my-component'</span>,my)</span><br></pre></td></tr></table></figure>
+<p>##局部组件<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="keyword">vm</span>=<span class="keyword">new</span> Vue(&#123;</span><br><span class="line">	<span class="keyword">e</span><span class="variable">l:</span><span class="string">'#app'</span>,</span><br><span class="line">	component<span class="variable">s:</span>&#123;</span><br><span class="line">		child:&#123;</span><br><span class="line">			template:<span class="string">'&lt;div&gt;子组件&lt;/div&gt;'</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>定义在内部，而不是挂载在全局<h2 id="组件间的数据传递prop"><a href="#组件间的数据传递prop" class="headerlink" title="组件间的数据传递prop"></a>组件间的数据传递prop</h2></li>
+<li>组件实例的作用域是孤立的，互相不能访问</li>
+<li>给谁传递属性，就写在谁身上，通过冒号传递，可以传递数字，变量，布尔类型</li>
+<li>子组件需要显示声明在props 上</li>
+<li>属性的名字要使用驼峰命名法，因为要加载到html上</li>
+<li>使用四种验证方式，验证数据的传入方式</li>
+<li>这意味着不能（也不应该）在子组件模版内直接引用父组件的数据。父组件的数据<br>##单向数据流<h3 id="事件Event是子传父"><a href="#事件Event是子传父" class="headerlink" title="事件Event是子传父"></a>事件Event是子传父</h3></li>
+<li>在子组件上绑定自定义函数，对应的事件函数是父类的</li>
+<li>子组件触发自己的自定义事件，让父类执行</li>
+</ul>
+<p>2、父组件发生变化，刷新子组件</p>
+<hr>
+<p>##重点</p>
+<ul>
+<li>全局组件和局部组件的使用</li>
+<li>局部组件的模版</li>
+<li>组件中的数据必须是函数诶型</li>
+<li>属性的嵌套</li>
+<li>属性的传递</li>
+<li>属性的验证</li>
+<li>父组件获取子组件数据和方法</li>
+</ul>
+<p>##路由</p>
+<ul>
+<li>不同的url返回不同的结果</li>
+<li>vue的路由（spa）中只有一个首页，切换url地址，显示不同的组件</li>
+<li>切换路径，但是页面不切换<ul>
+<li>hash #</li>
+<li>pushState  没井号 (在开发的时候会产生404)，如果线上时会使用这种方式，可以依赖服务端解决404问题</li>
+</ul>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/Vue组件化开发.md/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-JS中this的指向问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1058,10 +1186,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">nodeJs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
@@ -1070,15 +1194,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">hybrid</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">hybrid</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">nodeJs</a>
               </li>
              
               <li class="article-tag-list-item">

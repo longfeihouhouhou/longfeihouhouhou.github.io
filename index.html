@@ -153,6 +153,101 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-JS常用的数组排序和去重" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/JS常用的数组排序和去重.md/">JS常用的数组排序和去重</a>
+    </h1>
+  
+
+        
+        <a href="/JS常用的数组排序和去重.md/" class="archive-article-date">
+  	<time datetime="2018-03-18T13:21:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##排序</p>
+<blockquote>
+<p>冒泡排序<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bubbleSort</span><span class="params">(ary)</span></span>&#123;</span><br><span class="line">    <span class="keyword">var</span> flag = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; ary.length; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; ary.length<span class="number">-1</span>; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (ary[j] &gt; ary[j+<span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="keyword">var</span> tem = ary[j];</span><br><span class="line">                ary[j] = ary[j+<span class="number">1</span>];</span><br><span class="line">                ary[j+<span class="number">1</span>] = tem;</span><br><span class="line">                flag = <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (flag) &#123;</span><br><span class="line">            flag = <span class="literal">false</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ary;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>  冒泡排序的思想：首先在外侧顶一个flag为false，在外侧for i 循环原数组，在i循环内部 for j循环原数组，如果ary[j]&gt;ary[j+1]调换两者的位置，将flag置位true。然后在内部循环完成后判断flag情况，如果为true，就置位false，否则就break。为什么break？冒泡就是相邻两个比，如果大了就换位置，但是需要比多少轮呢？数组length-1轮，立flag就是为了优化性能的，当比较完一轮后发现没有需要换位置的就是说嘛已经排好了，就该break了，否则就该给flag置位false继续；</p>
+<blockquote>
+<p>快速排序<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function <span class="built_in">quickSort</span>(ary)&#123;</span><br><span class="line">    <span class="keyword">if</span> (ary.length &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> ary;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> pointIndex = <span class="type">Math</span>.floor(ary.length / <span class="number">2</span>),</span><br><span class="line">        pointVal = ary.splice(pointIndex, <span class="number">1</span>)[<span class="number">0</span>],</span><br><span class="line">        <span class="keyword">left</span> = [],</span><br><span class="line">        <span class="keyword">right</span> = [];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; ary.length; i++) &#123;</span><br><span class="line">        <span class="keyword">var</span> cur = ary[i];</span><br><span class="line">        cur &lt; pointVal ? <span class="keyword">left</span>.push(cur) : <span class="keyword">right</span>.push(cur);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">quickSort</span>(<span class="keyword">left</span>).concat(pointVal, <span class="built_in">quickSort</span>(<span class="keyword">right</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>快速排序思想：快速排序是一个递归，递归终止的条件就是ary的length&lt;=1的时候就return ary；否则就定义数组的中间值索引、中间值、left、right数组，接下来在for i循环中遍历原数组，在遍历中比较当前项和数组的中间值的大小，如果小则push进left，否则push进right，在函数结尾，for loop外侧return quickSort(left).concat(pointVal, quickSort(right));</p>
+<blockquote>
+<p>插入排序<br><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertSort</span></span>(ary)&#123;</span><br><span class="line">    <span class="keyword">var</span> <span class="keyword">new</span><span class="type">Ary</span> = [];</span><br><span class="line">    <span class="keyword">new</span><span class="type">Ary</span>.push(ary[<span class="number">0</span>]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; ary.length; i++) &#123;</span><br><span class="line">        <span class="keyword">var</span> cur = ary[i];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="keyword">new</span><span class="type">Ary</span>.length - <span class="number">1</span>; j &gt;= <span class="number">0</span>;) &#123;</span><br><span class="line">            <span class="keyword">if</span> (cur &lt; <span class="keyword">new</span><span class="type">Ary</span>[j]) &#123;</span><br><span class="line">                j--;</span><br><span class="line">                <span class="keyword">if</span> (j === <span class="number">-1</span>) &#123;</span><br><span class="line">                    <span class="keyword">new</span><span class="type">Ary</span>.unshift(cur);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">new</span><span class="type">Ary</span>.splice(j + <span class="number">1</span>, <span class="number">0</span> ,cur);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span><span class="type">Ary</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>插入排序的思想：搞一个新的数组，现将原数组的第一项插入其中，然后从第二项for i循环原数组，在这个循环中for j倒序循环新的数组，用原数组的当前项ary[i]和新数组的当前项ary[j]相比，ary[i] &lt; ary[j] 如果条件成立，则和新数组的倒数下一项比，所以j–，但是要考虑一种情况，就是说数组中之后一项的时候，这个时候就应该把这ary[i]插入到数组的最前面；否则，即ary[i] &gt;= ary[j]的情况，把他塞到ary[j]的下一项去，同时应该break，为什么break，因为这个新数组是从大到小排的，比到这里就可以了，因为ary[j]前面的都比他小，没必要在比较了。</p>
+<p>##数组去重</p>
+<blockquote>
+<p>对象法<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">~<span class="function"><span class="keyword">function</span> (<span class="params">pro</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">var</span> obj = &#123;&#125;;<span class="number">0</span></span><br><span class="line">            pro.unique = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">                <span class="keyword">var</span> arr = <span class="keyword">this</span>;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">                    <span class="keyword">var</span> cur = arr[i];</span><br><span class="line">                    <span class="keyword">if</span> (obj[cur] == cur) &#123;</span><br><span class="line">                        arr[i] = arr[arr.length - <span class="number">1</span>];</span><br><span class="line">                        arr.length--;</span><br><span class="line">                        i--;</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        obj[cur] = cur;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> arr;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;(<span class="built_in">Array</span>.prototype);</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>对象法去重：首先定义一个对象，接下来for i loop，在循环中判断cur = ary[i]，ary[i] == obj[cur]，满足条件说明已经重复了，接下来让ary[i] = ary[ary.length -1]，ary.length–;数组长度变小了，i–；如果不满足说明就是没重复，那就给对象增加obj[cur] = cur;</p>
+<blockquote>
+<p>双for循环<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Array.prototype.unique1 = function () &#123;</span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">var</span> nIndex = <span class="number">0</span>; nIndex &lt; <span class="keyword">this</span>.length; nIndex ++) &#123;</span><br><span class="line">           <span class="keyword">for</span> (<span class="keyword">var</span> i = nIndex + <span class="number">1</span>;i &lt; <span class="keyword">this</span>.length;) &#123;</span><br><span class="line">               <span class="keyword">if</span> (<span class="keyword">this</span>[nIndex] == <span class="keyword">this</span>[i]) &#123;</span><br><span class="line">                   <span class="keyword">this</span>.splice(i, <span class="number">1</span>);</span><br><span class="line">               &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                   i++;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">   &#125;;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>双for循环就是，在外侧for i loop中，for j loop，但是j不是从0开始，是从 i + 1开始，就是说从这一项的后一项开始往后找，如果找到ary[i] == ary[j]就是splice第i项，否则的话，i++进行下一项<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">~<span class="function"><span class="keyword">function</span> (<span class="params">pro</span>)</span>&#123;</span><br><span class="line">    pro.thComma = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> str = <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">var</span> reg = <span class="regexp">/\d&#123;1,3&#125;(?=(\d&#123;3&#125;)+$)/g</span>;</span><br><span class="line">        <span class="keyword">return</span> str.replace(<span class="regexp">/^(\d+)((\.\d+)?)$/</span>, <span class="function"><span class="keyword">function</span> (<span class="params">s, s1, s2</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> s1.replace(reg, <span class="string">"$&amp;,"</span>) + s2;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;(<span class="built_in">String</span>.prototype);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> str = <span class="string">'12345687.12445'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str.thComma());</span><br><span class="line"><span class="keyword">var</span> ary1 = [<span class="number">1</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>];</span><br><span class="line"><span class="keyword">var</span> flag = <span class="literal">false</span>;</span><br></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/JS常用的数组排序和去重.md/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-es6-3-StringExt" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1634,128 +1729,6 @@ git reset --hard 版本号
 
 
   
-    <article id="w-flex布局和弹性盒子" class="article article-type-w  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/flex布局和弹性盒子.md/">flex布局和弹性盒子</a>
-    </h1>
-  
-
-        
-        <a href="/flex布局和弹性盒子.md/" class="archive-article-date">
-  	<time datetime="2017-04-03T05:32:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>##CSS3弹性盒子flex布局</p>
-<blockquote>
-<p>弹性盒子是css3一种新的布局模式，他能更有效的对元素进行排列，对齐，分配空间。弹性盒子外和子元素内是正常渲染的，弹性盒子只定义了<code>弹性子元素</code>如何<code>在弹性容器</code>内渲染。弹性子元素默认每个容器只有一行，弹性子元素在弹性盒子内一行显示</p>
-</blockquote>
-<ol>
-<li><p>direction：</p>
-<blockquote>
-<p>设置<code>direction</code>属性为<code>rtl</code>(right-to-left)弹性子元素排列改变，页面布局也会跟变化</p>
-</blockquote>
-</li>
-<li><p>flex-direction方法</p>
-<blockquote>
-<p>flex-direction 指定了弹性子元素在父容器的位置，排列方式横向和纵向，正向和反向</p>
-<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flex-directi<span class="symbol">on:</span> <span class="built_in">row</span> | <span class="built_in">row</span>-reverse | <span class="built_in">column</span> | <span class="built_in">column</span>-reverse</span><br></pre></td></tr></table></figure>
-</blockquote>
-</li>
-<li><p>justify-content属性</p>
-<blockquote>
-<p>制定了 弹性子元素在行内如何对齐</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">justify-content:flex-start | flex-<span class="keyword">end</span> | center | <span class="literal">space</span>-<span class="keyword">between</span> | <span class="literal">space</span>-<span class="keyword">around</span></span><br></pre></td></tr></table></figure>
-</blockquote>
-</li>
-</ol>
-<p>4 .align-items属性</p>
-<blockquote>
-<p>align-items 设置或检索弹性盒子元素在纵轴上的对齐方式<br>值同<code>justify-content</code>类似<br><figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">align-items: flex-start | <span class="type">flex</span>-<span class="keyword">end</span> | <span class="type">center</span> | <span class="type">baseline</span> | <span class="type">stretch</span></span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<ol>
-<li>flex-wrap属性<blockquote>
-<p>flex-wrap属性用于指定弹性盒子的子元素换行方式</p>
-<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flex-wrap: nowrap | <span class="type">wrap</span> | <span class="type">wrap</span>-reverse | <span class="type">initial</span> |<span class="type">inherit</span></span><br></pre></td></tr></table></figure>
-</blockquote>
-</li>
-</ol>
-<p>各各值解析: </p>
-<ul>
-<li>nowrap :默认单行，子元素可能会溢出</li>
-<li>wrap ： 多行，溢出部分放入新行，子项内部会发生断行</li>
-</ul>
-<ol>
-<li>align-content属性<blockquote>
-<p>用于修改flex-wrap属性，类似<code>align-items</code>但是它不是修改对齐，而是设置各个行的对齐</p>
-</blockquote>
-</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CSS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">flex</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/flex布局和弹性盒子.md/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1889,10 +1862,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">nodeJs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
@@ -1901,15 +1870,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">hybrid</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">hybrid</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">nodeJs</a>
               </li>
              
               <li class="article-tag-list-item">

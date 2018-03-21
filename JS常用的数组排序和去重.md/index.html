@@ -6,18 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://longfeihouhouhou.github.io">
-  <title>Archives: 2017/10 | LoongFly的博客</title>
+  <title>JS常用的数组排序和去重 | LoongFly的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前端攻城狮，此为博客一枚">
-<meta name="keywords" content="前端,js,jQuery,javascript,html5,开发者,程序猿,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验,Vue,React,node.js">
-<meta property="og:type" content="website">
-<meta property="og:title" content="LoongFly的博客">
-<meta property="og:url" content="http://longfeihouhouhou.github.io/archives/2017/10/index.html">
+  <meta name="description" content="##排序  冒泡排序12345678910111213141516171819function bubbleSort(ary)&amp;#123;    var flag = false;    for (var i = 0; i &amp;lt; ary.length; i++) &amp;#123;        for (var j = 0; j &amp;lt; ary.length-1; j++) &amp;#123;">
+<meta name="keywords" content="javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS常用的数组排序和去重">
+<meta property="og:url" content="http://longfeihouhouhou.github.io/JS常用的数组排序和去重.md/index.html">
 <meta property="og:site_name" content="LoongFly的博客">
-<meta property="og:description" content="前端攻城狮，此为博客一枚">
+<meta property="og:description" content="##排序  冒泡排序12345678910111213141516171819function bubbleSort(ary)&amp;#123;    var flag = false;    for (var i = 0; i &amp;lt; ary.length; i++) &amp;#123;        for (var j = 0; j &amp;lt; ary.length-1; j++) &amp;#123;">
+<meta property="og:updated_time" content="2018-03-21T13:34:43.117Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LoongFly的博客">
-<meta name="twitter:description" content="前端攻城狮，此为博客一枚">
+<meta name="twitter:title" content="JS常用的数组排序和去重">
+<meta name="twitter:description" content="##排序  冒泡排序12345678910111213141516171819function bubbleSort(ary)&amp;#123;    var flag = false;    for (var i = 0; i &amp;lt; ary.length; i++) &amp;#123;        for (var j = 0; j &amp;lt; ary.length-1; j++) &amp;#123;">
   
     <link rel="alternative" href="/atom.xml" title="LoongFly的博客" type="application/atom+xml">
   
@@ -151,60 +152,198 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-JS常用的数组排序和去重" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/es6-3-StringExt.md/" class="archive-article-date">
-  	<time datetime="2017-10-01T13:33:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-01</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/es6-3-StringExt.md/">ES6(3) 字符串扩展</a>
+    <h1 class="article-title" itemprop="name">
+      JS常用的数组排序和去重
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/JS常用的数组排序和去重.md/" class="archive-article-date">
+  	<time datetime="2018-03-18T13:21:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##排序</p>
+<blockquote>
+<p>冒泡排序<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bubbleSort</span><span class="params">(ary)</span></span>&#123;</span><br><span class="line">    <span class="keyword">var</span> flag = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; ary.length; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; ary.length<span class="number">-1</span>; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (ary[j] &gt; ary[j+<span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="keyword">var</span> tem = ary[j];</span><br><span class="line">                ary[j] = ary[j+<span class="number">1</span>];</span><br><span class="line">                ary[j+<span class="number">1</span>] = tem;</span><br><span class="line">                flag = <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (flag) &#123;</span><br><span class="line">            flag = <span class="literal">false</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ary;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>  冒泡排序的思想：首先在外侧顶一个flag为false，在外侧for i 循环原数组，在i循环内部 for j循环原数组，如果ary[j]&gt;ary[j+1]调换两者的位置，将flag置位true。然后在内部循环完成后判断flag情况，如果为true，就置位false，否则就break。为什么break？冒泡就是相邻两个比，如果大了就换位置，但是需要比多少轮呢？数组length-1轮，立flag就是为了优化性能的，当比较完一轮后发现没有需要换位置的就是说嘛已经排好了，就该break了，否则就该给flag置位false继续；</p>
+<blockquote>
+<p>快速排序<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function <span class="built_in">quickSort</span>(ary)&#123;</span><br><span class="line">    <span class="keyword">if</span> (ary.length &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> ary;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> pointIndex = <span class="type">Math</span>.floor(ary.length / <span class="number">2</span>),</span><br><span class="line">        pointVal = ary.splice(pointIndex, <span class="number">1</span>)[<span class="number">0</span>],</span><br><span class="line">        <span class="keyword">left</span> = [],</span><br><span class="line">        <span class="keyword">right</span> = [];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; ary.length; i++) &#123;</span><br><span class="line">        <span class="keyword">var</span> cur = ary[i];</span><br><span class="line">        cur &lt; pointVal ? <span class="keyword">left</span>.push(cur) : <span class="keyword">right</span>.push(cur);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">quickSort</span>(<span class="keyword">left</span>).concat(pointVal, <span class="built_in">quickSort</span>(<span class="keyword">right</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>快速排序思想：快速排序是一个递归，递归终止的条件就是ary的length&lt;=1的时候就return ary；否则就定义数组的中间值索引、中间值、left、right数组，接下来在for i循环中遍历原数组，在遍历中比较当前项和数组的中间值的大小，如果小则push进left，否则push进right，在函数结尾，for loop外侧return quickSort(left).concat(pointVal, quickSort(right));</p>
+<blockquote>
+<p>插入排序<br><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertSort</span></span>(ary)&#123;</span><br><span class="line">    <span class="keyword">var</span> <span class="keyword">new</span><span class="type">Ary</span> = [];</span><br><span class="line">    <span class="keyword">new</span><span class="type">Ary</span>.push(ary[<span class="number">0</span>]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; ary.length; i++) &#123;</span><br><span class="line">        <span class="keyword">var</span> cur = ary[i];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="keyword">new</span><span class="type">Ary</span>.length - <span class="number">1</span>; j &gt;= <span class="number">0</span>;) &#123;</span><br><span class="line">            <span class="keyword">if</span> (cur &lt; <span class="keyword">new</span><span class="type">Ary</span>[j]) &#123;</span><br><span class="line">                j--;</span><br><span class="line">                <span class="keyword">if</span> (j === <span class="number">-1</span>) &#123;</span><br><span class="line">                    <span class="keyword">new</span><span class="type">Ary</span>.unshift(cur);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">new</span><span class="type">Ary</span>.splice(j + <span class="number">1</span>, <span class="number">0</span> ,cur);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span><span class="type">Ary</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>插入排序的思想：搞一个新的数组，现将原数组的第一项插入其中，然后从第二项for i循环原数组，在这个循环中for j倒序循环新的数组，用原数组的当前项ary[i]和新数组的当前项ary[j]相比，ary[i] &lt; ary[j] 如果条件成立，则和新数组的倒数下一项比，所以j–，但是要考虑一种情况，就是说数组中之后一项的时候，这个时候就应该把这ary[i]插入到数组的最前面；否则，即ary[i] &gt;= ary[j]的情况，把他塞到ary[j]的下一项去，同时应该break，为什么break，因为这个新数组是从大到小排的，比到这里就可以了，因为ary[j]前面的都比他小，没必要在比较了。</p>
+<p>##数组去重</p>
+<blockquote>
+<p>对象法<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">~<span class="function"><span class="keyword">function</span> (<span class="params">pro</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">var</span> obj = &#123;&#125;;<span class="number">0</span></span><br><span class="line">            pro.unique = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">                <span class="keyword">var</span> arr = <span class="keyword">this</span>;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">                    <span class="keyword">var</span> cur = arr[i];</span><br><span class="line">                    <span class="keyword">if</span> (obj[cur] == cur) &#123;</span><br><span class="line">                        arr[i] = arr[arr.length - <span class="number">1</span>];</span><br><span class="line">                        arr.length--;</span><br><span class="line">                        i--;</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        obj[cur] = cur;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> arr;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;(<span class="built_in">Array</span>.prototype);</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>对象法去重：首先定义一个对象，接下来for i loop，在循环中判断cur = ary[i]，ary[i] == obj[cur]，满足条件说明已经重复了，接下来让ary[i] = ary[ary.length -1]，ary.length–;数组长度变小了，i–；如果不满足说明就是没重复，那就给对象增加obj[cur] = cur;</p>
+<blockquote>
+<p>双for循环<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Array.prototype.unique1 = function () &#123;</span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">var</span> nIndex = <span class="number">0</span>; nIndex &lt; <span class="keyword">this</span>.length; nIndex ++) &#123;</span><br><span class="line">           <span class="keyword">for</span> (<span class="keyword">var</span> i = nIndex + <span class="number">1</span>;i &lt; <span class="keyword">this</span>.length;) &#123;</span><br><span class="line">               <span class="keyword">if</span> (<span class="keyword">this</span>[nIndex] == <span class="keyword">this</span>[i]) &#123;</span><br><span class="line">                   <span class="keyword">this</span>.splice(i, <span class="number">1</span>);</span><br><span class="line">               &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                   i++;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">   &#125;;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>双for循环就是，在外侧for i loop中，for j loop，但是j不是从0开始，是从 i + 1开始，就是说从这一项的后一项开始往后找，如果找到ary[i] == ary[j]就是splice第i项，否则的话，i++进行下一项<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">~<span class="function"><span class="keyword">function</span> (<span class="params">pro</span>)</span>&#123;</span><br><span class="line">    pro.thComma = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> str = <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">var</span> reg = <span class="regexp">/\d&#123;1,3&#125;(?=(\d&#123;3&#125;)+$)/g</span>;</span><br><span class="line">        <span class="keyword">return</span> str.replace(<span class="regexp">/^(\d+)((\.\d+)?)$/</span>, <span class="function"><span class="keyword">function</span> (<span class="params">s, s1, s2</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> s1.replace(reg, <span class="string">"$&amp;,"</span>) + s2;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;(<span class="built_in">String</span>.prototype);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> str = <span class="string">'12345687.12445'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str.thComma());</span><br><span class="line"><span class="keyword">var</span> ary1 = [<span class="number">1</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>];</span><br><span class="line"><span class="keyword">var</span> flag = <span class="literal">false</span>;</span><br></pre></td></tr></table></figure></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://ww1.sinaimg.cn/large/c3fd4c29ly1fp5gbsv27tj20la0ogwg3.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://ww1.sinaimg.cn/large/c3fd4c29ly1fp5gc2g8gyj20oa0o940n.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">es6</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://longfeihouhouhou.github.io/JS常用的数组排序和去重.md/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/es6-3-StringExt.md/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ES6(3) 字符串扩展</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -227,8 +366,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
