@@ -153,6 +153,173 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-GIT的使用指南" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/GIT的使用指南.md/">GIT的使用指南</a>
+    </h1>
+  
+
+        
+        <a href="/GIT的使用指南.md/" class="archive-article-date">
+  	<time datetime="2017-05-09T14:34:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="GIT-使用指南"><a href="#GIT-使用指南" class="headerlink" title="GIT 使用指南"></a>GIT 使用指南</h1><p>[toc]</p>
+<h2 id="git-特性"><a href="#git-特性" class="headerlink" title="git 特性"></a>git 特性</h2><p>-&gt; 管理代码版本的工具（分布式git） </p>
+<ul>
+<li>能记住是谁提交的东西</li>
+<li>保存每个阶段的内容（备份功能）</li>
+<li>可以实现时空裂缝功能</li>
+<li>GitHub 开源  多端共享 团队协作</li>
+<li>自动合并代码，比较不同<br>-&gt; 区别集中式 svn<h2 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h2></li>
+<li>下载git</li>
+<li>通过鼠标右键 git bush  here 使用git 命令行</li>
+<li>查看 git 版本<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="comment">--version</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="使用git"><a href="#使用git" class="headerlink" title="使用git"></a>使用git</h2><ul>
+<li>界面化操作GUI ( source tree)</li>
+<li>命令行操作c l i<h2 id="配置git"><a href="#配置git" class="headerlink" title="配置git"></a>配置git</h2><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git<span class="built_in"> config </span>--global user.name zhufengzhufeng</span><br><span class="line">git congif --global user.email 695409705@qq.com</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>-&gt;告诉git 是谁提交的代码</p>
+<h2 id="初始化git-不能嵌套使用git"><a href="#初始化git-不能嵌套使用git" class="headerlink" title="初始化git(不能嵌套使用git)"></a>初始化git(不能嵌套使用git)</h2><ul>
+<li>以某个文件夹作为git管理的目录<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git init</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>-&gt; 会产生一个.git文件夹</p>
+<h2 id="提交到git前-查看暂存区是否存在"><a href="#提交到git前-查看暂存区是否存在" class="headerlink" title="提交到git前 查看暂存区是否存在"></a>提交到git前 查看暂存区是否存在</h2><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git status</span></span><br></pre></td></tr></table></figure>
+<p>-&gt; 如果是红色便是未添加到暂存区</p>
+<ul>
+<li>添加到暂存区<ul>
+<li>git add 文件名</li>
+<li>或者 git add .   提交所有<h3 id="提交到历史区"><a href="#提交到历史区" class="headerlink" title="提交到历史区"></a>提交到历史区</h3><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git</span> commit -m <span class="string">"initial"</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>单纯的git commit 会进入编辑器 可以直接通过-m +”本次提交日志”来便捷提交 </p>
+</blockquote>
+<h3 id="查看提交历史"><a href="#查看提交历史" class="headerlink" title="查看提交历史"></a>查看提交历史</h3>  <figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git  <span class="built_in">log</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>查看所提交过的文件及历史</p>
+</blockquote>
+<h2 id="比较三个阶段文件区别"><a href="#比较三个阶段文件区别" class="headerlink" title="比较三个阶段文件区别"></a>比较三个阶段文件区别</h2><ul>
+<li><p>工作区和暂存区</p>
+<pre><code><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git diff</span></span><br></pre></td></tr></table></figure>
+</code></pre></li>
+<li><p>比较暂存区和历史区</p>
+<pre><code><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff <span class="comment">--cached</span></span><br></pre></td></tr></table></figure>
+</code></pre></li>
+<li><p>比较工作区和历史区</p>
+<pre><code><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git diff mater</span></span><br></pre></td></tr></table></figure>
+</code></pre></li>
+</ul>
+<blockquote>
+<p>如果一样则不显示</p>
+<ul>
+<li>时空裂缝<ul>
+<li>工作区回到暂存区内容<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git checkout 文件名</span><br><span class="line"> ``` </span><br><span class="line"> - 将暂存区内容返回到上一次</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<pre><code>git reset HEAD 文件名
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">- </span>查看历史版本</span><br></pre></td></tr></table></figure>
+
+git reflog 版本号
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">- </span>回到历史版本</span><br></pre></td></tr></table></figure>
+
+git reset --hard 版本号
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 分支</span></span></span><br><span class="line">- 查看分支</span><br></pre></td></tr></table></figure>
+</code></pre><p>git branch<br><figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="deletion">-创建分支</span></span><br></pre></td></tr></table></figure></p>
+<p>git checkout -b 分支名<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">- </span>切换分支</span><br></pre></td></tr></table></figure></p>
+<p>git checkout 分支名<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">- </span>创建并切换分支名</span><br></pre></td></tr></table></figure></p>
+<p>git checkout -b dev<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">- </span>删除分支</span><br></pre></td></tr></table></figure></p>
+<p>git branch -D 分支名  但是不能删除当前分支<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-&gt;每个分支是没有关`enter <span class="keyword">code</span> here`系的</span><br><span class="line">- 分支合并</span><br></pre></td></tr></table></figure></p>
+<p>git merge dev<br><code>`</code></p>
+<h2 id="linux-命令"><a href="#linux-命令" class="headerlink" title="linux 命令"></a>linux 命令</h2><ul>
+<li>pwd  打印当前路径</li>
+<li>rm -rf  .git  (删除文件夹)</li>
+<li>mkdir 创建目录</li>
+<li>ls （list show 查看目录）</li>
+<li>cd -git-pro/ (进入文件夹)</li>
+<li>创建一个文本并在命令行编辑<ul>
+<li>touch 文件名</li>
+<li>vi 文件名</li>
+<li>i 插入模式</li>
+<li>esc + :wq 保存推出</li>
+<li>cat 文件名 （查看文本内容） </li>
+</ul>
+</li>
+</ul>
+<p><code type="javascript" style="background: #00b38a"></code></p>
+<p>var ab = ‘1223’;</p>
+<p></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/GIT的使用指南.md/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="w-flex布局和弹性盒子" class="article article-type-w  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1161,149 +1328,6 @@ hexo deploy
 
 
   
-    <article id="w-Css特性" class="article article-type-w  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/Css特性.md/">Css特性</a>
-    </h1>
-  
-
-        
-        <a href="/Css特性.md/" class="archive-article-date">
-  	<time datetime="2017-02-04T03:31:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>元素左右居中</p>
-<ul>
-<li><ol>
-<li>内联元素: text-align:centerte</li>
-</ol>
-</li>
-<li><ol>
-<li>定宽块级元素：margin: 0 auto</li>
-</ol>
-</li>
-<li><ol>
-<li>不定宽块级元素：<ul>
-<li>a.  元素外面加入完整的table标签（table,tbody,tr,td）在td内设置margin的值为auto</li>
-<li>b. 使用display:inline-block 再 text-align</li>
-<li>c. 增加一个父级盒子 给父级盒子设置向左浮动，相对定位，left：50%  ，给子盒子相对定位，left值为-50%</li>
-<li>d. 利用transform中的translateX属性，设置绝对定位，left：50%在translateX（-50%）<br>##元素垂直居中</li>
-</ul>
-</li>
-</ol>
-</li>
-<li><ol>
-<li>父元素高度确定的单行文本：设置父元素的height和line-height</li>
-</ol>
-</li>
-<li><ol>
-<li>父元素高度确定的多行文本：<br>   a:  插入table，设置vertical-align：middle<br>   b: 先设置display：table-cell 在设置verticala-align：middle</li>
-</ol>
-</li>
-<li><ol>
-<li>flex布局解决方法：<br>display:flex<br>align-items:center;<br>##解决img标签间隙问题</li>
-</ol>
-</li>
-<li><ol>
-<li>给父元素设置font-size: 0</li>
-</ol>
-</li>
-<li><ol>
-<li>设置display：block</li>
-</ol>
-</li>
-<li><ol>
-<li>设置图片margin为负值<br>##浮动<blockquote>
-<p> 定义：浮动元素会脱离文档流向左/右浮动，直到碰到父元素或者其他浮动元素，值得注意的是当同时有多个浮动元素，大小不一致的情况下可能会导致“卡住”</p>
-</blockquote>
-###浮动元素会导致父级元素高度坍塌<blockquote>
-<p>浮动元素脱离文档流，如果父级盒子没设置高度，而是靠子级撑开的话，会导致没了高度</p>
-</blockquote>
-###清除浮动<blockquote>
-<p>清除浮动主要方法是clear和BFC</p>
-</blockquote>
-</li>
-</ol>
-</li>
-<li>clear属性不允许被清除浮动元素的左边/右边挨着浮动元素，底层原理是在被清除浮动元素上边或者下边添加足够的清除空间。<br>给浮动元素父元素加一个after伪类，表示加载完后在内容里面追加。<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.clearfix</span><span class="selector-pseudo">:after</span>&#123;</span><br><span class="line">	<span class="attribute">display</span>:table;</span><br><span class="line">	<span class="attribute">clear</span>:both;</span><br><span class="line">	<span class="attribute">content</span>:<span class="string">""</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<blockquote>
-<p>如果需要兼容IE6/7的话需要给父元素一个<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">.clearfix&#123;</span></span><br><span class="line"><span class="code">	*zoom:1;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>BFC以后再总结，目前clear就够了</p>
-</blockquote>
-<p>###图片在div中，div下面会有4像素的空白</p>
-<blockquote>
-<p>方法： 给图片display block 或者 table  还有就是margin…</p>
-</blockquote>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">布局</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Css</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/Css特性.md/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1417,6 +1441,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">布局</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">CSS</a>
               </li>
              
@@ -1429,10 +1461,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">nodeJs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
@@ -1441,15 +1469,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">布局</a>
+                <a href="javascript:void(0)" class="js-tag color2">nodeJs</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">hybrid</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1465,11 +1489,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Array</a>
+                <a href="javascript:void(0)" class="js-tag color2">hybrid</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Math</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Array</a>
               </li>
              
               <li class="article-tag-list-item">

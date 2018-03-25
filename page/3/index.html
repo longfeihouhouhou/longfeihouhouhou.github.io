@@ -153,6 +153,149 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="w-Css特性" class="article article-type-w  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Css特性.md/">Css特性</a>
+    </h1>
+  
+
+        
+        <a href="/Css特性.md/" class="archive-article-date">
+  	<time datetime="2017-02-04T03:31:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>元素左右居中</p>
+<ul>
+<li><ol>
+<li>内联元素: text-align:centerte</li>
+</ol>
+</li>
+<li><ol>
+<li>定宽块级元素：margin: 0 auto</li>
+</ol>
+</li>
+<li><ol>
+<li>不定宽块级元素：<ul>
+<li>a.  元素外面加入完整的table标签（table,tbody,tr,td）在td内设置margin的值为auto</li>
+<li>b. 使用display:inline-block 再 text-align</li>
+<li>c. 增加一个父级盒子 给父级盒子设置向左浮动，相对定位，left：50%  ，给子盒子相对定位，left值为-50%</li>
+<li>d. 利用transform中的translateX属性，设置绝对定位，left：50%在translateX（-50%）<br>##元素垂直居中</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><ol>
+<li>父元素高度确定的单行文本：设置父元素的height和line-height</li>
+</ol>
+</li>
+<li><ol>
+<li>父元素高度确定的多行文本：<br>   a:  插入table，设置vertical-align：middle<br>   b: 先设置display：table-cell 在设置verticala-align：middle</li>
+</ol>
+</li>
+<li><ol>
+<li>flex布局解决方法：<br>display:flex<br>align-items:center;<br>##解决img标签间隙问题</li>
+</ol>
+</li>
+<li><ol>
+<li>给父元素设置font-size: 0</li>
+</ol>
+</li>
+<li><ol>
+<li>设置display：block</li>
+</ol>
+</li>
+<li><ol>
+<li>设置图片margin为负值<br>##浮动<blockquote>
+<p> 定义：浮动元素会脱离文档流向左/右浮动，直到碰到父元素或者其他浮动元素，值得注意的是当同时有多个浮动元素，大小不一致的情况下可能会导致“卡住”</p>
+</blockquote>
+###浮动元素会导致父级元素高度坍塌<blockquote>
+<p>浮动元素脱离文档流，如果父级盒子没设置高度，而是靠子级撑开的话，会导致没了高度</p>
+</blockquote>
+###清除浮动<blockquote>
+<p>清除浮动主要方法是clear和BFC</p>
+</blockquote>
+</li>
+</ol>
+</li>
+<li>clear属性不允许被清除浮动元素的左边/右边挨着浮动元素，底层原理是在被清除浮动元素上边或者下边添加足够的清除空间。<br>给浮动元素父元素加一个after伪类，表示加载完后在内容里面追加。<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.clearfix</span><span class="selector-pseudo">:after</span>&#123;</span><br><span class="line">	<span class="attribute">display</span>:table;</span><br><span class="line">	<span class="attribute">clear</span>:both;</span><br><span class="line">	<span class="attribute">content</span>:<span class="string">""</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>如果需要兼容IE6/7的话需要给父元素一个<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">.clearfix&#123;</span></span><br><span class="line"><span class="code">	*zoom:1;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>BFC以后再总结，目前clear就够了</p>
+</blockquote>
+<p>###图片在div中，div下面会有4像素的空白</p>
+<blockquote>
+<p>方法： 给图片display block 或者 table  还有就是margin…</p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">布局</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Css</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/Css特性.md/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Vue组件化开发" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1166,6 +1309,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">布局</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">CSS</a>
               </li>
              
@@ -1178,10 +1329,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">nodeJs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
@@ -1190,15 +1337,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">布局</a>
+                <a href="javascript:void(0)" class="js-tag color2">nodeJs</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">hybrid</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1214,11 +1357,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Array</a>
+                <a href="javascript:void(0)" class="js-tag color2">hybrid</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Math</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Array</a>
               </li>
              
               <li class="article-tag-list-item">
